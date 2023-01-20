@@ -18,9 +18,9 @@ func makeVC(withColor color: UIColor) -> UIViewController {
 func makeLabel(withText text: String) -> UILabel {
   let label = UILabel()
   label.translatesAutoresizingMaskIntoConstraints = false
-  label.text = <#text#>
-  label.textColor = <#color#>
-  label.font = UIFont.preferredFont(forTextStyle: <#T##UIFont.TextStyle#>)
+  label.text = text
+  label.textColor = .label
+  label.font = UIFont.preferredFont(forTextStyle: .body)
   
   return label
 }
@@ -28,9 +28,9 @@ func makeLabel(withText text: String) -> UILabel {
 func makeSubLabel(withText text: String) -> UILabel {
   let label = UILabel()
   label.translatesAutoresizingMaskIntoConstraints = false
-  label.text = <#text#>
-  label.textColor = <#color#>
-  label.font = UIFont.preferredFont(forTextStyle: <#T##UIFont.TextStyle#>)
+  label.text = text
+  label.textColor = .label
+  label.font = UIFont.preferredFont(forTextStyle: .subheadline)
   label.numberOfLines = 0 // multiline
   
   return label
@@ -41,7 +41,7 @@ func makeBoldLabel(withText text: String) -> UILabel {
   label.translatesAutoresizingMaskIntoConstraints = false
   label.text = text
   label.textColor = .white
-  label.font = UIFont.boldSystemFont(ofSize: <#size#>)
+  label.font = UIFont.boldSystemFont(ofSize: 18)
   
   return label
 }
