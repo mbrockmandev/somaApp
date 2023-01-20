@@ -53,7 +53,6 @@ extension LandingViewController {
     pagingVC.dataSource = self
     pagingVC.delegate = self
     
-    
     topPagingVCs.append(firstPageVC)
     topPagingVCs.append(secondPageVC)
     topPagingVCs.append(thirdPageVC)
@@ -61,8 +60,9 @@ extension LandingViewController {
     pagingVC.setViewControllers([topPagingVCs[0]], direction: .forward, animated: true)
     scrollView.addSubview(pagingVC.view)
     let pagingVCInitialX = 32
+    let pagingVCInitialY = Int(view.safeAreaInsets.top + 64)
     
-    pagingVC.view.frame = CGRect(x: pagingVCInitialX, y: 24, width: Int(view.frame.size.width - 64), height: 200)
+    pagingVC.view.frame = CGRect(x: pagingVCInitialX, y: pagingVCInitialY, width: Int(view.frame.size.width - 64), height: 200)
     
   }
   

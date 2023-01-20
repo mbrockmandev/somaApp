@@ -24,5 +24,8 @@ class SomaTabController: UITabBarController {
     infoVC.tabBarItem = infoTabBarItem
     
     viewControllers = [landingVC, listingVC, infoVC]
+    #if DEBUG
+    selectedIndex = 1 // TODO: Delete
+    #endif
   }
 }
