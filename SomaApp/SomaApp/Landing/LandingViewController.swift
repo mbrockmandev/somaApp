@@ -13,7 +13,7 @@ class LandingViewController: UIViewController {
   let scrollView = UIScrollView()
   
     // top of the page
-  let pagingVC = UIPageViewController()
+  let pagingVC = UIPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal)
   var topPagingVCs: [UIViewController] = []
   lazy var firstPageVC: UIViewController = {
     makeVC(withColor: .systemMint)
@@ -27,6 +27,7 @@ class LandingViewController: UIViewController {
   lazy var timer: Timer = {
     setupTimer()
   }()
+  var pagingIndex = 0
   
     // use a stack view for the rest of the elements in the page
   let stackView = UIStackView()
@@ -40,6 +41,7 @@ class LandingViewController: UIViewController {
     setupPagingVC()
     style()
     layout()
+    startTimer()
   }
 }
 
@@ -50,6 +52,7 @@ extension LandingViewController {
     self.addChild(pagingVC)
     pagingVC.dataSource = self
     pagingVC.delegate = self
+    
     
     topPagingVCs.append(firstPageVC)
     topPagingVCs.append(secondPageVC)
@@ -66,6 +69,10 @@ extension LandingViewController {
   private func setupTimer() -> Timer {
     let timer = Timer.scheduledTimer(timeInterval: 3, target: self, selector: #selector(flipPage), userInfo: nil, repeats: true)
     return timer
+  }
+  
+  private func startTimer() {
+    timer.fire()
   }
   
   private func stopTimer() {
@@ -124,23 +131,29 @@ extension LandingViewController: UIScrollViewDelegate {
 extension LandingViewController: UIPageViewControllerDelegate, UIPageViewControllerDataSource {
   func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
     guard let index = topPagingVCs.firstIndex(of: viewController) else { return nil }
+    
     if index == 0 {
-      return topPagingVCs[topPagingVCs.count - 1]
+      pagingIndex = topPagingVCs.count - 1
+      return topPagingVCs[pagingIndex]
     }
-    return topPagingVCs[index-1]
+    pagingIndex = index - 1
+    return topPagingVCs[pagingIndex]
   }
   
   func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
     guard let index = topPagingVCs.firstIndex(of: viewController) else { return nil }
+    
     if index == topPagingVCs.count - 1 {
-      return topPagingVCs[0]
+      pagingIndex = 0
+      return topPagingVCs[pagingIndex]
     }
-    return topPagingVCs[index+1]
+    pagingIndex = index+1
+    return topPagingVCs[pagingIndex]
   }
   
   @objc private func flipPage() {
-    
-    
+    pagingIndex = pagingIndex == topPagingVCs.count - 1 ? 0 : pagingIndex + 1
+    pagingVC.setViewControllers([topPagingVCs[pagingIndex]], direction: .forward, animated: true)
   }
 }
 
