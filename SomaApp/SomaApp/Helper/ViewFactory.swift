@@ -7,12 +7,31 @@
 
 import UIKit
 
-func makeVC(withColor color: UIColor) -> UIViewController {
+func makeVC(withImage image: String) -> UIViewController {
   let vc = UIViewController()
   vc.view.translatesAutoresizingMaskIntoConstraints = false
-  vc.view.backgroundColor = color
+  
+  guard let uiImage = UIImage(named: image) else { fatalError("Incorrect image passed in") }
+  let imageView = makeBannerImage(from: uiImage)
+  imageView.translatesAutoresizingMaskIntoConstraints = false
+  imageView.clipsToBounds = true
+  
+  vc.view.addSubview(imageView)
+  
+  NSLayoutConstraint.activate([
+    imageView.topAnchor.constraint(equalTo: vc.view.topAnchor),
+    imageView.leadingAnchor.constraint(equalTo: vc.view.leadingAnchor),
+    imageView.trailingAnchor.constraint(equalTo: vc.view.trailingAnchor),
+    imageView.bottomAnchor.constraint(equalTo: vc.view.bottomAnchor),
+  ])
   
   return vc
+}
+
+func makeBannerImage(from image: UIImage) -> UIImageView {
+  guard let cgImage = image.cgImage else { fatalError("Could not make a cgImage from that UIImage.") }
+  let fixedImage = UIImage(cgImage: cgImage, scale: 6, orientation: .right)
+  return UIImageView(image: fixedImage)
 }
 
 func makeLabel(withText text: String) -> UILabel {

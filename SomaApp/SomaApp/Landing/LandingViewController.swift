@@ -5,6 +5,7 @@
   //  Created by Michael Brockman on 1/19/23.
   //
 
+// TODO: Fix image bug on first load; it does not appear on subsequent changes of paging VC. Not sure why. Look in top left hand corner.
 import UIKit
 
 class LandingViewController: UIViewController {
@@ -16,13 +17,13 @@ class LandingViewController: UIViewController {
   let pagingVC = UIPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal)
   var topPagingVCs: [UIViewController] = []
   lazy var firstPageVC: UIViewController = {
-    makeVC(withColor: .systemMint)
+    makeVC(withImage: "soma_banner")
   }()
   lazy var secondPageVC: UIViewController = {
-    makeVC(withColor: .systemPurple)
+    makeVC(withImage: "soma_3rd_degree")
   }()
   lazy var thirdPageVC: UIViewController = {
-    makeVC(withColor: .systemPink)
+    makeVC(withImage: "soma_prof_garrett")
   }()
   lazy var timer: Timer = {
     setupTimer()
@@ -52,6 +53,7 @@ extension LandingViewController {
     self.addChild(pagingVC)
     pagingVC.dataSource = self
     pagingVC.delegate = self
+    pagingVC.view.translatesAutoresizingMaskIntoConstraints = false
     
     topPagingVCs.append(firstPageVC)
     topPagingVCs.append(secondPageVC)
@@ -59,10 +61,6 @@ extension LandingViewController {
     
     pagingVC.setViewControllers([topPagingVCs[0]], direction: .forward, animated: true)
     scrollView.addSubview(pagingVC.view)
-    let pagingVCInitialX = 32
-    let pagingVCInitialY = Int(view.safeAreaInsets.top + 64)
-    
-    pagingVC.view.frame = CGRect(x: pagingVCInitialX, y: pagingVCInitialY, width: Int(view.frame.size.width - 64), height: 200)
     
   }
   
@@ -116,6 +114,11 @@ extension LandingViewController {
     view.addSubview(scrollView)
     
     NSLayoutConstraint.activate([
+      pagingVC.view.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 0),
+      pagingVC.view.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0),
+      pagingVC.view.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0),
+      pagingVC.view.heightAnchor.constraint(equalToConstant: 250),
+      
       stackView.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor),
       stackView.centerYAnchor.constraint(equalTo: scrollView.centerYAnchor),
       stackView.leadingAnchor.constraint(equalToSystemSpacingAfter: scrollView.leadingAnchor, multiplier: 1),

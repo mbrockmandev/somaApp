@@ -1,0 +1,15 @@
+{
+  "images" : [
+    {
+      "filename" : "soma_3rd_degree.pdf",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  },
+  "properties" : {
+    "preserves-vector-representation" : true
+  }
+}
