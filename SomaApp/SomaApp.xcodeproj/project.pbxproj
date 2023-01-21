@@ -19,6 +19,10 @@
 		27A7282A297A329500856CF3 /* SomaTabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A72829297A329500856CF3 /* SomaTabController.swift */; };
 		27A7282C297A339900856CF3 /* ListingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A7282B297A339900856CF3 /* ListingViewController.swift */; };
 		27A72832297A33F600856CF3 /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A72831297A33F600856CF3 /* InfoViewController.swift */; };
+		27C06547297C65CA001AE3CD /* ItemSupplementaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C06546297C65CA001AE3CD /* ItemSupplementaryView.swift */; };
+		27C06549297C669A001AE3CD /* Section.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C06548297C669A001AE3CD /* Section.swift */; };
+		27C0654B297C66C6001AE3CD /* ItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C0654A297C66C6001AE3CD /* ItemCell.swift */; };
+		27C0654D297C6CC4001AE3CD /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C0654C297C6CC4001AE3CD /* Item.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +59,10 @@
 		27A72829297A329500856CF3 /* SomaTabController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SomaTabController.swift; sourceTree = "<group>"; };
 		27A7282B297A339900856CF3 /* ListingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListingViewController.swift; sourceTree = "<group>"; };
 		27A72831297A33F600856CF3 /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
+		27C06546297C65CA001AE3CD /* ItemSupplementaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemSupplementaryView.swift; sourceTree = "<group>"; };
+		27C06548297C669A001AE3CD /* Section.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Section.swift; sourceTree = "<group>"; };
+		27C0654A297C66C6001AE3CD /* ItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemCell.swift; sourceTree = "<group>"; };
+		27C0654C297C6CC4001AE3CD /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -164,6 +172,10 @@
 			isa = PBXGroup;
 			children = (
 				27A7282B297A339900856CF3 /* ListingViewController.swift */,
+				27C06546297C65CA001AE3CD /* ItemSupplementaryView.swift */,
+				27C06548297C669A001AE3CD /* Section.swift */,
+				27C0654A297C66C6001AE3CD /* ItemCell.swift */,
+				27C0654C297C6CC4001AE3CD /* Item.swift */,
 			);
 			path = Listing;
 			sourceTree = "<group>";
@@ -306,9 +318,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				27C06549297C669A001AE3CD /* Section.swift in Sources */,
 				27A727FD297A31EF00856CF3 /* LandingViewController.swift in Sources */,
+				27C06547297C65CA001AE3CD /* ItemSupplementaryView.swift in Sources */,
 				271A10A3297ADA760058D76C /* ViewFactory.swift in Sources */,
+				27C0654B297C66C6001AE3CD /* ItemCell.swift in Sources */,
 				27A727F9297A31EF00856CF3 /* AppDelegate.swift in Sources */,
+				27C0654D297C6CC4001AE3CD /* Item.swift in Sources */,
 				27A727FB297A31EF00856CF3 /* SceneDelegate.swift in Sources */,
 				27A7282A297A329500856CF3 /* SomaTabController.swift in Sources */,
 				27A72832297A33F600856CF3 /* InfoViewController.swift in Sources */,
