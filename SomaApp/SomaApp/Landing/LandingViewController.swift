@@ -8,7 +8,7 @@
 // TODO: Fix image bug on first load; it does not appear on subsequent changes of paging VC. Not sure why. Look in top left hand corner.
 import UIKit
 
-class LandingViewController: UIViewController {
+final class LandingViewController: UIViewController {
   
     // embed everything in a scrollview
   let scrollView = UIScrollView()

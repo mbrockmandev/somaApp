@@ -7,7 +7,7 @@
 
 import UIKit
 
-class InfoViewController: UIViewController {
+final class InfoViewController: UIViewController {
   
   let stackView = UIStackView()
   let imageView = UIImageView()

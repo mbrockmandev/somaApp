@@ -7,7 +7,7 @@
 
 import UIKit
 
-class SomaTabController: UITabBarController {
+final class SomaTabController: UITabBarController {
   override func viewDidLoad() {
     super.viewDidLoad()
     

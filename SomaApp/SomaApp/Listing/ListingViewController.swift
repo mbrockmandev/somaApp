@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ListingViewController: UIViewController {
+final class ListingViewController: UIViewController {
   
   var collectionView: UICollectionView!
   var dataSource: UICollectionViewDiffableDataSource<Section, Item>!
@@ -23,16 +23,14 @@ class ListingViewController: UIViewController {
   }
   
   private func getItems() {
-    print(#function)
-    var tmpItems = [Item]()
+//    print(#function)
     for i in 1...10 {
       let title = "Item \(i)"
       guard let url = URL(string: "https://www.google.com") else { return }
       guard let section = Section.allCases.randomElement() else { return }
-      tmpItems.append(Item(title: title, section: section.rawValue, url: url))
+      items.append(Item(title: title, section: section.rawValue, url: url))
     }
-    items = tmpItems
-    items.forEach { $0.printContents() }
+//    items.forEach { $0.printContents() }
   }
   
 }
@@ -42,12 +40,12 @@ extension ListingViewController {
   typealias ItemDataSource = UICollectionViewDiffableDataSource<Section, Item>
   
   private func setupCollectionView() {
-    print(#function)
+//    print(#function)
     collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: configureCollectionViewLayout())
+    collectionView.delegate = self
     collectionView.register(ItemSupplementaryView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: ItemSupplementaryView.reuseID)
     collectionView.register(ItemCell.self, forCellWithReuseIdentifier: ItemCell.reuseID)
-    collectionView.backgroundColor = .systemMint  
-    collectionView.delegate = self
+    collectionView.backgroundColor = .systemMint
     collectionView.translatesAutoresizingMaskIntoConstraints = false
     
     view.addSubview(collectionView)
@@ -86,18 +84,38 @@ extension ListingViewController {
     return UICollectionViewCompositionalLayout(sectionProvider: sectionProvider)
   }
   
+//  func configureDataSource() {
+//    dataSource = UICollectionViewDiffableDataSource(collectionView: collectionView, cellProvider: { collectionView, indexPath, item in
+//      print(item)
+//      let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ItemCell.reuseID, for: indexPath) as! ItemCell
+//      cell.set(with: item)
+//      print(cell.label.text as Any)
+//      return cell
+//    })
+//
+//    dataSource.supplementaryViewProvider = { [weak self] (collectionView: UICollectionView, kind: String, indexPath: IndexPath) -> UICollectionReusableView? in
+//      if let self, let itemSupplementaryView = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: ItemSupplementaryView.reuseID, for: indexPath) as? ItemSupplementaryView {
+//        let itemCollection = self.dataSource.snapshot().sectionIdentifiers[indexPath.section]
+//        itemSupplementaryView.textLabel.text = itemCollection.rawValue
+//
+//        return itemSupplementaryView
+//      } else {
+//        return nil
+//      }
+//    }
+//  }
+  
   func configureDataSource() {
-    print(#function)
-    dataSource = ItemDataSource(collectionView: collectionView) { (collectionView: UICollectionView, indexPath: IndexPath, item: Item) -> UICollectionViewCell? in
-      
+//    print(#function)
+    dataSource = ItemDataSource(collectionView: collectionView, cellProvider: { collectionView, indexPath, item in
       guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ItemCell.reuseID, for: indexPath) as? ItemCell else {
         return nil
       }
       
-      //TODO: Consider move to cell configure method
-      cell.label.text = item.title
+      cell.set(with: item)
+      print(cell.label.text as Any)
       return cell
-    }
+    })
     
     dataSource.supplementaryViewProvider = { [weak self] (collectionView: UICollectionView, kind: String, indexPath: IndexPath) -> UICollectionReusableView? in
       
@@ -114,11 +132,12 @@ extension ListingViewController {
   }
   
   func updateData(in sections: [Section], with items: [Item]) {
-    print(#function)
+//    print(#function)
     var snapshot = NSDiffableDataSourceSnapshot<Section, Item>()
     
     snapshot.appendSections(sections)
     snapshot.appendItems(items)
+//    items.forEach { $0.printContents() }
     Task { @MainActor in
       self.dataSource.apply(snapshot, animatingDifferences: true)
     }
