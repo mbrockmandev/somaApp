@@ -16,13 +16,13 @@ class ListingViewController: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    generateItems()
+    getItems()
     setupCollectionView()
     configureDataSource()
     updateData(in: Section.allCases, with: items)
   }
   
-  private func generateItems() {
+  private func getItems() {
     print(#function)
     var tmpItems = [Item]()
     for i in 1...10 {
@@ -122,8 +122,6 @@ extension ListingViewController {
     Task { @MainActor in
       self.dataSource.apply(snapshot, animatingDifferences: true)
     }
-//     DispatchQueue.main.async { self.dataSource.apply(snapshot, animatingDifferences: true) }
-    // TODO: double check main thread updating
   }
     
 }

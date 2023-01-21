@@ -23,6 +23,7 @@
 		27C06549297C669A001AE3CD /* Section.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C06548297C669A001AE3CD /* Section.swift */; };
 		27C0654B297C66C6001AE3CD /* ItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C0654A297C66C6001AE3CD /* ItemCell.swift */; };
 		27C0654D297C6CC4001AE3CD /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C0654C297C6CC4001AE3CD /* Item.swift */; };
+		27C0654F297C79E6001AE3CD /* VideoDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C0654E297C79E6001AE3CD /* VideoDownloader.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,6 +64,7 @@
 		27C06548297C669A001AE3CD /* Section.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Section.swift; sourceTree = "<group>"; };
 		27C0654A297C66C6001AE3CD /* ItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemCell.swift; sourceTree = "<group>"; };
 		27C0654C297C6CC4001AE3CD /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
+		27C0654E297C79E6001AE3CD /* VideoDownloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoDownloader.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -176,6 +178,7 @@
 				27C06548297C669A001AE3CD /* Section.swift */,
 				27C0654A297C66C6001AE3CD /* ItemCell.swift */,
 				27C0654C297C6CC4001AE3CD /* Item.swift */,
+				27C0654E297C79E6001AE3CD /* VideoDownloader.swift */,
 			);
 			path = Listing;
 			sourceTree = "<group>";
@@ -324,6 +327,7 @@
 				271A10A3297ADA760058D76C /* ViewFactory.swift in Sources */,
 				27C0654B297C66C6001AE3CD /* ItemCell.swift in Sources */,
 				27A727F9297A31EF00856CF3 /* AppDelegate.swift in Sources */,
+				27C0654F297C79E6001AE3CD /* VideoDownloader.swift in Sources */,
 				27C0654D297C6CC4001AE3CD /* Item.swift in Sources */,
 				27A727FB297A31EF00856CF3 /* SceneDelegate.swift in Sources */,
 				27A7282A297A329500856CF3 /* SomaTabController.swift in Sources */,

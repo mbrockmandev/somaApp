@@ -14,6 +14,7 @@ class ItemCell: UICollectionViewCell {
   
   func configure() {
     
+    backgroundColor = .systemPink
     label.translatesAutoresizingMaskIntoConstraints = false
     label.adjustsFontForContentSizeCategory = true
     contentView.addSubview(label)
