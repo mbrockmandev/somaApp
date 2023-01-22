@@ -6,7 +6,15 @@
 //
 
 import UIKit
-import YouTubeiOSPlayerHelper
+
+final class ListingNavController: UINavigationController {
+  override func viewDidLoad() {
+    let listingVC = ListingViewController()
+    add(listingVC)
+    view.addSubview(listingVC.view)
+    
+  }
+}
 
 final class ListingViewController: UIViewController {
   
@@ -26,10 +34,14 @@ final class ListingViewController: UIViewController {
   
   var dataSource: UICollectionViewDiffableDataSource<Section, Video>! = nil
   
-  var playerView: YTPlayerView!
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    
+    //TODO: tweak nav bar for better appearance?
+    let appearance = UINavigationBarAppearance()
+    appearance.configureWithOpaqueBackground()
+    navigationController?.navigationBar.standardAppearance = appearance
     
     model.delegate = self
     model.getVideos(from: Constants.GUARD_PLAYLIST_URL, for: .grd)
@@ -136,10 +148,10 @@ extension ListingViewController: UICollectionViewDelegate {
     let urlString = Constants.YT_PLAY_URL + video.videoId
     guard let url = URL(string: urlString) else { return }
     let request = URLRequest(url: url)
-    playerView = YTPlayerView(frame: .zero)
     
-    playerView.load(withVideoId: urlString)
-    
+    let detailVC = DetailViewController()
+    detailVC.url = url
+    present(detailVC, animated: true)
     print(url)
     
   }
