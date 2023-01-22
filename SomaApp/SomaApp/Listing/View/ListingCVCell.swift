@@ -28,6 +28,14 @@ class ListingCVCell: UICollectionViewCell {
   }
   
   private func configure() {
+//    backgroundColor = .secondarySystemBackground
+//    contentView.layer.cornerRadius = 20
+//    layer.cornerRadius = 20
+//    contentView.clipsToBounds = true
+//    clipsToBounds = true
+    layer.shadowColor = .init(gray: 1, alpha: 1)
+    layer.shadowRadius = 10
+    
     addSubviews(textStackView, imageView)
 
     textStackView.translatesAutoresizingMaskIntoConstraints = false
@@ -38,11 +46,13 @@ class ListingCVCell: UICollectionViewCell {
     titleLabel.translatesAutoresizingMaskIntoConstraints = false
     titleLabel.numberOfLines = 2
     titleLabel.font = .preferredFont(forTextStyle: .body).bold()
-    titleLabel.textColor = .tertiaryLabel
+    titleLabel.textColor = .white
     
     imageView.translatesAutoresizingMaskIntoConstraints = false
     imageView.layer.zPosition = -1
     imageView.contentMode = .scaleAspectFill
+    imageView.clipsToBounds = true
+    imageView.layer.cornerRadius = 20
     
     NSLayoutConstraint.activate([
       
@@ -51,8 +61,8 @@ class ListingCVCell: UICollectionViewCell {
       textStackView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -K.inset),
       
       imageView.topAnchor.constraint(equalTo: topAnchor),
-      imageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: K.inset * 2),
-      imageView.heightAnchor.constraint(equalToConstant: 160),
+      imageView.leadingAnchor.constraint(equalTo: leadingAnchor),
+      imageView.heightAnchor.constraint(equalToConstant: 200),
       imageView.widthAnchor.constraint(equalTo: imageView.heightAnchor),
     ])
 

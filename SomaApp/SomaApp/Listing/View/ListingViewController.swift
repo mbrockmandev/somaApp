@@ -1,5 +1,5 @@
 //
-//  ListingUIVCPrototype.swift
+//  ListingViewController.swift
 //  SomaApp
 //
 //  Created by Michael Brockman on 1/22/23.
@@ -7,18 +7,20 @@
 
 import UIKit
 
-final class ListingUIVCPrototype: UIViewController {
+final class ListingViewController: UIViewController {
   
   var collectionView: UICollectionView!
   var model = Model()
-  var videos = [Video]()
+  var guardVideos = [Video]()
+  var sideMountVideos = [Video]()
+  var mountVideos = [Video]()
+  var backMountVideos = [Video]()
   
   enum Section: String, CaseIterable {
-//    case main
-    case first = "Guard"
-    case second = "Side Mount"
-    case third = "Mount"
-    case fourth = "Back Mount"
+    case grd = "Guard"
+    case sideMount = "Side Mount"
+    case mount = "Mount"
+    case backMount = "Back Mount"
   }
   
   var dataSource: UICollectionViewDiffableDataSource<Section, Video>! = nil
@@ -27,7 +29,10 @@ final class ListingUIVCPrototype: UIViewController {
     super.viewDidLoad()
     
     model.delegate = self
-    model.getVideos()
+    model.getVideos(from: Constants.GUARD_PLAYLIST_URL, for: .grd)
+    model.getVideos(from: Constants.SIDEMOUNT_PLAYLIST_URL, for: .sideMount)
+    model.getVideos(from: Constants.MOUNT_PLAYLIST_URL, for: .mount)
+    model.getVideos(from: Constants.BACKMOUNT_PLAYLIST_URL, for: .backMount)
     configureCollectionView()
     configureDataSource()
   }
@@ -52,7 +57,7 @@ final class ListingUIVCPrototype: UIViewController {
   }
 }
 
-extension ListingUIVCPrototype: UICollectionViewDelegate {
+extension ListingViewController: UICollectionViewDelegate {
   typealias ListingDataSource = UICollectionViewDiffableDataSource<Section, Video>
   
   private func configureDataSource() {
@@ -85,8 +90,13 @@ extension ListingUIVCPrototype: UICollectionViewDelegate {
   
   private func updateData() {
     var snapshot = NSDiffableDataSourceSnapshot<Section, Video>()
+    
     snapshot.appendSections(Section.allCases)
-    snapshot.appendItems(videos)
+    snapshot.appendItems(guardVideos, toSection: .grd)
+    snapshot.appendItems(sideMountVideos, toSection: .sideMount)
+    snapshot.appendItems(mountVideos, toSection: .mount)
+    snapshot.appendItems(backMountVideos, toSection: .backMount)
+
     dataSource.apply(snapshot, animatingDifferences: false)
   }
   
@@ -116,32 +126,42 @@ extension ListingUIVCPrototype: UICollectionViewDelegate {
     
     return UICollectionViewCompositionalLayout(sectionProvider: sectionProvider)
   }
-  
 }
 
-extension ListingUIVCPrototype: ModelDelegate {
-  func videosFetched(_ videos: [Video]) {
-    self.videos = videos
+extension ListingViewController: ModelDelegate {
+
+  func videosFetched(_ videos: [Video], type: Section) {
+    switch type {
+    case .grd:
+      guardVideos = videos
+    case .sideMount:
+      sideMountVideos = videos
+    case .mount:
+      mountVideos = videos
+    case .backMount:
+      backMountVideos = videos
+    }
     updateData()
   }
+
 }
 
   //MARK: - Previews
 #if DEBUG
 import SwiftUI
-struct ListingPrototypeControllerPreview<ListingUIVCPrototype: UIViewController>: UIViewControllerRepresentable {
-  func updateUIViewController(_ uiViewController: ListingUIVCPrototype, context: Context) {
+struct ListingPrototypeControllerPreview<ListingViewController: UIViewController>: UIViewControllerRepresentable {
+  func updateUIViewController(_ uiViewController: ListingViewController, context: Context) {
     
   }
   
-  let viewController: ListingUIVCPrototype
+  let viewController: ListingViewController
   
-  init(_ builder: @escaping () -> ListingUIVCPrototype) {
+  init(_ builder: @escaping () -> ListingViewController) {
     viewController = builder()
   }
   
     // MARK: - UIViewControllerRepresentable
-  func makeUIViewController(context: Context) -> ListingUIVCPrototype {
+  func makeUIViewController(context: Context) -> ListingViewController {
     viewController
   }
 }
@@ -150,7 +170,7 @@ struct ListingPrototypeControllerPreview<ListingUIVCPrototype: UIViewController>
 struct ListingUIVCPrototype_Previews: PreviewProvider {
   static var previews: some View {
     ListingPrototypeControllerPreview {
-      let vc = ListingUIVCPrototype()
+      let vc = ListingViewController()
       return vc
     }
   }

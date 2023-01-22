@@ -8,16 +8,16 @@
 import Foundation
 
 protocol ModelDelegate {
-  func videosFetched(_ videos: [Video])
+  func videosFetched(_ videos: [Video], type: ListingViewController.Section)
 }
 
 final class Model {
   
   var delegate: ModelDelegate?
   
-  func getVideos() {
-    
-    guard let url = URL(string: Constants.API_URL) else { return }
+  func getVideos(from url: String, for type: ListingViewController.Section) {
+    //Constants.API_URL was the url previously 
+    guard let url = URL(string: url) else { return }
     let session = URLSession.shared
     Task {
       let (data, response) = try await session.data(from: url)
@@ -28,7 +28,7 @@ final class Model {
         let decodedData = try decoder.decode(Response.self, from: data)
         guard let videos = decodedData.items else { return }
         Task { @MainActor in
-          self.delegate?.videosFetched(videos)          
+          self.delegate?.videosFetched(videos, type: type)
         }
       } catch {
         print("\(error)")
