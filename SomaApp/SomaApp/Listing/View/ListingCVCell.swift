@@ -26,6 +26,7 @@ class ListingCVCell: UICollectionViewCell {
     addSubview(textLabel)
     
     textLabel.translatesAutoresizingMaskIntoConstraints = false
+    textLabel.numberOfLines = 2
 
     
     NSLayoutConstraint.activate([
