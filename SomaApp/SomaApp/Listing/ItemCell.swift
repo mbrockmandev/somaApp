@@ -13,6 +13,15 @@ final class ItemCell: UICollectionViewCell {
   let label = UILabel()
   let thumbnailImageView = UIImageView()
   
+  override init(frame: CGRect) {
+    super.init(frame: frame)
+    configure()
+  }
+  
+  required init?(coder: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
+  }
+  
   func configure() {
     
     backgroundColor = .systemPink

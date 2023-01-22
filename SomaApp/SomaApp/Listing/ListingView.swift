@@ -8,34 +8,32 @@
 import SwiftUI
 import AVKit
 
-struct ListingView: View {
+struct ListingView: View, ModelDelegate {
+
   @State private var model = Model()
-  @State private var items = [Video]()
-  @State private var testItems = ["One", "Two", "Three"]
+  @State private var videos = [Video]()
   
   var body: some View {
     NavigationView {
       List {
-        if let items = model.response?.items {
-          ForEach(items) { item in
-            Text(item.title)
-          }
-        } else {
-          ForEach(testItems, id:\.self) { item in
-            Text(item)
-          }
+        ForEach(videos) { video in
+          Text(video.title)
         }
       }
-//      VStack {
-//        VideoPlayer(player: AVPlayer(url: model.response.items[0].))
-//          .scaledToFit()
-//      }
+      
+        //      VStack {
+        //        VideoPlayer(player: AVPlayer(url: model.response.items[0].))
+        //          .scaledToFit()
+        //      }
     }
     .onAppear {
       model.getVideos()
-      guard model.response?.items != nil else { return }
-      items = (model.response?.items)!
     }
+  }
+  
+  func videosFetched(_ videos: [Video]) {
+    self.videos = videos
+    dump(videos)
   }
 }
 
