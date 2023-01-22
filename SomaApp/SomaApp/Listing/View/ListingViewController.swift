@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import YouTubeiOSPlayerHelper
 
 final class ListingViewController: UIViewController {
   
@@ -25,6 +26,8 @@ final class ListingViewController: UIViewController {
   
   var dataSource: UICollectionViewDiffableDataSource<Section, Video>! = nil
   
+  var playerView: YTPlayerView!
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     
@@ -33,6 +36,7 @@ final class ListingViewController: UIViewController {
     model.getVideos(from: Constants.SIDEMOUNT_PLAYLIST_URL, for: .sideMount)
     model.getVideos(from: Constants.MOUNT_PLAYLIST_URL, for: .mount)
     model.getVideos(from: Constants.BACKMOUNT_PLAYLIST_URL, for: .backMount)
+    
     configureCollectionView()
     configureDataSource()
   }
@@ -126,6 +130,19 @@ extension ListingViewController: UICollectionViewDelegate {
     
     return UICollectionViewCompositionalLayout(sectionProvider: sectionProvider)
   }
+  
+  func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    guard let video = dataSource.itemIdentifier(for: indexPath) else { return }
+    let urlString = Constants.YT_PLAY_URL + video.videoId
+    guard let url = URL(string: urlString) else { return }
+    let request = URLRequest(url: url)
+    playerView = YTPlayerView(frame: .zero)
+    
+    playerView.load(withVideoId: urlString)
+    
+    print(url)
+    
+  }
 }
 
 extension ListingViewController: ModelDelegate {
@@ -143,7 +160,6 @@ extension ListingViewController: ModelDelegate {
     }
     updateData()
   }
-
 }
 
   //MARK: - Previews
