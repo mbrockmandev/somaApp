@@ -9,8 +9,10 @@ import SwiftUI
 import AVKit
 
 struct ListingView: View {
+  @State private var model = Model()
 //  let url = URL(string: "https://www.youtube.com/watch?v=AlPwpt0cgzc&list=PL0iM5DMxYC5lya2dDsNussyA_-2Y7jmmJ&index=1")!
   let url = URL(string: "https://www.youtube.com/embed/QV4_kVIf4V4")!
+  
   
   var body: some View {
     NavigationView {
@@ -19,6 +21,10 @@ struct ListingView: View {
           .scaledToFit()
         
       }
+    }
+    .onAppear {
+      model.getVideos()
+      print(model.url as Any)
     }
   }
 }
