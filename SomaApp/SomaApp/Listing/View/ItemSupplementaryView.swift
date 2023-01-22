@@ -23,8 +23,8 @@ final class ItemSupplementaryView: UICollectionReusableView {
   
   private func configure() {
     addSubview(textLabel)
-    textLabel.font = UIFont.preferredFont(forTextStyle: .title3).bold()
-    textLabel.textColor = .secondaryLabel
+    textLabel.font = UIFont.preferredFont(forTextStyle: .title2).bold()
+    textLabel.textColor = .label
     textLabel.translatesAutoresizingMaskIntoConstraints = false
     
     

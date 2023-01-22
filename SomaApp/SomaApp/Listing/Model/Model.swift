@@ -16,8 +16,9 @@ final class Model {
   var delegate: ModelDelegate?
   
   func getVideos(from url: String, for type: ListingViewController.Section) {
-    //Constants.API_URL was the url previously 
+    
     guard let url = URL(string: url) else { return }
+
     let session = URLSession.shared
     Task {
       let (data, response) = try await session.data(from: url)

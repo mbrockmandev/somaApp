@@ -25,14 +25,9 @@ class ListingCVCell: UICollectionViewCell {
   }
   
   private func configure() {
-//    backgroundColor = .secondarySystemBackground
-//    contentView.layer.cornerRadius = 20
-//    layer.cornerRadius = 20
-//    contentView.clipsToBounds = true
-//    clipsToBounds = true
     layer.shadowColor = .init(gray: 1, alpha: 1)
     layer.shadowRadius = 10
-    
+//    backgroundColor = .systemGray6
     
     addSubviews(titleLabel, imageView)
     
@@ -43,24 +38,24 @@ class ListingCVCell: UICollectionViewCell {
     imageView.layer.cornerRadius = 20
     
     titleLabel.translatesAutoresizingMaskIntoConstraints = false
-    titleLabel.numberOfLines = 2
-    titleLabel.font = .preferredFont(forTextStyle: .body).bold()
+    titleLabel.numberOfLines = 1
+    titleLabel.font = .preferredFont(forTextStyle: .body)
     titleLabel.textColor = .white
     titleLabel.adjustsFontSizeToFitWidth = true
-    titleLabel.minimumScaleFactor = 0.7
+    titleLabel.minimumScaleFactor = 0.9
     titleLabel.shadowColor = .systemGray5
     titleLabel.layer.shadowRadius = 5
-    
+    titleLabel.lineBreakMode = .byTruncatingTail
     
     NSLayoutConstraint.activate([
       
-      imageView.topAnchor.constraint(equalTo: topAnchor),
+      imageView.topAnchor.constraint(equalTo: topAnchor, constant: K.inset * 1.5),
       imageView.leadingAnchor.constraint(equalTo: leadingAnchor),
-      imageView.heightAnchor.constraint(equalToConstant: 140),
-      imageView.widthAnchor.constraint(equalTo: imageView.heightAnchor, multiplier: (16/9)),
+      imageView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -K.inset * 1.5),
+      imageView.widthAnchor.constraint(equalTo: imageView.heightAnchor/*, multiplier: (16/9)*/),
       
       titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: K.inset),
-      titleLabel.bottomAnchor.constraint(equalTo: imageView.bottomAnchor, constant: -K.inset),
+      titleLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: -K.inset * 3),
       titleLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -K.inset),
       
     ])
