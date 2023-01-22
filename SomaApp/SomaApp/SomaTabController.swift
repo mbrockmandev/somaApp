@@ -6,13 +6,15 @@
 //
 
 import UIKit
+import SwiftUI
 
 final class SomaTabController: UITabBarController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
     let landingVC = LandingViewController()
-    let listingVC = ListingViewController()
+//    let listingVC = ListingViewController()
+    let listingVC = UIHostingController(rootView: ListingView())
     let infoVC = InfoViewController()
     
     let landingTabBarItem = UITabBarItem(title: "Welcome", image: UIImage(systemName: "house"), selectedImage: UIImage(systemName: "house.fill"))
