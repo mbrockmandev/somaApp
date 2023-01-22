@@ -8,25 +8,22 @@
 import Foundation
 
 final class Model {
-  var url = URL(string: "")
+  var response: Response?
   
   func getVideos() {
     
-    // make url object
     guard let url = URL(string: Constants.API_URL) else { return }
-    self.url = url
     let session = URLSession.shared
     Task {
       let (data, response) = try await session.data(from: url)
       guard let response = response as? HTTPURLResponse, (200...299).contains(response.statusCode) else { return }
-      
+      let decoder = JSONDecoder()
+      decoder.dateDecodingStrategy = .iso8601
       do {
-        
+        self.response = try decoder.decode(Response.self, from: data)
       } catch {
         print("\(error)")
       }
-      
     }
-   
   }
 }

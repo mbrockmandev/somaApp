@@ -10,21 +10,31 @@ import AVKit
 
 struct ListingView: View {
   @State private var model = Model()
-//  let url = URL(string: "https://www.youtube.com/watch?v=AlPwpt0cgzc&list=PL0iM5DMxYC5lya2dDsNussyA_-2Y7jmmJ&index=1")!
-  let url = URL(string: "https://www.youtube.com/embed/QV4_kVIf4V4")!
-  
+  @State private var items = [Video]()
+  @State private var testItems = ["One", "Two", "Three"]
   
   var body: some View {
     NavigationView {
-      VStack {
-        VideoPlayer(player: AVPlayer(url: url))
-          .scaledToFit()
-        
+      List {
+        if let items = model.response?.items {
+          ForEach(items) { item in
+            Text(item.title)
+          }
+        } else {
+          ForEach(testItems, id:\.self) { item in
+            Text(item)
+          }
+        }
       }
+//      VStack {
+//        VideoPlayer(player: AVPlayer(url: model.response.items[0].))
+//          .scaledToFit()
+//      }
     }
     .onAppear {
       model.getVideos()
-      print(model.url as Any)
+      guard model.response?.items != nil else { return }
+      items = (model.response?.items)!
     }
   }
 }
