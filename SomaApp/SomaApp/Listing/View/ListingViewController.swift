@@ -7,15 +7,6 @@
 
 import UIKit
 
-final class ListingNavController: UINavigationController {
-  override func viewDidLoad() {
-    let listingVC = ListingViewController()
-    add(listingVC)
-    view.addSubview(listingVC.view)
-    
-  }
-}
-
 final class ListingViewController: UIViewController {
   
   var collectionView: UICollectionView!
@@ -37,11 +28,6 @@ final class ListingViewController: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    
-    //TODO: tweak nav bar for better appearance?
-    let appearance = UINavigationBarAppearance()
-    appearance.configureWithOpaqueBackground()
-    navigationController?.navigationBar.standardAppearance = appearance
     
     model.delegate = self
     model.getVideos(from: Constants.GUARD_PLAYLIST_URL, for: .grd)
@@ -65,7 +51,7 @@ final class ListingViewController: UIViewController {
     collectionView.translatesAutoresizingMaskIntoConstraints = false
     
     NSLayoutConstraint.activate([
-      collectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: K.inset),
+      collectionView.topAnchor.constraint(equalTo: view.topAnchor, constant: K.inset),
       collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: K.inset),
       collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -K.inset),
       collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -K.inset),
@@ -123,17 +109,15 @@ extension ListingViewController: UICollectionViewDelegate {
       
       let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
       let item = NSCollectionLayoutItem(layoutSize: itemSize)
-      item.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 10, bottom: 10, trailing: 10)
+      item.contentInsets = NSDirectionalEdgeInsets(top: K.inset, leading: K.inset * 2, bottom: K.inset, trailing: K.inset)
       
-      let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.6), heightDimension: .fractionalHeight(0.3))
+      let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.8), heightDimension: .fractionalHeight(0.225))
       let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
       
       let section = NSCollectionLayoutSection(group: group)
       section.orthogonalScrollingBehavior = .groupPaging
-      section.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 10, bottom: 10, trailing: 10)
-      section.interGroupSpacing = 10
       
-      let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(44))
+      let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(25))
       let sectionHeader = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize, elementKind: UICollectionView.elementKindSectionHeader, alignment: .topLeading)
       section.boundarySupplementaryItems = [sectionHeader]
       
@@ -145,15 +129,13 @@ extension ListingViewController: UICollectionViewDelegate {
   
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
     guard let video = dataSource.itemIdentifier(for: indexPath) else { return }
-    let urlString = Constants.YT_PLAY_URL + video.videoId
+    let urlString = Constants.YT_PLAY_URL + video.videoId + Constants.YT_INLINE_YES
     guard let url = URL(string: urlString) else { return }
     let request = URLRequest(url: url)
     
     let detailVC = DetailViewController()
     detailVC.url = url
     present(detailVC, animated: true)
-    print(url)
-    
   }
 }
 

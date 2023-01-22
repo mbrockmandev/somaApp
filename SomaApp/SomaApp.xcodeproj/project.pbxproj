@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		271A10A3297ADA760058D76C /* ViewFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 271A10A2297ADA760058D76C /* ViewFactory.swift */; };
-		27471C7A297D856800F56946 /* YouTubeiOSPlayerHelper in Frameworks */ = {isa = PBXBuildFile; productRef = 27471C79297D856800F56946 /* YouTubeiOSPlayerHelper */; };
 		279654D1297CD1BD00F15177 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279654D0297CD1BD00F15177 /* Constants.swift */; };
 		279654D3297CD4EF00F15177 /* Video.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279654D2297CD4EF00F15177 /* Video.swift */; };
 		279654D5297CD52000F15177 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279654D4297CD52000F15177 /* Model.swift */; };
@@ -83,7 +82,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				27471C7A297D856800F56946 /* YouTubeiOSPlayerHelper in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -249,7 +247,6 @@
 			);
 			name = SomaApp;
 			packageProductDependencies = (
-				27471C79297D856800F56946 /* YouTubeiOSPlayerHelper */,
 			);
 			productName = SomaApp;
 			productReference = 27A727F5297A31EF00856CF3 /* SomaApp.app */;
@@ -324,7 +321,6 @@
 			);
 			mainGroup = 27A727EC297A31EF00856CF3;
 			packageReferences = (
-				27471C78297D856800F56946 /* XCRemoteSwiftPackageReference "youtube-ios-player-helper.git" */,
 			);
 			productRefGroup = 27A727F6297A31EF00856CF3 /* Products */;
 			projectDirPath = "";
@@ -716,25 +712,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCRemoteSwiftPackageReference section */
-		27471C78297D856800F56946 /* XCRemoteSwiftPackageReference "youtube-ios-player-helper.git" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/youtube/youtube-ios-player-helper.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.0.0;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		27471C79297D856800F56946 /* YouTubeiOSPlayerHelper */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 27471C78297D856800F56946 /* XCRemoteSwiftPackageReference "youtube-ios-player-helper.git" */;
-			productName = YouTubeiOSPlayerHelper;
-		};
-/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 27A727ED297A31EF00856CF3 /* Project object */;
 }

@@ -10,10 +10,7 @@ import UIKit
 class ListingCVCell: UICollectionViewCell {
   static let reuseID = "ListingCVCell"
   
-  let textStackView = UIStackView()
   let titleLabel = UILabel()
-  let dateLabel = UILabel()
-  
   let imageView = UIImageView()
   
   var video: Video?
@@ -36,17 +33,8 @@ class ListingCVCell: UICollectionViewCell {
     layer.shadowColor = .init(gray: 1, alpha: 1)
     layer.shadowRadius = 10
     
-    addSubviews(textStackView, imageView)
-
-    textStackView.translatesAutoresizingMaskIntoConstraints = false
-    textStackView.axis = .vertical
-//    textStackView.addArrangedSubviews(titleLabel, dateLabel)
-    textStackView.addArrangedSubviews(titleLabel) //TODO: Decide on having stack view for more info vs not
     
-    titleLabel.translatesAutoresizingMaskIntoConstraints = false
-    titleLabel.numberOfLines = 2
-    titleLabel.font = .preferredFont(forTextStyle: .body).bold()
-    titleLabel.textColor = .white
+    addSubviews(titleLabel, imageView)
     
     imageView.translatesAutoresizingMaskIntoConstraints = false
     imageView.layer.zPosition = -1
@@ -54,16 +42,27 @@ class ListingCVCell: UICollectionViewCell {
     imageView.clipsToBounds = true
     imageView.layer.cornerRadius = 20
     
+    titleLabel.translatesAutoresizingMaskIntoConstraints = false
+    titleLabel.numberOfLines = 2
+    titleLabel.font = .preferredFont(forTextStyle: .body).bold()
+    titleLabel.textColor = .white
+    titleLabel.adjustsFontSizeToFitWidth = true
+    titleLabel.minimumScaleFactor = 0.7
+    titleLabel.shadowColor = .systemGray5
+    titleLabel.layer.shadowRadius = 5
+    
+    
     NSLayoutConstraint.activate([
-      
-      textStackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: K.inset),
-      textStackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -K.inset),
-      textStackView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -K.inset),
       
       imageView.topAnchor.constraint(equalTo: topAnchor),
       imageView.leadingAnchor.constraint(equalTo: leadingAnchor),
-      imageView.heightAnchor.constraint(equalToConstant: 200),
-      imageView.widthAnchor.constraint(equalTo: imageView.heightAnchor),
+      imageView.heightAnchor.constraint(equalToConstant: 140),
+      imageView.widthAnchor.constraint(equalTo: imageView.heightAnchor, multiplier: (16/9)),
+      
+      titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: K.inset),
+      titleLabel.bottomAnchor.constraint(equalTo: imageView.bottomAnchor, constant: -K.inset),
+      titleLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -K.inset),
+      
     ])
 
   }
