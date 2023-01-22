@@ -23,16 +23,16 @@ final class ItemSupplementaryView: UICollectionReusableView {
   
   private func configure() {
     addSubview(textLabel)
-    textLabel.font = UIFont.preferredFont(forTextStyle: .title2)
+    textLabel.font = UIFont.preferredFont(forTextStyle: .title3).bold()
+    textLabel.textColor = .secondaryLabel
     textLabel.translatesAutoresizingMaskIntoConstraints = false
     
-    let padding: CGFloat = 8
     
     NSLayoutConstraint.activate([
-      textLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: padding),
-      textLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -padding),
-      textLabel.topAnchor.constraint(equalTo: topAnchor, constant: padding),
-      textLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -padding)
+      textLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: K.inset),
+      textLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -K.inset),
+      textLabel.topAnchor.constraint(equalTo: topAnchor, constant: K.inset),
+      textLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -K.inset)
     ])
   }
 }

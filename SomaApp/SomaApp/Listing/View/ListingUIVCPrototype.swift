@@ -34,7 +34,7 @@ final class ListingUIVCPrototype: UIViewController {
   
   private func configureCollectionView() {
     collectionView = UICollectionView(frame: view.frame, collectionViewLayout: createLayout())
-    collectionView.backgroundColor = .systemMint
+    collectionView.backgroundColor = .systemBackground
     collectionView.register(ListingCVCell.self, forCellWithReuseIdentifier: ListingCVCell.reuseID)
     collectionView.register(ItemSupplementaryView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: ItemSupplementaryView.reuseID)
     collectionView.delegate = self
@@ -42,13 +42,12 @@ final class ListingUIVCPrototype: UIViewController {
     view.addSubview(collectionView)
     
     collectionView.translatesAutoresizingMaskIntoConstraints = false
-    let inset: CGFloat = 8
     
     NSLayoutConstraint.activate([
-      collectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: inset),
-      collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: inset),
-      collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -inset),
-      collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -inset),
+      collectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: K.inset),
+      collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: K.inset),
+      collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -K.inset),
+      collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -K.inset),
     ])
   }
 }
@@ -60,14 +59,11 @@ extension ListingUIVCPrototype: UICollectionViewDelegate {
     dataSource = UICollectionViewDiffableDataSource<Section, Video>(collectionView: collectionView) {
       (collectionView: UICollectionView, indexPath: IndexPath, video: Video) -> UICollectionViewCell? in
       
-        // Get a cell of the desired kind.
       guard let cell = collectionView.dequeueReusableCell(
         withReuseIdentifier: ListingCVCell.reuseID,
         for: indexPath) as? ListingCVCell else { fatalError("Could not create new cell") }
       
-        // Populate the cell with our item description.
       cell.set(with: video)
-        // Return the cell.
       return cell
     }
     
@@ -119,26 +115,6 @@ extension ListingUIVCPrototype: UICollectionViewDelegate {
     }
     
     return UICollectionViewCompositionalLayout(sectionProvider: sectionProvider)
-    
-    
-    
-    
-//    let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.2),
-//                                          heightDimension: .fractionalHeight(1.0))
-//    let item = NSCollectionLayoutItem(layoutSize: itemSize)
-//    item.contentInsets = NSDirectionalEdgeInsets(top: 5, leading: 5, bottom: 5, trailing: 5)
-//
-//    let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
-//                                           heightDimension: .fractionalWidth(0.2))
-//    let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize,
-//                                                   subitems: [item])
-//
-//    let section = NSCollectionLayoutSection(group: group)
-//    section.orthogonalScrollingBehavior = .paging
-//
-//    let layout = UICollectionViewCompositionalLayout(section: section)
-//
-//    return layout
   }
   
 }
@@ -173,7 +149,7 @@ struct ListingPrototypeControllerPreview<ListingUIVCPrototype: UIViewController>
 
 struct ListingUIVCPrototype_Previews: PreviewProvider {
   static var previews: some View {
-    UIViewControllerPreview {
+    ListingPrototypeControllerPreview {
       let vc = ListingUIVCPrototype()
       return vc
     }

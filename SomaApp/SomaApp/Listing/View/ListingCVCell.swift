@@ -10,8 +10,13 @@ import UIKit
 class ListingCVCell: UICollectionViewCell {
   static let reuseID = "ListingCVCell"
   
-  let textLabel = UILabel()
+  let textStackView = UIStackView()
+  let titleLabel = UILabel()
+  let dateLabel = UILabel()
+  
   let imageView = UIImageView()
+  
+  var video: Video?
   
   override init(frame: CGRect) {
     super.init(frame: frame)
@@ -23,41 +28,69 @@ class ListingCVCell: UICollectionViewCell {
   }
   
   private func configure() {
-    addSubview(textLabel)
-    
-    textLabel.translatesAutoresizingMaskIntoConstraints = false
-    textLabel.numberOfLines = 2
+    addSubviews(textStackView, imageView)
 
+    textStackView.translatesAutoresizingMaskIntoConstraints = false
+    textStackView.axis = .vertical
+//    textStackView.addArrangedSubviews(titleLabel, dateLabel)
+    textStackView.addArrangedSubviews(titleLabel) //TODO: Decide on having stack view for more info vs not
+    
+    titleLabel.translatesAutoresizingMaskIntoConstraints = false
+    titleLabel.numberOfLines = 2
+    titleLabel.font = .preferredFont(forTextStyle: .body).bold()
+    titleLabel.textColor = .tertiaryLabel
+    
+    imageView.translatesAutoresizingMaskIntoConstraints = false
+    imageView.layer.zPosition = -1
+    imageView.contentMode = .scaleAspectFill
     
     NSLayoutConstraint.activate([
-      textLabel.topAnchor.constraint(equalTo: topAnchor),
-      textLabel.leadingAnchor.constraint(equalTo: leadingAnchor),
-      textLabel.trailingAnchor.constraint(equalTo: trailingAnchor),
-      textLabel.bottomAnchor.constraint(equalTo: bottomAnchor),
+      
+      textStackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: K.inset),
+      textStackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -K.inset),
+      textStackView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -K.inset),
+      
+      imageView.topAnchor.constraint(equalTo: topAnchor),
+      imageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: K.inset * 2),
+      imageView.heightAnchor.constraint(equalToConstant: 160),
+      imageView.widthAnchor.constraint(equalTo: imageView.heightAnchor),
     ])
 
   }
   
-  func set(with video: Video) {
-    textLabel.text = video.title
+  func set(with v: Video) {
+    self.video = v
+    guard let video = self.video else { return }
+    titleLabel.text = video.title
     
+    if let cachedData = CacheManager.getVideoCache(video.thumbnail) {
+      let image = UIImage(data: cachedData)
+      
+      Task { @MainActor in
+        self.imageView.image = image
+      }
+      return
+    }
+    
+    guard let thumbnail = self.video?.thumbnail else { return }
+    let session = URLSession.shared
+    
+    Task {
+      guard let url = URL(string: thumbnail) else { return }
+      
+      let (data, response) = try await session.data(from: url)
+      guard let response = response as? HTTPURLResponse, (200...299).contains(response.statusCode) else { return }
+      
+      CacheManager.setVideoCache(url.absoluteString, data: data)
+      let image = UIImage(data: data)
+      
+      Task { @MainActor in
+        self.imageView.image = image
+      }
+    }
   }
   
 }
-
-//class ListingCVHeaderView: UICollectionReusableView {
-//
-//  let section: Section
-//  @IBOutlet weak var textLabel: UILabel!
-//
-//  override init(frame: CGRect) {
-//    super.init(frame: frame)
-//
-//    textLabel.text = section.rawValue
-//    textLabel.textAlignment = .center
-//
-//  }
-//}
 
 
 
