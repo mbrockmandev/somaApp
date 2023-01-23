@@ -60,5 +60,25 @@ extension UIViewController {
     view.removeFromSuperview()
     removeFromParent()
   }
+  
+  ///Sets translatesAutoresizingMaskIntoConstraints = false
+  ///Works on any UIView, and accepts variadic views.
+  func turnTamicOffFor(_ views: UIView...) {
+    for view in views {
+      view.translatesAutoresizingMaskIntoConstraints = false
+    }
+  }
+  
+  ///Applies NSLayoutConstraints to all four edges of the superView (UIViewController)
+  func pinToEdges(_ views: UIView...) {
+    for view in views {
+      NSLayoutConstraint.activate([
+        view.topAnchor.constraint(equalTo: self.view.topAnchor),
+        view.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
+        view.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
+        view.bottomAnchor.constraint(equalTo: self.view.bottomAnchor),
+      ])
+    }
+  }
 }
 

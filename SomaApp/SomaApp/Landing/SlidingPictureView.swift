@@ -11,16 +11,11 @@ class SlidingPictureView: UIViewController {
   
   let button = UIButton(configuration: .borderedTinted())
   let imageView: UIImageView
-  
-  init(_ text: String) {
+    
+  init(image: String) {
+    guard let uiImage = UIImage(named: image) else { fatalError("bad image sent") }
+    imageView = makeBannerImage(from: uiImage)
     super.init(nibName: nil, bundle: nil)
-    label.text = text
-  }
-  
-  init(image: UIImage) {
-    super.init(nibName: nil, bundle: nil)
-    label.text = text
-    imageView.image = image
   }
   
   required init?(coder: NSCoder) {
@@ -30,60 +25,33 @@ class SlidingPictureView: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     view.backgroundColor = .systemGroupedBackground
-    layout()
-    setupImageView()
+    configure()
   }
 }
 
 extension SlidingPictureView {
   
-  private func layout() {
+  private func configure() {
     view.layer.cornerRadius = 20
     view.clipsToBounds = true
     view.layer.shadowRadius = 10
     view.layer.shadowColor = .init(red: 0, green: 0, blue: 0, alpha: 0.5)
     
-    label.translatesAutoresizingMaskIntoConstraints = false
+    imageView.layer.cornerRadius = 20
+    imageView.clipsToBounds = true
     
-    view.addSubview(label)
-    
+    turnTamicOffFor(button, imageView)
+    view.addSubviews(button, imageView)
+        
     NSLayoutConstraint.activate([
-      label.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-      label.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-      view.heightAnchor.constraint(equalToConstant: 240),
+      button.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+      button.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+      
+      imageView.topAnchor.constraint(equalTo: view.topAnchor, constant: K.inset),
+      imageView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: K.inset),
+      imageView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -K.inset),
+      imageView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -K.inset),
+      
     ])
-  }
-  
-  private func setupImageView() {
-    guard let imageView else { return }
-  }
-}
-
-#if DEBUG
-import SwiftUI
-struct SlidingPictureViewPreview<SlidingPictureView: UIViewController>: UIViewControllerRepresentable {
-  func updateUIViewController(_ uiViewController: SlidingPictureView, context: Context) {
-    
-  }
-  
-  let viewController: SlidingPictureView
-  
-  init(_ builder: @escaping () -> SlidingPictureView) {
-    viewController = builder()
-  }
-  
-    // MARK: - UIViewControllerRepresentable
-  func makeUIViewController(context: Context) -> SlidingPictureView {
-    viewController
-  }
-}
-#endif
-
-struct TestPreviews_Previews: PreviewProvider {
-  static var previews: some View {
-    SlidingPictureViewPreview {
-      let vc = SlidingPictureView(with: <#image#>)
-      return vc
-    }
   }
 }
