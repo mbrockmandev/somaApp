@@ -27,36 +27,46 @@ class ListingCVCell: UICollectionViewCell {
   private func configure() {
     layer.shadowColor = .init(gray: 1, alpha: 1)
     layer.shadowRadius = 10
-//    backgroundColor = .systemGray6
     
     addSubviews(titleLabel, imageView)
+//    backgroundColor = .systemPink
+//    layer.borderColor = .init(red: 0, green: 1, blue: 0, alpha: 1)
+//    layer.borderWidth = 2
     
     imageView.translatesAutoresizingMaskIntoConstraints = false
+//    imageView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
     imageView.layer.zPosition = -1
     imageView.contentMode = .scaleAspectFill
     imageView.clipsToBounds = true
     imageView.layer.cornerRadius = 20
     
     titleLabel.translatesAutoresizingMaskIntoConstraints = false
-    titleLabel.numberOfLines = 1
+    titleLabel.numberOfLines = 2
     titleLabel.font = .preferredFont(forTextStyle: .body)
     titleLabel.textColor = .white
     titleLabel.adjustsFontSizeToFitWidth = true
     titleLabel.minimumScaleFactor = 0.9
     titleLabel.shadowColor = .systemGray5
     titleLabel.layer.shadowRadius = 5
-    titleLabel.lineBreakMode = .byTruncatingTail
+    titleLabel.lineBreakMode = .byWordWrapping
     
     NSLayoutConstraint.activate([
       
-      imageView.topAnchor.constraint(equalTo: topAnchor, constant: K.inset * 1.5),
-      imageView.leadingAnchor.constraint(equalTo: leadingAnchor),
-      imageView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -K.inset * 1.5),
-      imageView.widthAnchor.constraint(equalTo: imageView.heightAnchor/*, multiplier: (16/9)*/),
+      imageView.centerXAnchor.constraint(equalTo: centerXAnchor),
+      imageView.centerYAnchor.constraint(equalTo: centerYAnchor),
+      imageView.heightAnchor.constraint(equalTo: heightAnchor),
+//      imageView.topAnchor.constraint(equalTo: topAnchor, constant: K.inset * 1.5),
+//      imageView.leadingAnchor.constraint(equalTo: leadingAnchor),
+//      imageView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -K.inset * 1.5),
+      imageView.widthAnchor.constraint(equalTo: imageView.heightAnchor, multiplier: 1.2),
       
-      titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: K.inset),
-      titleLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: -K.inset * 3),
-      titleLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -K.inset),
+      titleLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
+//      titleLabel.bottomAnchor.constraint(equalTo: imageView.bottomAnchor, constant: -K.inset),
+      titleLabel.topAnchor.constraint(equalTo: imageView.topAnchor, constant: K.inset),
+      titleLabel.leadingAnchor.constraint(equalTo: imageView.leadingAnchor, constant: K.inset),
+      titleLabel.trailingAnchor.constraint(equalTo: imageView.trailingAnchor, constant: -K.inset),
+//      titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: K.inset),
+//      titleLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -K.inset),
       
     ])
 

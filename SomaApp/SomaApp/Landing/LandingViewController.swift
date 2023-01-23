@@ -43,6 +43,7 @@ final class LandingViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     setupScrollView()
+    setupBackgroundImageBlur()
     setupPagingVC()
     style()
     layout()
@@ -56,6 +57,11 @@ extension LandingViewController {
     scrollView.delegate = self
     scrollView.isDirectionalLockEnabled = true
     scrollView.showsHorizontalScrollIndicator = false
+  }
+  
+  private func setupBackgroundImageBlur() {
+    
+
   }
   
   private func setupPagingVC() {
@@ -90,7 +96,6 @@ extension LandingViewController {
     view.backgroundColor = .systemBackground
     
     navigationController?.navigationBar.topItem?.title = "Soma Academy"
-    navigationController?.navigationBar.tintColor = .systemCyan
     
     turnTamicOffFor(stackView, scrollView, pagingVC.view)
 
@@ -101,25 +106,30 @@ extension LandingViewController {
   
   private func layout() {
     
-    view.addSubviews(scrollView, blurView)
-    scrollView.addSubviews(pagingVC.view, stackView)
+    let imageView = UIImageView(image: UIImage(named: "soma_red_black"))
+    imageView.translatesAutoresizingMaskIntoConstraints = false
+    imageView.contentMode = .scaleAspectFill
+    
+    view.addSubviews(scrollView)
+    scrollView.addSubviews(pagingVC.view, stackView, imageView)
+    scrollView.sendSubviewToBack(imageView)
     
     for tile in tiles {
       addChildVCs(to: stackView, tile)
-      
+      tile.index = tiles.firstIndex(of: tile)
     }
     
     NSLayoutConstraint.activate([
       
       scrollView.topAnchor.constraint(equalTo: view.topAnchor),
-      scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-      scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+      scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: K.inset),
+      scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -K.inset),
       scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
       
       pagingVC.view.topAnchor.constraint(equalTo: scrollView.topAnchor),
       pagingVC.view.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: K.inset),
       pagingVC.view.heightAnchor.constraint(equalToConstant: 190),
-      pagingVC.view.widthAnchor.constraint(equalTo: scrollView.widthAnchor, constant: K.inset * -2),
+      pagingVC.view.widthAnchor.constraint(equalTo: scrollView.widthAnchor, constant: K.inset * -3),
       
       stackView.topAnchor.constraint(equalTo: pagingVC.view.bottomAnchor, constant: K.inset * 2),
       stackView.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor),
@@ -127,6 +137,8 @@ extension LandingViewController {
       stackView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
       stackView.widthAnchor.constraint(equalTo: scrollView.widthAnchor, constant: K.inset * -4),
       
+      imageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+      imageView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
     ])
   }
 }
@@ -166,5 +178,6 @@ extension LandingViewController: UIPageViewControllerDelegate, UIPageViewControl
   @objc private func flipPage() {
     pagingIndex = pagingIndex == topPagingVCs.count - 1 ? 0 : pagingIndex + 1
     pagingVC.setViewControllers([topPagingVCs[pagingIndex]], direction: .forward, animated: true)
+    
   }
 }

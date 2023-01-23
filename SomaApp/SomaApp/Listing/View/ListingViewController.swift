@@ -17,11 +17,13 @@ final class ListingViewController: UIViewController {
   var backMountVideos = [Video]()
   
   enum Section: String, CaseIterable {
-    case grd = "Guard"
-    case sideMount = "Side Mount"
-    case mount = "Mount"
-    case backMount = "Back Mount"
+    case first
+    case second
+    case third
+    case fourth
   }
+  var whichMonth: Int!
+  let sectionNames = ["Guard", "Side Mount", "Mount", "Back Mount"]
   
   var dataSource: UICollectionViewDiffableDataSource<Section, Video>! = nil
   
@@ -29,18 +31,47 @@ final class ListingViewController: UIViewController {
     super.viewDidLoad()
 
     view.backgroundColor = .secondarySystemBackground
-    
     model.delegate = self
-    model.getVideos(from: Constants.GUARD_PLAYLIST_URL, for: .grd)
-    model.getVideos(from: Constants.SIDEMOUNT_PLAYLIST_URL, for: .sideMount)
-    model.getVideos(from: Constants.MOUNT_PLAYLIST_URL, for: .mount)
-    model.getVideos(from: Constants.BACKMOUNT_PLAYLIST_URL, for: .backMount)
+    
+    setupMonths()
     
     configureCollectionView()
     configureDataSource()
     
     addUITweakButton()
   }
+  
+  private func setupMonths() {
+    guard let month = Int(Date().getFormattedDate(format: "M")) else { return }
+    whichMonth = month % 4
+    // order the videos into sections based on the month (i.e., this follows the curriculum at soma)
+    switch whichMonth {
+    case 0:
+      model.getVideos(from: Constants.GUARD_PLAYLIST_URL, for: .first)
+      model.getVideos(from: Constants.SIDEMOUNT_PLAYLIST_URL, for: .second)
+      model.getVideos(from: Constants.MOUNT_PLAYLIST_URL, for: .third)
+      model.getVideos(from: Constants.BACKMOUNT_PLAYLIST_URL, for: .fourth)
+    case 1:
+      model.getVideos(from: Constants.GUARD_PLAYLIST_URL, for: .second)
+      model.getVideos(from: Constants.SIDEMOUNT_PLAYLIST_URL, for: .third)
+      model.getVideos(from: Constants.MOUNT_PLAYLIST_URL, for: .fourth)
+      model.getVideos(from: Constants.BACKMOUNT_PLAYLIST_URL, for: .first)
+    case 2:
+      model.getVideos(from: Constants.GUARD_PLAYLIST_URL, for: .third)
+      model.getVideos(from: Constants.SIDEMOUNT_PLAYLIST_URL, for: .fourth)
+      model.getVideos(from: Constants.MOUNT_PLAYLIST_URL, for: .first)
+      model.getVideos(from: Constants.BACKMOUNT_PLAYLIST_URL, for: .second)
+    case 3:
+      model.getVideos(from: Constants.GUARD_PLAYLIST_URL, for: .fourth)
+      model.getVideos(from: Constants.SIDEMOUNT_PLAYLIST_URL, for: .first)
+      model.getVideos(from: Constants.MOUNT_PLAYLIST_URL, for: .second)
+      model.getVideos(from: Constants.BACKMOUNT_PLAYLIST_URL, for: .third)
+    default:
+      break
+    }
+  }
+  
+  
   
   private func addUITweakButton() {
     navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .organize, target: self, action: #selector(menuBtnPushed))
@@ -63,7 +94,7 @@ final class ListingViewController: UIViewController {
     
     NSLayoutConstraint.activate([
       collectionView.topAnchor.constraint(equalTo: view.topAnchor, constant: K.inset),
-      collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: K.inset),
+      collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: K.inset * 2),
       collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -K.inset),
       collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -K.inset),
     ])
@@ -89,8 +120,9 @@ extension ListingViewController: UICollectionViewDelegate {
       
       if let self, let itemSupplementaryView = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: ItemSupplementaryView.reuseID, for: indexPath) as? ItemSupplementaryView {
         
-        let itemCollection = self.dataSource.snapshot().sectionIdentifiers[indexPath.section]
-        itemSupplementaryView.textLabel.text = itemCollection.rawValue
+        let _ = self.dataSource.snapshot().sectionIdentifiers[indexPath.section]
+        let sectionIndex = self.whichMonth + indexPath.section - 1
+        itemSupplementaryView.textLabel.text = self.sectionNames[sectionIndex]
         
         return itemSupplementaryView
       } else {
@@ -105,10 +137,10 @@ extension ListingViewController: UICollectionViewDelegate {
     var snapshot = NSDiffableDataSourceSnapshot<Section, Video>()
     
     snapshot.appendSections(Section.allCases)
-    snapshot.appendItems(guardVideos, toSection: .grd)
-    snapshot.appendItems(sideMountVideos, toSection: .sideMount)
-    snapshot.appendItems(mountVideos, toSection: .mount)
-    snapshot.appendItems(backMountVideos, toSection: .backMount)
+    snapshot.appendItems(guardVideos, toSection: .first)
+    snapshot.appendItems(sideMountVideos, toSection: .second)
+    snapshot.appendItems(mountVideos, toSection: .third)
+    snapshot.appendItems(backMountVideos, toSection: .fourth)
 
     dataSource.apply(snapshot, animatingDifferences: false)
   }
@@ -143,14 +175,13 @@ extension ListingViewController: UICollectionViewDelegate {
     let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
     let item = NSCollectionLayoutItem(layoutSize: itemSize)
     
-    let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.5), heightDimension: .fractionalHeight(0.25))
+    let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.6), heightDimension: .fractionalHeight(0.265))
     let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
-
     
     let section = NSCollectionLayoutSection(group: group)
-//    section.interGroupSpacing = 4
-    section.contentInsets = NSDirectionalEdgeInsets(top: 2, leading: 10, bottom: 2, trailing: 10)
-            section.orthogonalScrollingBehavior = .continuousGroupLeadingBoundary
+    section.interGroupSpacing = 80
+    section.contentInsets = NSDirectionalEdgeInsets(top: 2, leading: 24, bottom: 2, trailing: 6)
+    section.orthogonalScrollingBehavior = .continuousGroupLeadingBoundary
     
       // Create a supplementary item for the section header
     let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(40))
@@ -164,8 +195,6 @@ extension ListingViewController: UICollectionViewDelegate {
     guard let video = dataSource.itemIdentifier(for: indexPath) else { return }
     let urlString = Constants.YT_PLAY_URL + video.videoId + Constants.YT_INLINE_YES
     guard let url = URL(string: urlString) else { return }
-//    let request = URLRequest(url: url)
-    
     
     let detailVC = DetailViewController()
     detailVC.url = url
@@ -177,13 +206,13 @@ extension ListingViewController: ModelDelegate {
 
   func videosFetched(_ videos: [Video], type: Section) {
     switch type {
-    case .grd:
+    case .first:
       guardVideos = videos
-    case .sideMount:
+    case .second:
       sideMountVideos = videos
-    case .mount:
+    case .third:
       mountVideos = videos
-    case .backMount:
+    case .fourth:
       backMountVideos = videos
     }
     updateData()

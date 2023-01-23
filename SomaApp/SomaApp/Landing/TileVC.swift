@@ -12,6 +12,14 @@ final class TileVC: UIViewController {
   let label = UILabel()
   let button = UIButton(configuration: .borderedTinted())
   let imageView: UIImageView? = nil
+  var index: Int!
+  
+  let aboutText: [String] = [
+    "A nationwide Gracie Brazilian Jiu-Jitsu association under the guidance of 4th Degree Gracie Jiu-Jitsu Black Belt, Professor Matt Strack, who received his black belt from 8th degree Master Pedro Sauer in 2006. Professor Strack is currently a 4th degree black belt from 9th degree Grand Master Relson Gracie.",
+    "To provide quality instruction to our students in a clean, inclusive, family friendly environment, through curriculum driven, effective, real world self-defense techniques that are not based on size, strength, athletic ability, or time limits.",
+    "To unlock the full potential of our students.",
+    "The word 'Soma' comes from from Greek sōma ‘body’ and is used in our name because Jiu-Jitsu is not only known as one of the most effective forms of martial arts, but is also one of the earliest forms of exercise or physical fitness in existence, providing for a complete workout of the body and mind.",
+  ]
   
   init(_ text: String) {
     super.init(nibName: nil, bundle: nil)
@@ -30,7 +38,7 @@ final class TileVC: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    view.backgroundColor = .systemGroupedBackground
+    view.backgroundColor = .secondarySystemBackground
     layout()
     setupTap()
   }
@@ -61,35 +69,9 @@ extension TileVC {
   }
   
   @objc func tileTapped(_ gestureRecognizer: UITapGestureRecognizer) {
-    print("Tapped \(self) \(label.text)")
-  }
-}
-
-#if DEBUG
-import SwiftUI
-struct TileVCPreview<TileVC: UIViewController>: UIViewControllerRepresentable {
-  func updateUIViewController(_ uiViewController: TileVC, context: Context) {
     
-  }
-  
-  let viewController: TileVC
-  
-  init(_ builder: @escaping () -> TileVC) {
-    viewController = builder()
-  }
-  
-    // MARK: - UIViewControllerRepresentable
-  func makeUIViewController(context: Context) -> TileVC {
-    viewController
-  }
-}
-#endif
+    let cardView = CardView(text: aboutText[index], headline: label.text)
+    present(cardView, animated: true)
 
-struct TestPreviews_Previews: PreviewProvider {
-  static var previews: some View {
-    TileVCPreview {
-      let vc = TileVC("Hi there! I have the high ground.")
-      return vc
-    }
   }
 }
