@@ -95,7 +95,7 @@ extension LandingViewController {
     turnTamicOffFor(stackView, scrollView, pagingVC.view)
 
     stackView.axis = .vertical
-    stackView.spacing = 20
+    stackView.spacing = 32
     
   }
   
@@ -106,6 +106,7 @@ extension LandingViewController {
     
     for tile in tiles {
       addChildVCs(to: stackView, tile)
+      
     }
     
     NSLayoutConstraint.activate([
@@ -124,7 +125,7 @@ extension LandingViewController {
       stackView.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor),
       stackView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
       stackView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
-      stackView.widthAnchor.constraint(equalTo: scrollView.widthAnchor, constant: K.inset * -10),
+      stackView.widthAnchor.constraint(equalTo: scrollView.widthAnchor, constant: K.inset * -4),
       
     ])
   }

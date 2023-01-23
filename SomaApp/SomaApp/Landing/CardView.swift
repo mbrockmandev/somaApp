@@ -67,21 +67,12 @@ class CardView: UIView {
       containerView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -K.inset),
       containerView.heightAnchor.constraint(equalToConstant: 200),
 
-//      imageView.topAnchor.constraint(equalTo: topAnchor),
       imageView.centerXAnchor.constraint(equalTo: centerXAnchor),
       imageView.centerYAnchor.constraint(equalTo: centerYAnchor),
-//      imageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: K.inset),
-//      imageView.heightAnchor.constraint(equalToConstant: 160),
-//      imageView.widthAnchor.constraint(equalTo: heightAnchor),
-      
 
       stackView.topAnchor.constraint(equalTo: containerView.topAnchor, constant: K.inset),
       stackView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: K.inset),
       stackView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -K.inset),
-      
-//      bodyLabel.topAnchor.constraint(equalTo: headlineLabel.bottomAnchor, constant: K.inset),
-//      bodyLabel.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
-//      bodyLabel.widthAnchor.constraint(equalTo: containerView.widthAnchor, constant: -K.inset * 2),
       
     ])
   }

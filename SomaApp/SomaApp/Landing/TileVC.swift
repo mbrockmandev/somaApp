@@ -7,7 +7,7 @@
 
 import UIKit
 
-class TileVC: UIViewController {
+final class TileVC: UIViewController {
   
   let label = UILabel()
   let button = UIButton(configuration: .borderedTinted())
@@ -32,7 +32,7 @@ class TileVC: UIViewController {
     super.viewDidLoad()
     view.backgroundColor = .systemGroupedBackground
     layout()
-    setupImageView()
+    setupTap()
   }
 }
 
@@ -51,12 +51,17 @@ extension TileVC {
     NSLayoutConstraint.activate([
       label.centerXAnchor.constraint(equalTo: view.centerXAnchor),
       label.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-      view.heightAnchor.constraint(equalToConstant: 100),
+      view.heightAnchor.constraint(equalToConstant: 160),
     ])
   }
   
-  private func setupImageView() {
-    guard let imageView else { return }
+  private func setupTap() {
+    let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(tileTapped))
+    view.addGestureRecognizer(tapGestureRecognizer)
+  }
+  
+  @objc func tileTapped(_ gestureRecognizer: UITapGestureRecognizer) {
+    print("Tapped \(self) \(label.text)")
   }
 }
 
