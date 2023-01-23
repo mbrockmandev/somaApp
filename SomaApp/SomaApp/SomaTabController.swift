@@ -12,7 +12,8 @@ final class SomaTabController: UITabBarController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    let landingVC = LandingViewController()
+//    let landingVC = LandingViewController()
+    let landingVC = LandingPrototype()
     let listingVC = ListingViewController()
     let infoVC = InfoViewController()
     
@@ -28,7 +29,7 @@ final class SomaTabController: UITabBarController {
     viewControllers = controllers.map { UINavigationController(rootViewController: $0) }
     
     #if DEBUG
-    selectedIndex = 1 // TODO: Delete
+    selectedIndex = 0 // TODO: Delete
     #endif
   }
 }
