@@ -41,8 +41,6 @@ final class LandingViewController: UIViewController {
   }()
   var pagingIndex = 0
   
-    // use a stack view for the rest of the elements in the page
-  let stackView = UIStackView()
   let imageView = UIImageView()
   let label = UILabel()
   
@@ -63,15 +61,13 @@ extension LandingViewController {
     self.addChild(pagingVC)
     pagingVC.dataSource = self
     pagingVC.delegate = self
-    pagingVC.view.translatesAutoresizingMaskIntoConstraints = false
+    pagingVC.view.frame = .zero
     
     topPagingVCs.append(firstPageVC)
     topPagingVCs.append(secondPageVC)
     topPagingVCs.append(thirdPageVC)
     
     pagingVC.setViewControllers([topPagingVCs[0]], direction: .forward, animated: true)
-    scrollView.addSubview(pagingVC.view)
-    
   }
   
   private func setupTimer() -> Timer {
@@ -89,48 +85,58 @@ extension LandingViewController {
   
   private func setupScrollView() {
     scrollView.delegate = self
-    view.addSubview(scrollView)
-    scrollView.frame = view.frame
-    scrollView.contentSize = view.frame.size
-    scrollView.isScrollEnabled = true 
+    scrollView.isScrollEnabled = true
   }
   
   private func configureVC() {
     view.backgroundColor = .systemBackground
     
-    stackView.translatesAutoresizingMaskIntoConstraints = false
-    stackView.axis = .vertical
-    stackView.spacing = 20
+    let containerView = UIView()
+    containerView.frame = view.bounds
+    containerView.backgroundColor = .systemBackground
+    scrollView.frame = view.frame
+    scrollView.contentSize = view.frame.size
     
-      // Label
-    label.translatesAutoresizingMaskIntoConstraints = false
-    label.textAlignment = .center
-    label.font = UIFont.preferredFont(forTextStyle: .subheadline)
-    label.adjustsFontForContentSizeCategory = true
-    label.numberOfLines = 0
-    label.text = aboutText[1]
+    let questionBtnOne = UIButton(configuration: .borderedProminent())
+    questionBtnOne.translatesAutoresizingMaskIntoConstraints = false
+    questionBtnOne.setTitle(aboutText[0], for: .normal)
+    
+    pagingVC.view.translatesAutoresizingMaskIntoConstraints = false
+    scrollView.translatesAutoresizingMaskIntoConstraints = false
   
-    stackView.addArrangedSubviews(label)
-    scrollView.addSubview(stackView)
-    view.addSubview(scrollView)
+    view.addSubviews(containerView)
+    containerView.addSubviews(scrollView)
+    scrollView.addSubviews(pagingVC.view, questionBtnOne)
     
     NSLayoutConstraint.activate([
-      pagingVC.view.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 0),
-      pagingVC.view.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0),
-      pagingVC.view.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0),
+      
+      containerView.topAnchor.constraint(equalTo: view.topAnchor),
+      containerView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+      containerView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+      containerView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+      
+      scrollView.topAnchor.constraint(equalTo: containerView.topAnchor),
+      scrollView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
+      scrollView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
+      scrollView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor),
+      
+      pagingVC.view.topAnchor.constraint(equalTo: scrollView.topAnchor),
+      pagingVC.view.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
+      pagingVC.view.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
       pagingVC.view.heightAnchor.constraint(equalToConstant: 250),
       
-      stackView.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor),
-      stackView.centerYAnchor.constraint(equalTo: scrollView.centerYAnchor),
-      stackView.leadingAnchor.constraint(equalToSystemSpacingAfter: scrollView.leadingAnchor, multiplier: 1),
-      view.trailingAnchor.constraint(equalToSystemSpacingAfter: stackView.trailingAnchor, multiplier: 1)
+      questionBtnOne.topAnchor.constraint(equalTo: pagingVC.view.bottomAnchor),
+      questionBtnOne.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
+      questionBtnOne.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
+      questionBtnOne.heightAnchor.constraint(equalToConstant: 60),
+      
     ])
   }
 }
 
 //MARK: - ScrollView Methods
 extension LandingViewController: UIScrollViewDelegate {
-  
+
 }
 
 //MARK: - Page VC Methods

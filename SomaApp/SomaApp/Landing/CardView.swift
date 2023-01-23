@@ -8,6 +8,7 @@
 import UIKit
 
 class CardView: UIView {
+  var text: String
   let aboutText: [String] = [
     "Who is Soma Academy?",
     "A nationwide Gracie Brazilian Jiu-Jitsu association under the guidance of 4th Degree Gracie Jiu-Jitsu Black Belt, Professor Matt Strack, who received his black belt from 8th degree Master Pedro Sauer in 2006. Professor Strack is currently a 4th degree black belt from 9th degree Grand Master Relson Gracie.",
@@ -18,17 +19,10 @@ class CardView: UIView {
     "Why \"Soma?\"",
     "The word 'Soma' comes from from Greek sōma ‘body’ and is used in our name because Jiu-Jitsu is not only known as one of the most effective forms of martial arts, but is also one of the earliest forms of exercise or physical fitness in existence, providing for a complete workout of the body and mind.",
   ]
-  
-//  lazy var blurView: UIView = {
-//    let blurEffect = UIBlurEffect(style: UIBlurEffect.Style.light)
-//    let blurView = UIVisualEffectView(effect: blurEffect)
-//    blurView.frame = bounds
-//    addSubview(blurView)
-//    return blurView
-//  }()
     
-  override init(frame: CGRect) {
-    super.init(frame: frame)
+  init(text: String) {
+    self.text = text
+    super.init(frame: .zero)
     configureView()
   }
   
@@ -37,32 +31,57 @@ class CardView: UIView {
   }
   
   private func configureView() {
+    backgroundColor = .systemGray4
     let containerView = UIView()
+    let imageView = UIImageView(image: UIImage(named: "soma_crest"))
+    let stackView = UIStackView(frame: .zero)
     let headlineLabel = makeBoldLabel(withText: aboutText[0])
     let bodyLabel = makeSubLabel(withText: aboutText[1])
-    
+        
     containerView.translatesAutoresizingMaskIntoConstraints = false
-    containerView.backgroundColor = .systemMint
+    containerView.backgroundColor = .systemBackground
     containerView.layer.cornerRadius = 20
     containerView.clipsToBounds = true
     
-    addSubviews(containerView)
-    containerView.addSubviews(headlineLabel, bodyLabel)
+    imageView.translatesAutoresizingMaskIntoConstraints = false
+    imageView.contentMode = .scaleAspectFill
+  
+    let blurEffect = UIBlurEffect(style: .light)
+    let blurView = UIVisualEffectView(effect: blurEffect)
+    blurView.frame = imageView.bounds
+    imageView.addSubview(blurView)
+    
+    stackView.translatesAutoresizingMaskIntoConstraints = false
+    stackView.axis = .vertical
+    stackView.alignment = .center
+    stackView.spacing = 16
+    
+    addSubviews(imageView, containerView)
+    containerView.addSubviews(stackView)
+    stackView.addArrangedSubviews(headlineLabel, bodyLabel)
     
     NSLayoutConstraint.activate([
       
-      containerView.topAnchor.constraint(equalTo: topAnchor),
-      containerView.leadingAnchor.constraint(equalTo: leadingAnchor),
-      containerView.trailingAnchor.constraint(equalTo: trailingAnchor),
-      containerView.bottomAnchor.constraint(equalTo: bottomAnchor),
+      containerView.centerYAnchor.constraint(equalTo: centerYAnchor),
+      containerView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: K.inset),
+      containerView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -K.inset),
+      containerView.heightAnchor.constraint(equalToConstant: 200),
+
+//      imageView.topAnchor.constraint(equalTo: topAnchor),
+      imageView.centerXAnchor.constraint(equalTo: centerXAnchor),
+      imageView.centerYAnchor.constraint(equalTo: centerYAnchor),
+//      imageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: K.inset),
+//      imageView.heightAnchor.constraint(equalToConstant: 160),
+//      imageView.widthAnchor.constraint(equalTo: heightAnchor),
       
-      headlineLabel.topAnchor.constraint(equalTo: containerView.topAnchor, constant: K.inset),
-      headlineLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: K.inset),
-      headlineLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -K.inset),
+
+      stackView.topAnchor.constraint(equalTo: containerView.topAnchor, constant: K.inset),
+      stackView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: K.inset),
+      stackView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -K.inset),
       
-      bodyLabel.topAnchor.constraint(equalTo: headlineLabel.bottomAnchor, constant: K.inset),
-      bodyLabel.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
-      bodyLabel.widthAnchor.constraint(equalTo: containerView.widthAnchor, constant: -K.inset * 2),
+//      bodyLabel.topAnchor.constraint(equalTo: headlineLabel.bottomAnchor, constant: K.inset),
+//      bodyLabel.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
+//      bodyLabel.widthAnchor.constraint(equalTo: containerView.widthAnchor, constant: -K.inset * 2),
       
     ])
   }
@@ -81,7 +100,7 @@ struct ViewWrapper: UIViewRepresentable {
   }
   
   func makeUIView(context: UIViewRepresentableContext<ViewWrapper>) -> UIView {
-    return CardView()
+    return CardView(text: "A nationwide Gracie Brazilian Jiu-Jitsu association under the guidance of 4th Degree Gracie Jiu-Jitsu Black Belt, Professor Matt Strack, who received his black belt from 8th degree Master Pedro Sauer in 2006. Professor Strack is currently a 4th degree black belt from 9th degree Grand Master Relson Gracie.")
   }
 }
 #endif

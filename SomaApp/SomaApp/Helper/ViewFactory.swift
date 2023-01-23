@@ -10,15 +10,18 @@ import UIKit
 func makeVC(withImage image: String) -> UIViewController {
   let vc = UIViewController()
   vc.view.translatesAutoresizingMaskIntoConstraints = false
+  vc.view.frame = .zero
   
   guard let uiImage = UIImage(named: image) else { fatalError("Incorrect image passed in") }
   let imageView = makeBannerImage(from: uiImage)
   imageView.translatesAutoresizingMaskIntoConstraints = false
+  imageView.layer.cornerRadius = 20
   imageView.clipsToBounds = true
   
   vc.view.addSubview(imageView)
   
   NSLayoutConstraint.activate([
+    
     imageView.topAnchor.constraint(equalTo: vc.view.topAnchor),
     imageView.leadingAnchor.constraint(equalTo: vc.view.leadingAnchor),
     imageView.trailingAnchor.constraint(equalTo: vc.view.trailingAnchor),
