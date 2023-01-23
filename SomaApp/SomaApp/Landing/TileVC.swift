@@ -10,10 +10,18 @@ import UIKit
 class TileVC: UIViewController {
   
   let label = UILabel()
+  let button = UIButton(configuration: .borderedTinted())
+  let imageView: UIImageView? = nil
   
   init(_ text: String) {
     super.init(nibName: nil, bundle: nil)
     label.text = text
+  }
+  
+  init(_ text: String, image: UIImage) {
+    super.init(nibName: nil, bundle: nil)
+    label.text = text
+    imageView?.image = image
   }
   
   required init?(coder: NSCoder) {
@@ -22,14 +30,20 @@ class TileVC: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    view.backgroundColor = .systemMint
+    view.backgroundColor = .systemGroupedBackground
     layout()
+    setupImageView()
   }
 }
 
 extension TileVC {
   
-  func layout() {
+  private func layout() {
+    view.layer.cornerRadius = 20
+    view.clipsToBounds = true
+    view.layer.shadowRadius = 10
+    view.layer.shadowColor = .init(red: 0, green: 0, blue: 0, alpha: 0.5)
+    
     label.translatesAutoresizingMaskIntoConstraints = false
     
     view.addSubview(label)
@@ -37,8 +51,12 @@ extension TileVC {
     NSLayoutConstraint.activate([
       label.centerXAnchor.constraint(equalTo: view.centerXAnchor),
       label.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-      view.heightAnchor.constraint(equalToConstant: 300),
+      view.heightAnchor.constraint(equalToConstant: 240),
     ])
+  }
+  
+  private func setupImageView() {
+    guard let imageView else { return }
   }
 }
 

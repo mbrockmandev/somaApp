@@ -9,7 +9,6 @@ import UIKit
 
 final class LandingPrototype: UIViewController {
   
-  let headerView = LandingHeaderView()
   let stackView = UIStackView()
   let scrollView = UIScrollView()
   
@@ -31,14 +30,16 @@ extension LandingPrototype {
   
   private func setupScrollView() {
     scrollView.delegate = self
+    scrollView.isDirectionalLockEnabled = true
+    scrollView.showsHorizontalScrollIndicator = false
   }
   
   private func style() {
     view.backgroundColor = .systemBackground
     
-//    navigationController?.navigationBar.topItem?.title = "Soma Academy"
+    navigationController?.navigationBar.topItem?.title = "Soma Academy"
+    navigationController?.navigationBar.tintColor = .systemCyan
     
-    headerView.translatesAutoresizingMaskIntoConstraints = false
     stackView.translatesAutoresizingMaskIntoConstraints = false
     scrollView.translatesAutoresizingMaskIntoConstraints = false
 
@@ -49,7 +50,7 @@ extension LandingPrototype {
   
   private func layout() {
     
-    view.addSubviews(headerView, scrollView)
+    view.addSubviews(scrollView)
     scrollView.addSubview(stackView)
     
     for tile in tiles {
@@ -57,9 +58,6 @@ extension LandingPrototype {
     }
     
     NSLayoutConstraint.activate([
-      headerView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-      headerView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-      headerView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
       
       scrollView.topAnchor.constraint(equalTo: view.topAnchor),
       scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
@@ -67,16 +65,22 @@ extension LandingPrototype {
       scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
       
       stackView.topAnchor.constraint(equalTo: scrollView.topAnchor),
-      stackView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
+      stackView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: 8),
       stackView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
       stackView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
       
-      stackView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
+      //
+      stackView.widthAnchor.constraint(equalTo: scrollView.widthAnchor, constant: -16),
+      
     ])
   }
 }
 
 extension LandingPrototype: UIScrollViewDelegate {
-  
+  func scrollViewDidScroll(_ scrollView: UIScrollView) {
+    if scrollView.contentOffset.x != 0 {
+      scrollView.contentOffset.x = 0
+    }
+  }
 }
 

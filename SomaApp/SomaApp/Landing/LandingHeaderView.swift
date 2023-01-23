@@ -18,6 +18,12 @@ final class LandingHeaderView: UIView {
     layout()
   }
   
+  init(with text: String) {
+    super.init(frame: .zero)
+    style()
+    layout()
+  }
+  
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
