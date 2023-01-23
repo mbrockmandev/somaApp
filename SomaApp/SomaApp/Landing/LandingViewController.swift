@@ -10,6 +10,17 @@ import UIKit
 
 final class LandingViewController: UIViewController {
   
+  let aboutText: [String] = [
+    "Who is Soma Academy?",
+    "A nationwide Gracie Brazilian Jiu-Jitsu association under the guidance of 4th Degree Gracie Jiu-Jitsu Black Belt, Professor Matt Strack, who received his black belt from 8th degree Master Pedro Sauer in 2006. Professor Strack is currently a 4th degree black belt from 9th degree Grand Master Relson Gracie.",
+    "What is the mission of Soma Academy?",
+    "To provide quality instruction to our students in a clean, inclusive, family friendly environment, through curriculum driven, effective, real world self-defense techniques that are not based on size, strength, athletic ability, or time limits.",
+    "The Vision:",
+    "To unlock the full potential of our students.",
+    "Why \"Soma?\"",
+    "The word 'Soma' comes from from Greek sōma ‘body’ and is used in our name because Jiu-Jitsu is not only known as one of the most effective forms of martial arts, but is also one of the earliest forms of exercise or physical fitness in existence, providing for a complete workout of the body and mind.",
+    
+  ]
     // embed everything in a scrollview
   let scrollView = UIScrollView()
   
@@ -40,8 +51,7 @@ final class LandingViewController: UIViewController {
     super.viewDidLoad()
     setupScrollView()
     setupPagingVC()
-    style()
-    layout()
+    configureVC()
     startTimer()
   }
 }
@@ -82,34 +92,25 @@ extension LandingViewController {
     view.addSubview(scrollView)
     scrollView.frame = view.frame
     scrollView.contentSize = view.frame.size
-    scrollView.isScrollEnabled = true
-    
+    scrollView.isScrollEnabled = true 
   }
   
-  private func style() {
+  private func configureVC() {
     view.backgroundColor = .systemBackground
     
     stackView.translatesAutoresizingMaskIntoConstraints = false
     stackView.axis = .vertical
     stackView.spacing = 20
     
-      // Image
-    imageView.translatesAutoresizingMaskIntoConstraints = false
-    imageView.contentMode = .scaleAspectFit
-    imageView.image = UIImage(systemName: "square.and.arrow.up")
-    
       // Label
     label.translatesAutoresizingMaskIntoConstraints = false
     label.textAlignment = .center
-    label.font = UIFont.preferredFont(forTextStyle: .title3)
+    label.font = UIFont.preferredFont(forTextStyle: .subheadline)
     label.adjustsFontForContentSizeCategory = true
     label.numberOfLines = 0
-    label.text = "LANDING"
-  }
+    label.text = aboutText[1]
   
-  private func layout() {
-    stackView.addArrangedSubview(imageView)
-    stackView.addArrangedSubview(label)
+    stackView.addArrangedSubviews(label)
     scrollView.addSubview(stackView)
     view.addSubview(scrollView)
     
@@ -127,10 +128,12 @@ extension LandingViewController {
   }
 }
 
+//MARK: - ScrollView Methods
 extension LandingViewController: UIScrollViewDelegate {
   
 }
 
+//MARK: - Page VC Methods
 extension LandingViewController: UIPageViewControllerDelegate, UIPageViewControllerDataSource {
   func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
     guard let index = topPagingVCs.firstIndex(of: viewController) else { return nil }
@@ -160,3 +163,33 @@ extension LandingViewController: UIPageViewControllerDelegate, UIPageViewControl
   }
 }
 
+
+//MARK: - Previews
+#if DEBUG
+import SwiftUI
+struct UIViewControllerPreview<LandingViewController: UIViewController>: UIViewControllerRepresentable {
+  func updateUIViewController(_ uiViewController: LandingViewController, context: Context) {
+    
+  }
+  
+  let viewController: LandingViewController
+  
+  init(_ builder: @escaping () -> LandingViewController) {
+    viewController = builder()
+  }
+  
+    // MARK: - UIViewControllerRepresentable
+  func makeUIViewController(context: Context) -> LandingViewController {
+    viewController
+  }
+}
+#endif
+
+struct LandingViewController_Previews: PreviewProvider {
+  static var previews: some View {
+    UIViewControllerPreview {
+      let vc = LandingViewController()
+      return vc
+    }
+  }
+}

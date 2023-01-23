@@ -43,7 +43,7 @@ final class ListingViewController: UIViewController {
   }
   
   private func addUITweakButton() {
-    navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(menuBtnPushed))
+    navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .organize, target: self, action: #selector(menuBtnPushed))
   }
   
   @objc private func menuBtnPushed(_ sender: UIButton) {
@@ -169,8 +169,7 @@ extension ListingViewController: UICollectionViewDelegate {
     
     let detailVC = DetailViewController()
     detailVC.url = url
-    let nc = UINavigationController(rootViewController: detailVC)
-    present(nc, animated: true)
+    present(detailVC, animated: true)
   }
 }
 

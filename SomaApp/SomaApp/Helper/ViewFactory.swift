@@ -51,6 +51,7 @@ func makeSubLabel(withText text: String) -> UILabel {
   label.textColor = .label
   label.font = UIFont.preferredFont(forTextStyle: .subheadline)
   label.numberOfLines = 0 // multiline
+  label.lineBreakMode = .byWordWrapping
   
   return label
 }
@@ -59,8 +60,10 @@ func makeBoldLabel(withText text: String) -> UILabel {
   let label = UILabel()
   label.translatesAutoresizingMaskIntoConstraints = false
   label.text = text
-  label.textColor = .white
+  label.textColor = .label
   label.font = UIFont.boldSystemFont(ofSize: 18)
+  label.shadowColor = .systemGray2
+  label.lineBreakMode = .byWordWrapping
   
   return label
 }

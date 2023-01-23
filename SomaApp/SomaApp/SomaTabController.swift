@@ -14,7 +14,6 @@ final class SomaTabController: UITabBarController {
     
     let landingVC = LandingViewController()
     let listingVC = ListingViewController()
-    let listingNC = UINavigationController(rootViewController: listingVC)
     let infoVC = InfoViewController()
     
     let landingTabBarItem = UITabBarItem(title: "Welcome", image: UIImage(systemName: "house"), selectedImage: UIImage(systemName: "house.fill"))
@@ -22,10 +21,12 @@ final class SomaTabController: UITabBarController {
     let infoTabBarItem = UITabBarItem(title: "Info", image: UIImage(systemName: "info.circle"), selectedImage: UIImage(systemName: "info.circle.fill"))
     
     landingVC.tabBarItem = landingTabBarItem
-    listingNC.tabBarItem = listingTabBarItem
+    listingVC.tabBarItem = listingTabBarItem
     infoVC.tabBarItem = infoTabBarItem
     
-    viewControllers = [landingVC, listingNC, infoVC]
+    let controllers = [landingVC, listingVC, infoVC]
+    viewControllers = controllers.map { UINavigationController(rootViewController: $0) }
+    
     #if DEBUG
     selectedIndex = 1 // TODO: Delete
     #endif

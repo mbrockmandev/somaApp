@@ -19,8 +19,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     window = UIWindow(frame: windowScene.coordinateSpace.bounds)
     window?.windowScene = windowScene
-    window?.rootViewController = SomaTabController()
-//    window?.rootViewController = LandingViewController()
+    let tabBarController = SomaTabController()
+    window?.rootViewController = tabBarController
     window?.makeKeyAndVisible()
   }
 }
