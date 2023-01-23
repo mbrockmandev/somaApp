@@ -4,6 +4,7 @@
 //
 //  Created by Michael Brockman on 1/22/23.
 //
+/// convenience extensions used for UIView, UIStackView, UIViewController
 
 import UIKit
 
@@ -36,10 +37,18 @@ extension UIStackView {
 }
 
 extension UIViewController {
-  func add(_ children: UIViewController...) {
+  func addChildVCs(_ children: UIViewController...) {
     for child in children {
       addChild(child)
       view.addSubview(child.view)
+      child.didMove(toParent: self)
+    }
+  }
+  
+  func addChildVCs(to stack: UIStackView, _ children: UIViewController...) {
+    for child in children {
+      addChild(child)
+      stack.addArrangedSubview(child.view)
       child.didMove(toParent: self)
     }
   }
@@ -52,3 +61,4 @@ extension UIViewController {
     removeFromParent()
   }
 }
+

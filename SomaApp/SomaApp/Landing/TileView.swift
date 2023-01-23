@@ -9,12 +9,11 @@ import UIKit
 
 class TileVC: UIViewController {
   
-  let stackView = UIStackView()
-  let imageView = UIImageView()
   let label = UILabel()
   
   init(_ text: String) {
-    self.label.text = text
+    super.init(nibName: nil, bundle: nil)
+    label.text = text
   }
   
   required init?(coder: NSCoder) {
@@ -23,44 +22,51 @@ class TileVC: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    style()
+    view.backgroundColor = .systemMint
     layout()
   }
 }
 
 extension TileVC {
-  func style() {
-    view.backgroundColor = .systemBackground
-    
-    stackView.translatesAutoresizingMaskIntoConstraints = false
-    stackView.axis = .vertical
-    stackView.spacing = 20
-    
-      // Image
-    imageView.translatesAutoresizingMaskIntoConstraints = false
-    imageView.contentMode = .scaleAspectFit
-    imageView.image = UIImage(systemName: "square.and.arrow.up")
-    
-      // Label
-    label.translatesAutoresizingMaskIntoConstraints = false
-    label.textAlignment = .center
-    label.font = UIFont.preferredFont(forTextStyle: .title3)
-    label.adjustsFontForContentSizeCategory = true
-    label.numberOfLines = 0
-    label.text = "Text here!"
-  }
   
   func layout() {
-    stackView.addArrangedSubview(imageView)
-    stackView.addArrangedSubview(label)
+    label.translatesAutoresizingMaskIntoConstraints = false
     
-    view.addSubview(stackView)
+    view.addSubview(label)
     
     NSLayoutConstraint.activate([
-      stackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-      stackView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-      stackView.heightAnchor.constraint(equalToConstant: 300),
+      label.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+      label.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+      view.heightAnchor.constraint(equalToConstant: 300),
     ])
   }
 }
 
+#if DEBUG
+import SwiftUI
+struct TileVCPreview<TileVC: UIViewController>: UIViewControllerRepresentable {
+  func updateUIViewController(_ uiViewController: TileVC, context: Context) {
+    
+  }
+  
+  let viewController: TileVC
+  
+  init(_ builder: @escaping () -> TileVC) {
+    viewController = builder()
+  }
+  
+    // MARK: - UIViewControllerRepresentable
+  func makeUIViewController(context: Context) -> TileVC {
+    viewController
+  }
+}
+#endif
+
+struct TestPreviews_Previews: PreviewProvider {
+  static var previews: some View {
+    TileVCPreview {
+      let vc = TileVC("Hi there! I have the high ground.")
+      return vc
+    }
+  }
+}

@@ -9,6 +9,7 @@ import UIKit
 
 final class LandingPrototype: UIViewController {
   
+  let headerView = LandingHeaderView()
   let stackView = UIStackView()
   let scrollView = UIScrollView()
   
@@ -35,23 +36,31 @@ extension LandingPrototype {
   private func style() {
     view.backgroundColor = .systemBackground
     
-    navigationController?.navigationBar.topItem?.title = "Soma Academy"
+//    navigationController?.navigationBar.topItem?.title = "Soma Academy"
     
+    headerView.translatesAutoresizingMaskIntoConstraints = false
     stackView.translatesAutoresizingMaskIntoConstraints = false
     scrollView.translatesAutoresizingMaskIntoConstraints = false
 
     stackView.axis = .vertical
     stackView.spacing = 20
     
-    
-
   }
   
   private func layout() {
     
-    view.addSubviews(scrollView, stackView)
+    view.addSubviews(headerView, scrollView)
+    scrollView.addSubview(stackView)
+    
+    for tile in tiles {
+      addChildVCs(to: stackView, tile)
+    }
     
     NSLayoutConstraint.activate([
+      headerView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+      headerView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+      headerView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+      
       scrollView.topAnchor.constraint(equalTo: view.topAnchor),
       scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
       scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
@@ -70,3 +79,4 @@ extension LandingPrototype {
 extension LandingPrototype: UIScrollViewDelegate {
   
 }
+

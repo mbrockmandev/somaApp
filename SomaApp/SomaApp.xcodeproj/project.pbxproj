@@ -33,6 +33,7 @@
 		27C06547297C65CA001AE3CD /* ItemSupplementaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C06546297C65CA001AE3CD /* ItemSupplementaryView.swift */; };
 		27EF30BF297EA887003C4BAB /* TileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27EF30BE297EA887003C4BAB /* TileView.swift */; };
 		27EF30C1297EA903003C4BAB /* LandingPrototype.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27EF30C0297EA903003C4BAB /* LandingPrototype.swift */; };
+		27EF30C3297EAD19003C4BAB /* LandingHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27EF30C2297EAD19003C4BAB /* LandingHeaderView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -83,6 +84,7 @@
 		27C06546297C65CA001AE3CD /* ItemSupplementaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemSupplementaryView.swift; sourceTree = "<group>"; };
 		27EF30BE297EA887003C4BAB /* TileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TileView.swift; sourceTree = "<group>"; };
 		27EF30C0297EA903003C4BAB /* LandingPrototype.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandingPrototype.swift; sourceTree = "<group>"; };
+		27EF30C2297EAD19003C4BAB /* LandingHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandingHeaderView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -220,6 +222,7 @@
 				276BEDFA297E1AD900660252 /* CardView.swift */,
 				27EF30BE297EA887003C4BAB /* TileView.swift */,
 				27EF30C0297EA903003C4BAB /* LandingPrototype.swift */,
+				27EF30C2297EAD19003C4BAB /* LandingHeaderView.swift */,
 			);
 			path = Landing;
 			sourceTree = "<group>";
@@ -379,6 +382,7 @@
 				279654E5297D6A4700F15177 /* UIView+Ext.swift in Sources */,
 				27A727FD297A31EF00856CF3 /* LandingViewController.swift in Sources */,
 				279654E7297D71B900F15177 /* CacheManager.swift in Sources */,
+				27EF30C3297EAD19003C4BAB /* LandingHeaderView.swift in Sources */,
 				279654D9297D500600F15177 /* ListingViewController.swift in Sources */,
 				276BEDFB297E1AD900660252 /* CardView.swift in Sources */,
 				27C06547297C65CA001AE3CD /* ItemSupplementaryView.swift in Sources */,
