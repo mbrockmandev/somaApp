@@ -10,25 +10,23 @@ import UIKit
 func makeVC(withImage image: String) -> UIViewController {
   let vc = UIViewController()
   vc.view.frame = .zero
+  vc.view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+//  vc.view.backgroundColor = .systemPink
   
   guard let uiImage = UIImage(named: image) else { fatalError("Incorrect image passed in") }
   let imageView = makeBannerImage(from: uiImage)
-  imageView.translatesAutoresizingMaskIntoConstraints = false
   imageView.layer.cornerRadius = 20
   imageView.clipsToBounds = true
   imageView.contentMode = .scaleAspectFill
+  imageView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
   
   vc.view.addSubview(imageView)
-  
-  vc.pinToEdges(imageView)
-  vc.view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-  
   return vc
 }
 
 func makeBannerImage(from image: UIImage) -> UIImageView {
   guard let cgImage = image.cgImage else { fatalError("Could not make a cgImage from that UIImage.") }
-  let fixedImage = UIImage(cgImage: cgImage, scale: 6, orientation: .right)
+  let fixedImage = UIImage(cgImage: cgImage, scale: 1000, orientation: .right)
   return UIImageView(image: fixedImage)
 }
 
@@ -64,4 +62,14 @@ func makeBoldLabel(withText text: String) -> UILabel {
   label.lineBreakMode = .byWordWrapping
   
   return label
+}
+
+extension UIViewController {
+  func makeBlurView() -> UIView {
+    let blurEffect = UIBlurEffect(style: UIBlurEffect.Style.dark)
+    let blurEffectView = UIVisualEffectView(effect: blurEffect)
+    blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+    
+    return blurEffectView
+  }
 }

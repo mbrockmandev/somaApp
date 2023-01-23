@@ -13,7 +13,7 @@ final class SomaTabController: UITabBarController {
     super.viewDidLoad()
     
 //    let landingVC = LandingViewController()
-    let landingVC = LandingPrototype()
+    let landingVC = LandingViewController()
     let listingVC = ListingViewController()
     let infoVC = InfoViewController()
     

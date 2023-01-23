@@ -51,7 +51,7 @@ extension TileVC {
     NSLayoutConstraint.activate([
       label.centerXAnchor.constraint(equalTo: view.centerXAnchor),
       label.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-      view.heightAnchor.constraint(equalToConstant: 240),
+      view.heightAnchor.constraint(equalToConstant: 100),
     ])
   }
   
