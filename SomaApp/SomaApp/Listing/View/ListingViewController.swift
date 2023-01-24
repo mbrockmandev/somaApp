@@ -11,10 +11,6 @@ final class ListingViewController: UIViewController {
   
   var collectionView: UICollectionView!
   var model = Model()
-  var guardVideos = [Video]()
-  var sideMountVideos = [Video]()
-  var mountVideos = [Video]()
-  var backMountVideos = [Video]()
   
   enum Section: String, CaseIterable {
     case first
@@ -22,8 +18,15 @@ final class ListingViewController: UIViewController {
     case third
     case fourth
   }
+  
+  enum Subset {
+    case ground
+    case standing
+  }
+  
   var whichMonth: Int!
   let sectionNames = ["Guard", "Side Mount", "Mount", "Back Mount"]
+  var currentSubset: Subset = .ground
   
   var dataSource: UICollectionViewDiffableDataSource<Section, Video>! = nil
   
@@ -33,52 +36,94 @@ final class ListingViewController: UIViewController {
     view.backgroundColor = .secondarySystemBackground
     model.delegate = self
     
-    setupMonths()
+    downloadData(for: currentSubset)
     
     configureCollectionView()
     configureDataSource()
     
-    addUITweakButton()
+    addMenu()
   }
   
-  private func setupMonths() {
+  private func downloadData(for subset: Subset) {
     guard let month = Int(Date().getFormattedDate(format: "M")) else { return }
+    // soma uses a 4 month rotation for the schedule
     whichMonth = month % 4
+    
     // order the videos into sections based on the month (i.e., this follows the curriculum at soma)
-    switch whichMonth {
-    case 0:
-      model.getVideos(from: Constants.GUARD_PLAYLIST_URL, for: .first)
-      model.getVideos(from: Constants.SIDEMOUNT_PLAYLIST_URL, for: .second)
-      model.getVideos(from: Constants.MOUNT_PLAYLIST_URL, for: .third)
-      model.getVideos(from: Constants.BACKMOUNT_PLAYLIST_URL, for: .fourth)
-    case 1:
-      model.getVideos(from: Constants.GUARD_PLAYLIST_URL, for: .second)
-      model.getVideos(from: Constants.SIDEMOUNT_PLAYLIST_URL, for: .third)
-      model.getVideos(from: Constants.MOUNT_PLAYLIST_URL, for: .fourth)
-      model.getVideos(from: Constants.BACKMOUNT_PLAYLIST_URL, for: .first)
-    case 2:
-      model.getVideos(from: Constants.GUARD_PLAYLIST_URL, for: .third)
-      model.getVideos(from: Constants.SIDEMOUNT_PLAYLIST_URL, for: .fourth)
-      model.getVideos(from: Constants.MOUNT_PLAYLIST_URL, for: .first)
-      model.getVideos(from: Constants.BACKMOUNT_PLAYLIST_URL, for: .second)
-    case 3:
-      model.getVideos(from: Constants.GUARD_PLAYLIST_URL, for: .fourth)
-      model.getVideos(from: Constants.SIDEMOUNT_PLAYLIST_URL, for: .first)
-      model.getVideos(from: Constants.MOUNT_PLAYLIST_URL, for: .second)
-      model.getVideos(from: Constants.BACKMOUNT_PLAYLIST_URL, for: .third)
-    default:
-      break
+    switch subset {
+    case .ground:
+      switch whichMonth {
+      case 0:
+        model.getVideos(from: Constants.GUARD_PLAYLIST_URL, for: .first)
+        model.getVideos(from: Constants.SIDEMOUNT_PLAYLIST_URL, for: .second)
+        model.getVideos(from: Constants.MOUNT_PLAYLIST_URL, for: .third)
+        model.getVideos(from: Constants.BACKMOUNT_PLAYLIST_URL, for: .fourth)
+      case 1:
+        model.getVideos(from: Constants.GUARD_PLAYLIST_URL, for: .second)
+        model.getVideos(from: Constants.SIDEMOUNT_PLAYLIST_URL, for: .third)
+        model.getVideos(from: Constants.MOUNT_PLAYLIST_URL, for: .fourth)
+        model.getVideos(from: Constants.BACKMOUNT_PLAYLIST_URL, for: .first)
+      case 2:
+        model.getVideos(from: Constants.GUARD_PLAYLIST_URL, for: .third)
+        model.getVideos(from: Constants.SIDEMOUNT_PLAYLIST_URL, for: .fourth)
+        model.getVideos(from: Constants.MOUNT_PLAYLIST_URL, for: .first)
+        model.getVideos(from: Constants.BACKMOUNT_PLAYLIST_URL, for: .second)
+      case 3:
+        model.getVideos(from: Constants.GUARD_PLAYLIST_URL, for: .fourth)
+        model.getVideos(from: Constants.SIDEMOUNT_PLAYLIST_URL, for: .first)
+        model.getVideos(from: Constants.MOUNT_PLAYLIST_URL, for: .second)
+        model.getVideos(from: Constants.BACKMOUNT_PLAYLIST_URL, for: .third)
+      default:
+        break
+      }
+    
+    case .standing:
+      switch whichMonth {
+      case 0:
+        model.getVideos(from: Constants.STRIKE_PLAYLIST_URL, for: .first)
+        model.getVideos(from: Constants.HOLD_PLAYLIST_URL, for: .second)
+        model.getVideos(from: Constants.STRANGLE_PLAYLIST_URL, for: .third)
+        model.getVideos(from: Constants.WEAPON_PLAYLIST_URL, for: .fourth)
+      case 1:
+        model.getVideos(from: Constants.STRIKE_PLAYLIST_URL, for: .second)
+        model.getVideos(from: Constants.HOLD_PLAYLIST_URL, for: .third)
+        model.getVideos(from: Constants.STRANGLE_PLAYLIST_URL, for: .fourth)
+        model.getVideos(from: Constants.WEAPON_PLAYLIST_URL, for: .first)
+      case 2:
+        model.getVideos(from: Constants.STRIKE_PLAYLIST_URL, for: .third)
+        model.getVideos(from: Constants.HOLD_PLAYLIST_URL, for: .fourth)
+        model.getVideos(from: Constants.STRANGLE_PLAYLIST_URL, for: .first)
+        model.getVideos(from: Constants.WEAPON_PLAYLIST_URL, for: .second)
+      case 3:
+        model.getVideos(from: Constants.STRIKE_PLAYLIST_URL, for: .fourth)
+        model.getVideos(from: Constants.HOLD_PLAYLIST_URL, for: .first)
+        model.getVideos(from: Constants.STRANGLE_PLAYLIST_URL, for: .second)
+        model.getVideos(from: Constants.WEAPON_PLAYLIST_URL, for: .third)
+      default:
+        break
+      }
+      
     }
+      
+    
+
   }
   
-  
-  
-  private func addUITweakButton() {
-    navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .organize, target: self, action: #selector(menuBtnPushed))
-  }
-  
-  @objc private func menuBtnPushed(_ sender: UIButton) {
-    print("test")
+  private func addMenu() {
+    let groundItem = UIAction(title: "Ground") { [self] action in
+      // trigger refresh of data for ground items
+      currentSubset = .ground
+      downloadData(for: currentSubset)
+    }
+    
+    let standingItem = UIAction(title: "Standing") { [self] action in
+      // trigger refresh of data for standing items
+      currentSubset = .standing
+      downloadData(for: currentSubset)
+    }
+    
+    let menu = UIMenu(title: "", children: [groundItem, standingItem])
+    navigationItem.rightBarButtonItem = UIBarButtonItem(title: nil, image: UIImage(systemName: "list.bullet"), primaryAction: nil, menu: menu)
   }
   
   private func configureCollectionView() {
@@ -135,42 +180,25 @@ extension ListingViewController: UICollectionViewDelegate {
   
   private func updateData() {
     var snapshot = NSDiffableDataSourceSnapshot<Section, Video>()
-    
-    snapshot.appendSections(Section.allCases)
-    snapshot.appendItems(guardVideos, toSection: .first)
-    snapshot.appendItems(sideMountVideos, toSection: .second)
-    snapshot.appendItems(mountVideos, toSection: .third)
-    snapshot.appendItems(backMountVideos, toSection: .fourth)
 
+    snapshot.appendSections(Section.allCases)
+    
+    switch currentSubset {
+    case .ground:
+      snapshot.appendItems(model.guardVideos, toSection: .first)
+      snapshot.appendItems(model.sideMountVideos, toSection: .second)
+      snapshot.appendItems(model.mountVideos, toSection: .third)
+      snapshot.appendItems(model.backMountVideos, toSection: .fourth)
+    case .standing:
+      snapshot.appendItems(model.strikeVideos, toSection: .first)
+      snapshot.appendItems(model.holdVideos, toSection: .second)
+      snapshot.appendItems(model.strangleVideos, toSection: .third)
+      snapshot.appendItems(model.weaponVideos, toSection: .fourth)
+    }
+    
     dataSource.apply(snapshot, animatingDifferences: false)
   }
   
-  //first attempt
-//  private func createLayout() -> UICollectionViewCompositionalLayout {
-//
-//    let sectionProvider = { (sectionIndex: Int, layoutEnvironment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection? in
-//
-//      let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(0.95))
-//      let item = NSCollectionLayoutItem(layoutSize: itemSize)
-//      item.contentInsets = NSDirectionalEdgeInsets(top: -K.inset, leading: K.inset, bottom: K.inset, trailing: K.inset)
-//
-//      let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.8), heightDimension: .fractionalHeight(0.225))
-//      let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
-//
-//      let section = NSCollectionLayoutSection(group: group)
-//      section.orthogonalScrollingBehavior = .continuousGroupLeadingBoundary
-//
-//      let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(25))
-//      let sectionHeader = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize, elementKind: UICollectionView.elementKindSectionHeader, alignment: .topLeading)
-//      section.boundarySupplementaryItems = [sectionHeader]
-//
-//      return section
-//    }
-//
-//    return UICollectionViewCompositionalLayout(sectionProvider: sectionProvider)
-//  }
-  
-  //second attempt at layout
   func createLayout() -> UICollectionViewLayout {
     let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
     let item = NSCollectionLayoutItem(layoutSize: itemSize)
@@ -205,16 +233,32 @@ extension ListingViewController: UICollectionViewDelegate {
 extension ListingViewController: ModelDelegate {
 
   func videosFetched(_ videos: [Video], type: Section) {
-    switch type {
-    case .first:
-      guardVideos = videos
-    case .second:
-      sideMountVideos = videos
-    case .third:
-      mountVideos = videos
-    case .fourth:
-      backMountVideos = videos
+    switch currentSubset {
+      
+    case .ground:
+      switch type {
+      case .first:
+        model.guardVideos = videos
+      case .second:
+        model.sideMountVideos = videos
+      case .third:
+        model.mountVideos = videos
+      case .fourth:
+        model.backMountVideos = videos
+      }
+    case .standing:
+      switch type {
+      case .first:
+        model.strikeVideos = videos
+      case .second:
+        model.holdVideos = videos
+      case .third:
+        model.strangleVideos = videos
+      case .fourth:
+        model.weaponVideos = videos
+      }
     }
+    
     updateData()
   }
 }

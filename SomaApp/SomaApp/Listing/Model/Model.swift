@@ -15,6 +15,17 @@ final class Model {
   
   var delegate: ModelDelegate?
   
+    // ground videos
+  var guardVideos = [Video]()
+  var sideMountVideos = [Video]()
+  var mountVideos = [Video]()
+  var backMountVideos = [Video]()
+    // standing videos
+  var strikeVideos = [Video]()
+  var holdVideos = [Video]()
+  var strangleVideos = [Video]()
+  var weaponVideos = [Video]()
+  
   func getVideos(from url: String, for type: ListingViewController.Section) {
     
     guard let url = URL(string: url) else { return }

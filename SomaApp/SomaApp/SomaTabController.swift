@@ -12,7 +12,6 @@ final class SomaTabController: UITabBarController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
-//    let landingVC = LandingViewController()
     let landingVC = LandingViewController()
     let listingVC = ListingViewController()
     let infoVC = InfoViewController()
