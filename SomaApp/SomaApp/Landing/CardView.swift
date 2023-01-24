@@ -10,6 +10,7 @@ import UIKit
 class CardView: UIViewController {
   var text: String
   var headline: String!
+  let iconView = UIImageView(image: UIImage(named: "soma_red_black"))
     
   init(text: String, headline: String?) {
     self.text = text
@@ -33,6 +34,9 @@ class CardView: UIViewController {
     let headlineLabel = makeBoldLabel(withText: headline)
     let bodyLabel = makeSubLabel(withText: text)
         
+    iconView.translatesAutoresizingMaskIntoConstraints = false
+    
+    
     containerView.translatesAutoresizingMaskIntoConstraints = false
     containerView.backgroundColor = .systemBackground
     containerView.layer.cornerRadius = 20
@@ -41,7 +45,7 @@ class CardView: UIViewController {
     imageView.translatesAutoresizingMaskIntoConstraints = false
     imageView.contentMode = .scaleAspectFill
   
-    let blurEffect = UIBlurEffect(style: .light)
+    let blurEffect = UIBlurEffect(style: .systemUltraThinMaterial)
     let blurView = UIVisualEffectView(effect: blurEffect)
     blurView.frame = imageView.bounds
     imageView.addSubview(blurView)
@@ -53,10 +57,15 @@ class CardView: UIViewController {
     stackView.distribution = .fillProportionally
     
     view.addSubviews(imageView, containerView)
-    containerView.addSubviews(stackView)
+    containerView.addSubviews(iconView, stackView)
     stackView.addArrangedSubviews(headlineLabel, bodyLabel)
     
     NSLayoutConstraint.activate([
+      
+      iconView.topAnchor.constraint(equalTo: containerView.topAnchor, constant: K.inset),
+      iconView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: K.inset),
+      iconView.heightAnchor.constraint(equalToConstant: 40),
+      iconView.widthAnchor.constraint(equalTo: iconView.heightAnchor),
       
       containerView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
       containerView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: K.inset),
