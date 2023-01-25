@@ -6,8 +6,11 @@
 //
 
 import UIKit
+import SwiftUI
 
 final class InfoViewController: UIViewController {
+  
+  let hostingVC = UIHostingController(rootView: InfoView())
   
   let stackView = UIStackView()
   let imageView = UIImageView()
