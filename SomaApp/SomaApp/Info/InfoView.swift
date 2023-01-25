@@ -1,37 +1,41 @@
-//
-//  InfoView.swift
-//  SomaApp
-//
-//  Created by Michael Brockman on 1/24/23.
-//
+  //
+  //  InfoView.swift
+  //  SomaApp
+  //
+  //  Created by Michael Brockman on 1/24/23.
+  //
 
 import SwiftUI
 
 struct InfoView: View {
-//  var profiles: [Profile]
+    //  var profiles: [Profile]
+  @State private var currentZoom = 0.0
+  @State private var finalZoom = 1.0
   
-    var body: some View {
-      ZStack {
-        Color.secondary
-        List {
-          ProfileView(profile: Profiles.mattStrack)
-            .onTapGesture {
-              
-            }
-          ProfileView(profile: Profiles.garrettMyers)
-          ProfileView(profile: Profiles.scottEvans)
-        }
+  var body: some View {
+    ZStack {
+      Color.secondary
+      List {
+        ProfileView(profile: Profiles.mattStrack)
+          .cornerRadius(10)
+        ProfileView(profile: Profiles.garrettMyers)
+        ProfileView(profile: Profiles.scottEvans)
       }
+
     }
+    .padding(.vertical)
+    .ignoresSafeArea()
+  }
 }
 
 struct ProfileView: View {
   var profile: Profile
+  @State private var isShowingDetail = false
   
   var body: some View {
     ZStack {
-      Color.red
-        .opacity(0.4)
+      Color.pink
+        .opacity(0.2)
       VStack {
         ZStack {
           RoundedRectangle(cornerRadius: 5)
@@ -43,9 +47,13 @@ struct ProfileView: View {
             .resizable()
             .scaledToFill()
             .border(.thinMaterial)
-            .cornerRadius(10)
-          
+            .cornerRadius(5)
+            .onTapGesture {
+              // present detail view?
+              isShowingDetail = true
+            }
         }
+        .cornerRadius(10)
         .frame(maxWidth: 300, maxHeight: 240)
         
         Spacer()
@@ -54,8 +62,6 @@ struct ProfileView: View {
           Text(profile.name)
             .font(.title)
             .bold()
-            .shadow(radius: 1)
-          
             .frame(height: 20)
           Spacer()
             .frame(height: 20)
@@ -68,14 +74,19 @@ struct ProfileView: View {
         }
       }
       .padding(10)
+      .shadow(radius: 10)
+    }
     .shadow(radius: 10)
+    .cornerRadius(10)
+    .sheet(isPresented: $isShowingDetail) {
+      InfoDetailView()
     }
   }
 }
 
 struct InfoView_Previews: PreviewProvider {
-    static var previews: some View {
-//      InfoView(profiles: [Profiles.mattStrack])
-      InfoView()
-    }
+  static var previews: some View {
+      //      InfoView(profiles: [Profiles.mattStrack])
+    InfoView()
+  }
 }

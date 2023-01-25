@@ -33,6 +33,8 @@
 		27C45FBA297F462800D6B6B8 /* Date+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C45FB9297F462800D6B6B8 /* Date+Ext.swift */; };
 		27C45FBE297FFECA00D6B6B8 /* InfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C45FBD297FFECA00D6B6B8 /* InfoView.swift */; };
 		27C45FC22980088C00D6B6B8 /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C45FC12980088C00D6B6B8 /* Profile.swift */; };
+		27C45FC42981583800D6B6B8 /* InfoDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C45FC32981583800D6B6B8 /* InfoDetailView.swift */; };
+		27C45FC6298158BB00D6B6B8 /* Color+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C45FC5298158BB00D6B6B8 /* Color+Ext.swift */; };
 		27EF30BF297EA887003C4BAB /* TileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27EF30BE297EA887003C4BAB /* TileVC.swift */; };
 		27EF30C1297EA903003C4BAB /* LandingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27EF30C0297EA903003C4BAB /* LandingViewController.swift */; };
 		27EF30C3297EAD19003C4BAB /* LandingHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27EF30C2297EAD19003C4BAB /* LandingHeaderView.swift */; };
@@ -86,6 +88,8 @@
 		27C45FB9297F462800D6B6B8 /* Date+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Ext.swift"; sourceTree = "<group>"; };
 		27C45FBD297FFECA00D6B6B8 /* InfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoView.swift; sourceTree = "<group>"; };
 		27C45FC12980088C00D6B6B8 /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
+		27C45FC32981583800D6B6B8 /* InfoDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoDetailView.swift; sourceTree = "<group>"; };
+		27C45FC5298158BB00D6B6B8 /* Color+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Ext.swift"; sourceTree = "<group>"; };
 		27EF30BE297EA887003C4BAB /* TileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TileVC.swift; sourceTree = "<group>"; };
 		27EF30C0297EA903003C4BAB /* LandingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandingViewController.swift; sourceTree = "<group>"; };
 		27EF30C2297EAD19003C4BAB /* LandingHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandingHeaderView.swift; sourceTree = "<group>"; };
@@ -124,6 +128,7 @@
 				279654E4297D6A4700F15177 /* UIView+Ext.swift */,
 				276BEDFC297E248B00660252 /* UIVisualEffectView.swift */,
 				27C45FB9297F462800D6B6B8 /* Date+Ext.swift */,
+				27C45FC5298158BB00D6B6B8 /* Color+Ext.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -247,6 +252,7 @@
 				27A72831297A33F600856CF3 /* InfoViewController.swift */,
 				27C45FBD297FFECA00D6B6B8 /* InfoView.swift */,
 				27C45FC12980088C00D6B6B8 /* Profile.swift */,
+				27C45FC32981583800D6B6B8 /* InfoDetailView.swift */,
 			);
 			path = Info;
 			sourceTree = "<group>";
@@ -395,12 +401,14 @@
 				279654D7297CDD7C00F15177 /* Response.swift in Sources */,
 				27EF30C1297EA903003C4BAB /* LandingViewController.swift in Sources */,
 				271A10A3297ADA760058D76C /* ViewFactory.swift in Sources */,
+				27C45FC42981583800D6B6B8 /* InfoDetailView.swift in Sources */,
 				279654D3297CD4EF00F15177 /* Video.swift in Sources */,
 				279654E9297D732800F15177 /* DetailViewController.swift in Sources */,
 				27A727F9297A31EF00856CF3 /* AppDelegate.swift in Sources */,
 				279654D5297CD52000F15177 /* Model.swift in Sources */,
 				279654E3297D695E00F15177 /* UIFont+Ext.swift in Sources */,
 				27C45FC22980088C00D6B6B8 /* Profile.swift in Sources */,
+				27C45FC6298158BB00D6B6B8 /* Color+Ext.swift in Sources */,
 				27C45FBE297FFECA00D6B6B8 /* InfoView.swift in Sources */,
 				27A727FB297A31EF00856CF3 /* SceneDelegate.swift in Sources */,
 				279654DE297D52D500F15177 /* ListingCVCell.swift in Sources */,
