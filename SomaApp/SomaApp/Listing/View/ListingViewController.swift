@@ -6,6 +6,7 @@
   //
 
 import UIKit
+import SwiftUI
 
 final class ListingViewController: UIViewController {
   
@@ -110,13 +111,14 @@ extension ListingViewController: UICollectionViewDelegate {
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
     guard let video = dataSource.itemIdentifier(for: indexPath) else { return }
     let urlString = Constants.YT_PLAY_URL + video.videoId + Constants.YT_INLINE_YES
-    guard let url = URL(string: urlString) else { return }
+//    guard let url = URL(string: urlString) else { return }
     
-    
-    
-    let detailVC = DetailViewController()
-    detailVC.url = url
+    let detailVC = UIHostingController(rootView: ListingDetailView(title: video.title, videoId: video.videoId))
     present(detailVC, animated: true)
+    
+//    let detailVC = DetailViewController()
+//    detailVC.url = url
+//    present(detailVC, animated: true)
   }
   
   private func configureDataSource() {

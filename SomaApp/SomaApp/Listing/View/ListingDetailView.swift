@@ -10,6 +10,8 @@ import WebKit
 
 struct ListingDetailView: View {
   let title: String
+  let videoId: String
+  
   var body: some View {
     ZStack {
       LinearGradient(
@@ -17,7 +19,7 @@ struct ListingDetailView: View {
         startPoint: .top,
         endPoint: .bottom
       ).ignoresSafeArea()
-      EmbedFrameView(title: title)
+      EmbedFrameView(title: title, videoId: videoId)
     }
   }
 }
@@ -38,6 +40,7 @@ struct EmbedView: UIViewRepresentable {
 
 struct EmbedFrameView: View {
   let title: String
+  let videoId: String
   
   var body: some View {
     GeometryReader { proxy in
@@ -46,7 +49,7 @@ struct EmbedFrameView: View {
         Spacer()
         Text(title)
           VStack {
-            EmbedView(videoID: "kkBB8afMliY")
+            EmbedView(videoID: videoId)
               .frame(maxWidth: .infinity, maxHeight: proxy.size.height / 3)
               .cornerRadius(8)
           }
@@ -71,6 +74,6 @@ struct EmbedFrameView: View {
 struct ListingDetailView_Previews: PreviewProvider {
   
   static var previews: ListingDetailView {
-    ListingDetailView(title: "Video Title")
+    ListingDetailView(title: "Video Title", videoId: "kkBB8afMliY")
   }
 }
