@@ -25,14 +25,14 @@ struct ListingDetailView: View {
 }
 
 struct EmbedView: UIViewRepresentable {
-  let videoID: String
+  let videoId: String
   
   func makeUIView(context: Context) -> WKWebView {
     return WKWebView()
   }
   
   func updateUIView(_ uiView: WKWebView, context: Context) {
-    guard let youtubeURL = URL(string: "https://www.youtube.com/embed/\(videoID)") else { return }
+    guard let youtubeURL = URL(string: "https://www.youtube.com/embed/\(videoId)") else { return }
     uiView.scrollView.isScrollEnabled = false
     uiView.load(URLRequest(url: youtubeURL))
   }
@@ -49,7 +49,7 @@ struct EmbedFrameView: View {
         Spacer()
         Text(title)
           VStack {
-            EmbedView(videoID: videoId)
+            EmbedView(videoId: videoId)
               .frame(maxWidth: .infinity, maxHeight: proxy.size.height / 3)
               .cornerRadius(8)
           }
