@@ -8,23 +8,48 @@
 import SwiftUI
 
 struct InfoView: View {
-    //  var profiles: [Profile]
-  @State private var currentZoom = 0.0
-  @State private var finalZoom = 1.0
+  @State private var profiles = [Profile]()
   
   var body: some View {
-    ZStack {
-      Color.secondary
-      List {
-        ProfileView(profile: Profiles.mattStrack)
+    
+    NavigationStack {
+      
+      ZStack {
+        Color.red.opacity(0.4)
+          .ignoresSafeArea()
+          .background(.regularMaterial)
+        
+        VStack {
+          List {
+            ForEach(Staff.allCases, id: \.self) { member in
+              InfoDetailView(profile: member)
+            }
+          }
+          .listStyle(.sidebar)
           .cornerRadius(10)
-        ProfileView(profile: Profiles.garrettMyers)
-        ProfileView(profile: Profiles.scottEvans)
+        }
+        .toolbar {
+          ToolbarItemGroup {
+              //
+          } label: {
+            Menu {
+                //
+            } label: {
+              Image(systemName: "location.square")
+            }
+          }
+        }
+        .navigationTitle("Soma")
+        .navigationBarTitleDisplayMode(.inline)
+        .padding(.vertical)
       }
-
     }
-    .padding(.vertical)
-    .ignoresSafeArea()
+  }
+  
+  private func getProfiles() {
+    ForEach(Profile.allCases) { profile in
+      profiles.append(profile)
+    }
   }
 }
 
@@ -33,53 +58,50 @@ struct ProfileView: View {
   @State private var isShowingDetail = false
   
   var body: some View {
-    ZStack {
-      Color.pink
-        .opacity(0.2)
-      VStack {
-        ZStack {
-          RoundedRectangle(cornerRadius: 5)
-            .padding(.horizontal)
-            .foregroundColor(.secondary)
-            .border(.thinMaterial, width: 2)
+    HStack {
+      ZStack {
+        Color.red
+          .opacity(0.4)
+          .ignoresSafeArea()
+          .background(.ultraThinMaterial)
+        VStack {
+          ZStack {
+            RoundedRectangle(cornerRadius: 5)
+              .padding(.horizontal)
+              .foregroundColor(.secondary)
+              .border(.thinMaterial, width: 2)
+            
+            Image(profile.image)
+              .resizable()
+              .scaledToFill()
+              .border(.thinMaterial)
+              .cornerRadius(5)
+              .onTapGesture {
+                isShowingDetail = true
+              }
+          }
+          .cornerRadius(10)
+          .frame(maxWidth: 300, maxHeight: 240)
           
-          Image(profile.image)
-            .resizable()
-            .scaledToFill()
-            .border(.thinMaterial)
-            .cornerRadius(5)
-            .onTapGesture {
-              // present detail view?
-              isShowingDetail = true
-            }
-        }
-        .cornerRadius(10)
-        .frame(maxWidth: 300, maxHeight: 240)
-        
-        Spacer()
-          .frame(height: 20)
-        VStack(spacing: 6) {
-          Text(profile.name)
-            .font(.title)
-            .bold()
-            .frame(height: 20)
           Spacer()
             .frame(height: 20)
-          ForEach(profile.locations, id:\.self) { location in
-            Text(location)
-              .foregroundColor(.secondary)
+          VStack(spacing: 6) {
+            Text(profile.name)
+              .font(.title)
               .bold()
+              .frame(height: 10)
+            Spacer()
+              .frame(height: 20)
           }
-          
         }
+          //        .padding(10)
+        .shadow(radius: 10)
       }
-      .padding(10)
       .shadow(radius: 10)
-    }
-    .shadow(radius: 10)
-    .cornerRadius(10)
-    .sheet(isPresented: $isShowingDetail) {
-      InfoDetailView()
+      .cornerRadius(10)
+      .navigationDestination(isPresented: $isShowingDetail) {
+        InfoDetailView(profile: profile)
+      }
     }
   }
 }

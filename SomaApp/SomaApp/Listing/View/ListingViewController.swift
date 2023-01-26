@@ -113,7 +113,7 @@ extension ListingViewController: UICollectionViewDelegate {
     
     // swiftui version
     let detailVC = UIHostingController(rootView: ListingDetailView(title: video.title, videoId: video.videoId))
-    present(detailVC, animated: true)
+    show(detailVC, sender: nil)
     
 
     // uikit version

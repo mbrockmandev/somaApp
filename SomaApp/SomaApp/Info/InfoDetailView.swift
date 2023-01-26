@@ -8,13 +8,14 @@
 import SwiftUI
 
 struct InfoDetailView: View {
+  var profile: Profile
     var body: some View {
       ZStack {
         Color.pink
           .opacity(0.2)
           .ignoresSafeArea()
         VStack {
-          InfoContainerView()
+          InfoContainerView(profile: profile)
         }
         
       }
@@ -23,21 +24,26 @@ struct InfoDetailView: View {
 }
 
 struct InfoContainerView: View {
+  var profile: Profile
   var body: some View {
       VStack {
-        Image("matt_thumb")
+        
+        Image(profile.image)
           .resizable()
           .scaledToFit()
+          .padding(.top, 30)
         Spacer()
 
-        Text("Matt Strack")
+        Text(profile.name)
           .font(.largeTitle)
         Text("Black Belt 2006 - Pedro Sauer")
           .font(.title2)
         Spacer()
         
-        Text("Professor Strack began his journey in Gracie Brazilian Jiu-Jitsu in 1997 with Jeff Curran in Chicago, IL. After being introduced to Jeff Curran's instructor, 8th degree Master Pedro Sauer, Matt moved to Salt Lake City, Utah to study exclusively with Master Sauer. After 9 years of training, Matt Strack received his Gracie Brazilian Jiu-Jitsu Black Belt on June 10, 2006 from Master Pedro Sauer, his 3rd degree Professorship in 2015, and his 4th degree from 9th degree Grand Master Relson Gracie.")
-          .font(.body)
+        ForEach(profile.locations, id: \.self) { location in
+          Text(location)
+            .font(.body)
+        }
         Spacer()
       }
       .padding()
@@ -45,11 +51,12 @@ struct InfoContainerView: View {
       .regularMaterial,
       in: RoundedRectangle(cornerRadius: 8, style: .continuous)
     )
+//    .ignoresSafeArea()
   }
 }
 
 struct InfoDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        InfoDetailView()
+      InfoDetailView(profile: Profiles.mattStrack)
     }
 }
