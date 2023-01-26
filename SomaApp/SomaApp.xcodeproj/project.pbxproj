@@ -37,6 +37,9 @@
 		27C45FC6298158BB00D6B6B8 /* Color+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C45FC5298158BB00D6B6B8 /* Color+Ext.swift */; };
 		27C45FC829820DB500D6B6B8 /* ListingDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C45FC729820DB500D6B6B8 /* ListingDetailView.swift */; };
 		27C45FCB2982A5F300D6B6B8 /* MessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C45FCA2982A5F300D6B6B8 /* MessageView.swift */; };
+		27C45FCD298334FE00D6B6B8 /* profiles.json in Resources */ = {isa = PBXBuildFile; fileRef = 27C45FCC298334FE00D6B6B8 /* profiles.json */; };
+		27C45FCF29833B1100D6B6B8 /* Bundle+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C45FCE29833B1100D6B6B8 /* Bundle+Ext.swift */; };
+		27C45FD129833B5A00D6B6B8 /* ProfileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C45FD029833B5A00D6B6B8 /* ProfileManager.swift */; };
 		27EF30BF297EA887003C4BAB /* TileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27EF30BE297EA887003C4BAB /* TileVC.swift */; };
 		27EF30C1297EA903003C4BAB /* LandingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27EF30C0297EA903003C4BAB /* LandingViewController.swift */; };
 		27EF30C3297EAD19003C4BAB /* LandingHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27EF30C2297EAD19003C4BAB /* LandingHeaderView.swift */; };
@@ -94,6 +97,9 @@
 		27C45FC5298158BB00D6B6B8 /* Color+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Ext.swift"; sourceTree = "<group>"; };
 		27C45FC729820DB500D6B6B8 /* ListingDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListingDetailView.swift; sourceTree = "<group>"; };
 		27C45FCA2982A5F300D6B6B8 /* MessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageView.swift; sourceTree = "<group>"; };
+		27C45FCC298334FE00D6B6B8 /* profiles.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = profiles.json; sourceTree = "<group>"; };
+		27C45FCE29833B1100D6B6B8 /* Bundle+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+Ext.swift"; sourceTree = "<group>"; };
+		27C45FD029833B5A00D6B6B8 /* ProfileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileManager.swift; sourceTree = "<group>"; };
 		27EF30BE297EA887003C4BAB /* TileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TileVC.swift; sourceTree = "<group>"; };
 		27EF30C0297EA903003C4BAB /* LandingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandingViewController.swift; sourceTree = "<group>"; };
 		27EF30C2297EAD19003C4BAB /* LandingHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandingHeaderView.swift; sourceTree = "<group>"; };
@@ -133,6 +139,7 @@
 				276BEDFC297E248B00660252 /* UIVisualEffectView.swift */,
 				27C45FB9297F462800D6B6B8 /* Date+Ext.swift */,
 				27C45FC5298158BB00D6B6B8 /* Color+Ext.swift */,
+				27C45FCE29833B1100D6B6B8 /* Bundle+Ext.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -255,10 +262,12 @@
 		27A72830297A33D800856CF3 /* Info */ = {
 			isa = PBXGroup;
 			children = (
-				27A72831297A33F600856CF3 /* InfoViewController.swift */,
-				27C45FBD297FFECA00D6B6B8 /* InfoView.swift */,
-				27C45FC12980088C00D6B6B8 /* Profile.swift */,
+				27C45FCC298334FE00D6B6B8 /* profiles.json */,
 				27C45FC32981583800D6B6B8 /* InfoDetailView.swift */,
+				27C45FBD297FFECA00D6B6B8 /* InfoView.swift */,
+				27A72831297A33F600856CF3 /* InfoViewController.swift */,
+				27C45FC12980088C00D6B6B8 /* Profile.swift */,
+				27C45FD029833B5A00D6B6B8 /* ProfileManager.swift */,
 			);
 			path = Info;
 			sourceTree = "<group>";
@@ -379,6 +388,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				27C45FCD298334FE00D6B6B8 /* profiles.json in Resources */,
 				27A72805297A31F000856CF3 /* LaunchScreen.storyboard in Resources */,
 				27A72802297A31F000856CF3 /* Assets.xcassets in Resources */,
 			);
@@ -416,6 +426,7 @@
 				279654D7297CDD7C00F15177 /* Response.swift in Sources */,
 				27EF30C1297EA903003C4BAB /* LandingViewController.swift in Sources */,
 				271A10A3297ADA760058D76C /* ViewFactory.swift in Sources */,
+				27C45FD129833B5A00D6B6B8 /* ProfileManager.swift in Sources */,
 				27C45FC42981583800D6B6B8 /* InfoDetailView.swift in Sources */,
 				27C45FCB2982A5F300D6B6B8 /* MessageView.swift in Sources */,
 				279654D3297CD4EF00F15177 /* Video.swift in Sources */,
@@ -430,6 +441,7 @@
 				279654DE297D52D500F15177 /* ListingCVCell.swift in Sources */,
 				27A7282A297A329500856CF3 /* SomaTabController.swift in Sources */,
 				279654D1297CD1BD00F15177 /* Constants.swift in Sources */,
+				27C45FCF29833B1100D6B6B8 /* Bundle+Ext.swift in Sources */,
 				276BEDFD297E248B00660252 /* UIVisualEffectView.swift in Sources */,
 				27EF30BF297EA887003C4BAB /* TileVC.swift in Sources */,
 				27A72832297A33F600856CF3 /* InfoViewController.swift in Sources */,

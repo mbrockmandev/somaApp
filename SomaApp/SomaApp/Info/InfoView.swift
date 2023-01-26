@@ -21,9 +21,7 @@ struct InfoView: View {
         
         VStack {
           List {
-            ForEach(Staff.allCases, id: \.self) { member in
-              InfoDetailView(profile: member)
-            }
+//            InfoDetailView(profile: Profile(name: "Matt", image: "matt_thumb", belt: "Black Belt", locations: ["Dayton, OH"]))
           }
           .listStyle(.sidebar)
           .cornerRadius(10)
@@ -44,11 +42,8 @@ struct InfoView: View {
         .padding(.vertical)
       }
     }
-  }
-  
-  private func getProfiles() {
-    ForEach(Profile.allCases) { profile in
-      profiles.append(profile)
+    .onAppear {
+//      profiles = ProfileManager.readData()
     }
   }
 }
