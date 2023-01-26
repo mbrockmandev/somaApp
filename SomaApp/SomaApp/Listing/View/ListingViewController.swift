@@ -112,6 +112,8 @@ extension ListingViewController: UICollectionViewDelegate {
     let urlString = Constants.YT_PLAY_URL + video.videoId + Constants.YT_INLINE_YES
     guard let url = URL(string: urlString) else { return }
     
+    
+    
     let detailVC = DetailViewController()
     detailVC.url = url
     present(detailVC, animated: true)
