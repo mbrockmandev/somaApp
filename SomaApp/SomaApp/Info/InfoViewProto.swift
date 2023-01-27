@@ -11,21 +11,27 @@ struct InfoViewProto: View {
   @State private var profiles = Profile.mock
   
   var body: some View {
-    
-    NavigationStack {
-      Text("Instructors")
-        .largeSectionModifier()
-      
-      ScrollView(.horizontal, showsIndicators: false) {
-        HStack(spacing: 16) {
-          ForEach(profiles, id: \.self) { profile in
-            ProfileViewProto(profile: profile)
-              .padding(.top)
-          }
+
+      NavigationStack {
+        
+
+        ZStack {
+          TabView {
+                  ForEach(profiles, id: \.self) { profile in
+                    GeometryReader { proxy in
+                      ProfileViewProto(profile: profile)
+                        .padding()
+                    }
+                  }
+                }
+                .background {
+                  Image("soma_red_black")
+                }
+              .tabViewStyle(.page(indexDisplayMode: .never))
         }
-        Spacer() //replace with other content later
+
+        
       }
-    }
   }
 }
 
@@ -36,40 +42,43 @@ struct ProfileViewProto: View {
   
   var body: some View {
     
-    VStack(alignment: .leading, spacing: 8) {
-      
-      RoundedRectangle(cornerRadius: 20)
-        .fill(.black.opacity(0.1))
-        .overlay(Image(profile.image)
-          .resizable()
-          .aspectRatio(contentMode: .fill)
-          .overlay(RoundedRectangle(cornerRadius: 20, style: .continuous)
-            .stroke(.linearGradient(colors: [.primary.opacity(0.3), .secondary.opacity(0.1)], startPoint: .bottom, endPoint: .top)))
-          .frame(width: 250, height: 105))
-        .cornerRadius(20)
-        .padding([.top, .horizontal])
-        .onTapGesture {
-          isShowingDetail = true
-        }
-      Text(profile.belt.uppercased())
-        .font(.caption)
-        .foregroundColor(.secondary)
-        .lineLimit(1)
-        .padding(.leading)
-      Text(profile.name)
-        .fontWeight(.semibold)
-        .padding(.leading)
+      VStack(alignment: .center, spacing: 8) {
+        
+        RoundedRectangle(cornerRadius: 20)
+          .fill(.black.opacity(0.1))
+          .overlay(Image(profile.image)
+            .resizable()
+            .aspectRatio(contentMode: .fill)
+            .overlay(RoundedRectangle(cornerRadius: 20, style: .continuous)
+              .stroke(.linearGradient(colors: [.primary.opacity(0.3), .secondary.opacity(0.1)], startPoint: .bottom, endPoint: .top)))
+              .frame(width: UIScreen.main.bounds.width * 0.8, height: UIScreen.main.bounds.height * 0.4)
+          )
+          .mask(RoundedRectangle(cornerRadius: 20, style: .continuous))
+          .padding([.top, .horizontal])
+          .onTapGesture {
+            isShowingDetail = true
+          }
+        Text(profile.belt.uppercased())
+          .font(.caption)
+          .foregroundColor(.secondary)
+          .lineLimit(1)
+          .padding(.leading)
+        Text(profile.name)
+          .fontWeight(.semibold)
+          .padding(.leading)
+      }
+      .padding(.bottom)
+      .frame(width: UIScreen.main.bounds.width * 0.9, height: UIScreen.main.bounds.height * 0.4)
+//      .frame(width: 350, height: sizeCategory > .large ? 480 : 360)
+      .background(.ultraThinMaterial)
+      .mask(RoundedRectangle(cornerRadius: 20, style: .continuous))
+      .shadow(radius: 20)
+      .overlay(RoundedRectangle(cornerRadius: 20, style: .continuous)
+        .stroke(.linearGradient(colors: [.primary.opacity(0.3), .secondary.opacity(0.1)], startPoint: .bottom, endPoint: .top)))
+      .navigationDestination(isPresented: $isShowingDetail) {
+        InfoDetailView(profile: profile)
     }
-    .padding(.bottom)
-    .frame(width: 240, height: sizeCategory > .large ? 300 : 240)
-    .background(.ultraThinMaterial)
-    .mask(RoundedRectangle(cornerRadius: 20, style: .continuous))
-    .shadow(radius: 20)
-    .overlay(RoundedRectangle(cornerRadius: 20, style: .continuous)
-      .stroke(.linearGradient(colors: [.primary.opacity(0.3), .secondary.opacity(0.1)], startPoint: .bottom, endPoint: .top)))
-    .navigationDestination(isPresented: $isShowingDetail) {
-      InfoDetailView(profile: profile)
-    }
+    
   }
 }
 
