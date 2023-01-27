@@ -22,10 +22,10 @@ struct InfoView: View {
         VStack {
           List {
             ForEach(profiles, id: \.self) { profile in
-              InfoDetailView(profile: profile)
+              ProfileView(profile: profile)
             }
           }
-          .listStyle(.sidebar)
+          .listStyle(.inset)
           .cornerRadius(10)
         }
         .toolbar {
@@ -39,8 +39,7 @@ struct InfoView: View {
             }
           }
         }
-//        .navigationTitle("Soma")
-//        .navigationBarTitleDisplayMode(.inline)
+        
         .padding(.vertical)
       }
     }

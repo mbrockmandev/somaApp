@@ -36,7 +36,7 @@ struct InfoContainerView: View {
 
         Text(profile.name)
           .font(.largeTitle)
-        Text("Black Belt 2006 - Pedro Sauer")
+        Text(profile.belt)
           .font(.title2)
         Spacer()
         

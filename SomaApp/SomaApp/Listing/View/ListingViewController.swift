@@ -13,6 +13,7 @@ final class ListingViewController: UIViewController {
   var collectionView: UICollectionView!
   var model = Model()
   
+  
   let groundSections = [
     Model.Section(uuid: UUID().uuidString, title: "Guard"),
     Model.Section(uuid: UUID().uuidString, title: "Side Mount"),

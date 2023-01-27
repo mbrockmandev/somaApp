@@ -13,6 +13,7 @@ protocol ModelDelegate {
 
 final class Model {
   var delegate: ModelDelegate?
+//  let cache = NSCache<NSString, UIImage>()
   
   struct Section: Hashable {
     let uuid: String
