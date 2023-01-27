@@ -11,7 +11,7 @@ struct InfoDetailView: View {
   var profile: Profile
     var body: some View {
       ZStack {
-        Color.pink
+        Color.systemGray
           .opacity(0.2)
           .ignoresSafeArea()
         VStack {

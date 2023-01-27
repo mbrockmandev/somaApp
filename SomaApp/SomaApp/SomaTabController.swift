@@ -15,7 +15,9 @@ final class SomaTabController: UITabBarController {
     let landingVC = LandingViewController()
     let listingVC = ListingViewController()
     let messageVC = UIHostingController(rootView: MessageView())
-    let infoVC = UIHostingController(rootView: InfoView())
+//    let infoVC = UIHostingController(rootView: InfoView())
+    let infoVC = UIHostingController(rootView: InfoViewProto())
+    
     
     let landingTabBarItem = UITabBarItem(title: "Welcome", image: UIImage(systemName: "house"), selectedImage: UIImage(systemName: "house.fill"))
     let listingTabBarItem = UITabBarItem(title: "Videos", image: UIImage(systemName: "video"), selectedImage: UIImage(systemName: "video.fill"))

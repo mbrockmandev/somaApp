@@ -15,18 +15,15 @@ struct InfoView: View {
     NavigationStack {
       
       ZStack {
-        Color.red.opacity(0.4)
-          .ignoresSafeArea()
-          .background(.regularMaterial)
-        
-        VStack {
-          List {
+        HStack {
+          ScrollView() {
             ForEach(profiles, id: \.self) { profile in
               ProfileView(profile: profile)
             }
           }
+          
           .listStyle(.inset)
-          .cornerRadius(10)
+          .listRowBackground(Color.secondarySystemBackground)
         }
         .toolbar {
           ToolbarItemGroup {
@@ -53,45 +50,41 @@ struct ProfileView: View {
   var body: some View {
     HStack {
       ZStack {
-        Color.red
-          .opacity(0.4)
+        Color.secondarySystemBackground
+//          .opacity(0.4)
           .ignoresSafeArea()
-          .background(.ultraThinMaterial)
+          .background(.thickMaterial)
         VStack {
           ZStack {
-            RoundedRectangle(cornerRadius: 5)
-              .padding(.horizontal)
+            Rectangle()
               .foregroundColor(.secondary)
-              .border(.thinMaterial, width: 2)
+              .border(.thinMaterial, width: 5)
+              .shadow(radius: 5)
             
             Image(profile.image)
               .resizable()
               .scaledToFill()
-              .border(.thinMaterial)
-              .cornerRadius(5)
+              .border(.thickMaterial)
+              .cornerRadius(2)
               .onTapGesture {
                 isShowingDetail = true
               }
           }
-          .cornerRadius(10)
+          .padding(.vertical)
           .frame(maxWidth: 300, maxHeight: 240)
           
-          Spacer()
-            .frame(height: 20)
           VStack(spacing: 6) {
             Text(profile.name)
               .font(.title)
               .bold()
               .frame(height: 10)
             Spacer()
-              .frame(height: 20)
           }
         }
-          //        .padding(10)
         .shadow(radius: 10)
       }
       .shadow(radius: 10)
-      .cornerRadius(10)
+//      .cornerRadius(10)
       .navigationDestination(isPresented: $isShowingDetail) {
         InfoDetailView(profile: profile)
       }

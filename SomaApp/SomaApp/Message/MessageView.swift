@@ -10,7 +10,7 @@ import SwiftUI
 struct MessageView: View {
   var body: some View {
     ZStack {
-      Color.red
+      Color.systemGray
         .opacity(0.4)
         .ignoresSafeArea()
       VStack {
