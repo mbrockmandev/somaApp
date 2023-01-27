@@ -20,6 +20,7 @@ struct InfoViewProto: View {
         HStack(spacing: 16) {
           ForEach(profiles, id: \.self) { profile in
             ProfileViewProto(profile: profile)
+              .padding(.top)
           }
         }
         Spacer() //replace with other content later
@@ -42,29 +43,35 @@ struct ProfileViewProto: View {
         .overlay(Image(profile.image)
           .resizable()
           .aspectRatio(contentMode: .fill)
-          .cornerRadius(30)
+          .overlay(RoundedRectangle(cornerRadius: 20, style: .continuous)
+            .stroke(.linearGradient(colors: [.primary.opacity(0.3), .secondary.opacity(0.1)], startPoint: .bottom, endPoint: .top)))
           .frame(width: 250, height: 105))
-        .cornerRadius(30)
+        .cornerRadius(20)
+        .padding([.top, .horizontal])
         .onTapGesture {
           isShowingDetail = true
         }
-      Text(profile.belt)
+      Text(profile.belt.uppercased())
         .font(.caption)
         .foregroundColor(.secondary)
         .lineLimit(1)
+        .padding(.leading)
       Text(profile.name)
         .fontWeight(.semibold)
+        .padding(.leading)
     }
-    .padding()
+    .padding(.bottom)
     .frame(width: 240, height: sizeCategory > .large ? 300 : 240)
     .background(.ultraThinMaterial)
-    .backgroundStyle(cornerRadius: 30)
+    .mask(RoundedRectangle(cornerRadius: 20, style: .continuous))
+    .shadow(radius: 20)
+    .overlay(RoundedRectangle(cornerRadius: 20, style: .continuous)
+      .stroke(.linearGradient(colors: [.primary.opacity(0.3), .secondary.opacity(0.1)], startPoint: .bottom, endPoint: .top)))
     .navigationDestination(isPresented: $isShowingDetail) {
       InfoDetailView(profile: profile)
     }
   }
 }
-
 
 struct InfoViewProto_Previews: PreviewProvider {
   static var previews: some View {
