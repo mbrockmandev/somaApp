@@ -28,7 +28,7 @@ final class SomaTabController: UITabBarController {
     infoVC.tabBarItem = infoTabBarItem
     
     let controllers = [landingVC, listingVC, messageVC, infoVC]
-//    viewControllers = controllers.map { UINavigationController(rootViewController: $0) }
+    viewControllers = controllers.map { UINavigationController(rootViewController: $0) }
     
     #if DEBUG
     selectedIndex = 2 // TODO: Delete

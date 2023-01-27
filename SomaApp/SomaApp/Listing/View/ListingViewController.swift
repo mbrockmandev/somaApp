@@ -47,18 +47,18 @@ final class ListingViewController: UIViewController {
 
   
   private func addMenu() {
-    let groundItem = UIAction(title: "Ground") { [self] action in
+    let groundItem = UIAction(title: "Ground", image: UIImage(systemName: model.currentSubset == .ground ? "star.fill" : "star")) { [self] action in
         // trigger refresh of data for ground items
       model.currentSubset = .ground
       model.downloadData(for: model.currentSubset)
     }
     
-    let standingItem = UIAction(title: "Standing") { [self] action in
+    let standingItem = UIAction(title: "Standing", image: UIImage(systemName: model.currentSubset == .ground ? "star" : "star.fill")) { [self] action in
         // trigger refresh of data for standing items
       model.currentSubset = .standing
       model.downloadData(for: model.currentSubset)
     }
-    
+      
     let menu = UIMenu(title: "", children: [groundItem, standingItem])
     navigationItem.rightBarButtonItem = UIBarButtonItem(title: nil, image: UIImage(systemName: "list.bullet"), primaryAction: nil, menu: menu)
   }
@@ -178,6 +178,7 @@ extension ListingViewController: UICollectionViewDelegate {
     }
     Task { @MainActor in
       dataSource.apply(snapshot, animatingDifferences: true)
+      addMenu()
     }
   }
 }

@@ -57,6 +57,6 @@ struct InfoContainerView: View {
 
 struct InfoDetailView_Previews: PreviewProvider {
     static var previews: some View {
-      InfoDetailView(profile: Profile.mock)
+      InfoDetailView(profile: Profile.mock[0])
     }
 }

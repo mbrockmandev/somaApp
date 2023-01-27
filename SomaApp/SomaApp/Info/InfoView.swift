@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct InfoView: View {
-  @State private var profiles = [Profile]()
+  @State private var profiles = Profile.mock
   
   var body: some View {
     
@@ -21,7 +21,9 @@ struct InfoView: View {
         
         VStack {
           List {
-//            InfoDetailView(profile: Profile(name: "Matt", image: "matt_thumb", belt: "Black Belt", locations: ["Dayton, OH"]))
+            ForEach(profiles, id: \.self) { profile in
+              InfoDetailView(profile: profile)
+            }
           }
           .listStyle(.sidebar)
           .cornerRadius(10)
@@ -37,13 +39,10 @@ struct InfoView: View {
             }
           }
         }
-        .navigationTitle("Soma")
-        .navigationBarTitleDisplayMode(.inline)
+//        .navigationTitle("Soma")
+//        .navigationBarTitleDisplayMode(.inline)
         .padding(.vertical)
       }
-    }
-    .onAppear {
-//      profiles = ProfileManager.readData()
     }
   }
 }

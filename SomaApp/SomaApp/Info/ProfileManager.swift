@@ -8,29 +8,31 @@
 import Foundation
 
 struct ProfileManager {
-  init() {}
-  static func writeData(_ profiles: [Profile]) -> Void {
-    do {
-      let fileURL = FileManager.default
-        .urls(for: .documentDirectory, in: .userDomainMask)[0]
-        .appendingPathComponent("profiles.json")
-      try JSONEncoder().encode(profiles).write(to: fileURL)
-        
-    } catch {
-      print(error)
-    }
-  }
+  private init() {}
   
+//  static func writeData(_ profiles: [Profile]) -> Void {
+//    do {
+//      let fileURL = FileManager.default
+//        .urls(for: .documentDirectory, in: .userDomainMask)[0]
+//        .appendingPathComponent("profiles.json")
+//      try JSONEncoder().encode(profiles).write(to: fileURL)
+//      print("Read profiles correctly")
+//    } catch {
+//      print(error)
+//    }
+//  }
   
   static func readData() -> [Profile] {
     do {
       let fileURL = FileManager.default
         .urls(for: .documentDirectory, in: .userDomainMask)[0]
         .appendingPathComponent("profiles.json")
+      print(fileURL)
       
       let data = try Data(contentsOf: fileURL)
+      dump(data)
       let profileData = try JSONDecoder().decode([Profile].self, from: data)
-      
+      dump(profileData)
       return profileData
       
     } catch {
