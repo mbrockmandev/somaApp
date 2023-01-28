@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		271A10A3297ADA760058D76C /* ViewFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 271A10A2297ADA760058D76C /* ViewFactory.swift */; };
+		271ABCD22985C64300B70204 /* Info.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 271ABCD12985C64300B70204 /* Info.storyboard */; };
+		271ABCD42985C65800B70204 /* InfoVCTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 271ABCD32985C65800B70204 /* InfoVCTest.swift */; };
 		276BEDFB297E1AD900660252 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 276BEDFA297E1AD900660252 /* CardView.swift */; };
 		276BEDFD297E248B00660252 /* UIVisualEffectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 276BEDFC297E248B00660252 /* UIVisualEffectView.swift */; };
 		2781E59D2983FF1B0029366A /* InfoViewProto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2781E59C2983FF1B0029366A /* InfoViewProto.swift */; };
@@ -33,7 +35,6 @@
 		27A7281A297A31F000856CF3 /* SomaAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A72819297A31F000856CF3 /* SomaAppUITests.swift */; };
 		27A7281C297A31F000856CF3 /* SomaAppUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A7281B297A31F000856CF3 /* SomaAppUITestsLaunchTests.swift */; };
 		27A7282A297A329500856CF3 /* SomaTabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A72829297A329500856CF3 /* SomaTabController.swift */; };
-		27A72832297A33F600856CF3 /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A72831297A33F600856CF3 /* InfoViewController.swift */; };
 		27C06547297C65CA001AE3CD /* ItemSupplementaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C06546297C65CA001AE3CD /* ItemSupplementaryView.swift */; };
 		27C45FBA297F462800D6B6B8 /* Date+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C45FB9297F462800D6B6B8 /* Date+Ext.swift */; };
 		27C45FBE297FFECA00D6B6B8 /* InfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C45FBD297FFECA00D6B6B8 /* InfoView.swift */; };
@@ -73,6 +74,8 @@
 
 /* Begin PBXFileReference section */
 		271A10A2297ADA760058D76C /* ViewFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewFactory.swift; sourceTree = "<group>"; };
+		271ABCD12985C64300B70204 /* Info.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Info.storyboard; sourceTree = "<group>"; };
+		271ABCD32985C65800B70204 /* InfoVCTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoVCTest.swift; sourceTree = "<group>"; };
 		276BEDFA297E1AD900660252 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		276BEDFC297E248B00660252 /* UIVisualEffectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIVisualEffectView.swift; sourceTree = "<group>"; };
 		2781E59C2983FF1B0029366A /* InfoViewProto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewProto.swift; sourceTree = "<group>"; };
@@ -101,7 +104,6 @@
 		27A72819297A31F000856CF3 /* SomaAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SomaAppUITests.swift; sourceTree = "<group>"; };
 		27A7281B297A31F000856CF3 /* SomaAppUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SomaAppUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		27A72829297A329500856CF3 /* SomaTabController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SomaTabController.swift; sourceTree = "<group>"; };
-		27A72831297A33F600856CF3 /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
 		27C06546297C65CA001AE3CD /* ItemSupplementaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemSupplementaryView.swift; sourceTree = "<group>"; };
 		27C45FB9297F462800D6B6B8 /* Date+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Ext.swift"; sourceTree = "<group>"; };
 		27C45FBD297FFECA00D6B6B8 /* InfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoView.swift; sourceTree = "<group>"; };
@@ -273,9 +275,9 @@
 			isa = PBXGroup;
 			children = (
 				276BEDFA297E1AD900660252 /* CardView.swift */,
-				27EF30BE297EA887003C4BAB /* TileVC.swift */,
-				27EF30C0297EA903003C4BAB /* LandingViewController.swift */,
 				27EF30C2297EAD19003C4BAB /* LandingHeaderView.swift */,
+				27EF30C0297EA903003C4BAB /* LandingViewController.swift */,
+				27EF30BE297EA887003C4BAB /* TileVC.swift */,
 			);
 			path = Landing;
 			sourceTree = "<group>";
@@ -296,10 +298,11 @@
 				27C45FCC298334FE00D6B6B8 /* profiles.json */,
 				27C45FC32981583800D6B6B8 /* InfoDetailView.swift */,
 				27C45FBD297FFECA00D6B6B8 /* InfoView.swift */,
-				27A72831297A33F600856CF3 /* InfoViewController.swift */,
 				27C45FC12980088C00D6B6B8 /* Profiles.swift */,
 				27C45FD029833B5A00D6B6B8 /* ProfileManager.swift */,
 				2781E59C2983FF1B0029366A /* InfoViewProto.swift */,
+				271ABCD12985C64300B70204 /* Info.storyboard */,
+				271ABCD32985C65800B70204 /* InfoVCTest.swift */,
 			);
 			path = Info;
 			sourceTree = "<group>";
@@ -431,6 +434,7 @@
 				27C45FCD298334FE00D6B6B8 /* profiles.json in Resources */,
 				27A72805297A31F000856CF3 /* LaunchScreen.storyboard in Resources */,
 				27A72802297A31F000856CF3 /* Assets.xcassets in Resources */,
+				271ABCD22985C64300B70204 /* Info.storyboard in Resources */,
 				27C45FD32983506D00D6B6B8 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -456,6 +460,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				271ABCD42985C65800B70204 /* InfoVCTest.swift in Sources */,
 				279654E5297D6A4700F15177 /* UIView+Ext.swift in Sources */,
 				279654E7297D71B900F15177 /* CacheManager.swift in Sources */,
 				27EF30C3297EAD19003C4BAB /* LandingHeaderView.swift in Sources */,
@@ -488,7 +493,6 @@
 				27C45FCF29833B1100D6B6B8 /* Bundle+Ext.swift in Sources */,
 				276BEDFD297E248B00660252 /* UIVisualEffectView.swift in Sources */,
 				27EF30BF297EA887003C4BAB /* TileVC.swift in Sources */,
-				27A72832297A33F600856CF3 /* InfoViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

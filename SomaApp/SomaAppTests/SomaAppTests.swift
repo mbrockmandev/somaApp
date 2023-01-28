@@ -7,8 +7,8 @@
 
 import XCTest
 @testable import SomaApp
-@testable import FirebaseCore
-@testable import FirebaseMessaging
+//@testable import FirebaseCore
+//@testable import FirebaseMessaging
 
 final class SomaAppTests: XCTestCase {
   
@@ -28,18 +28,5 @@ final class SomaAppTests: XCTestCase {
     let controller = ListingViewController()
     return controller
   }
-  
-//  func testDownloadDataFromModel() {
-//
-//    let listingVC = getListingViewController()
-//    listingVC.model = sut
-//    sut.currentSubset = .ground
-//    sut.downloadData(for: .ground)
-//    dump(listingVC)
-//
-//    XCTAssertEqual(sut.guardVideos.count, 17)
-//  }
-//
-  
   
 }

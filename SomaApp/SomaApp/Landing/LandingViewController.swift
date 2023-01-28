@@ -106,25 +106,24 @@ extension LandingViewController {
   
   private func layout() {
     
-    let imageView = UIImageView(image: UIImage(named: "soma_red_black"))
-    imageView.translatesAutoresizingMaskIntoConstraints = false
-    imageView.contentMode = .scaleAspectFill
+    let backgroundImageView = UIImageView(image: UIImage(named: "soma_red_black"))
+    backgroundImageView.translatesAutoresizingMaskIntoConstraints = false
+    backgroundImageView.contentMode = .scaleAspectFill
     
     view.addSubviews(scrollView)
-    scrollView.addSubviews(pagingVC.view, stackView, imageView)
-    scrollView.sendSubviewToBack(imageView)
+    scrollView.addSubviews(pagingVC.view, stackView, backgroundImageView)
+    scrollView.sendSubviewToBack(backgroundImageView)
     
     for tile in tiles {
       addChildVCs(to: stackView, tile)
       tile.index = tiles.firstIndex(of: tile)
     }
     
+    print("content size: \(scrollView.contentSize)")
+
+    
+    pinToEdges(scrollView)
     NSLayoutConstraint.activate([
-      
-      scrollView.topAnchor.constraint(equalTo: view.topAnchor),
-      scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: K.inset),
-      scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -K.inset),
-      scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
       
       pagingVC.view.topAnchor.constraint(equalTo: scrollView.topAnchor),
       pagingVC.view.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: K.inset),
@@ -137,8 +136,8 @@ extension LandingViewController {
       stackView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
       stackView.widthAnchor.constraint(equalTo: scrollView.widthAnchor, constant: K.inset * -4),
       
-      imageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-      imageView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+      backgroundImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+      backgroundImageView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
     ])
   }
 }
