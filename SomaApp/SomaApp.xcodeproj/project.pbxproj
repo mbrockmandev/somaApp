@@ -13,6 +13,7 @@
 		2781E59D2983FF1B0029366A /* InfoViewProto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2781E59C2983FF1B0029366A /* InfoViewProto.swift */; };
 		2781E59F298405040029366A /* ViewModifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2781E59E298405040029366A /* ViewModifiers.swift */; };
 		2781E5A129847AD30029366A /* PrefKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2781E5A029847AD30029366A /* PrefKeys.swift */; };
+		2781E5A42984A2CC0029366A /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 2781E5A32984A2CC0029366A /* FirebaseMessaging */; };
 		279654D1297CD1BD00F15177 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279654D0297CD1BD00F15177 /* Constants.swift */; };
 		279654D3297CD4EF00F15177 /* Video.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279654D2297CD4EF00F15177 /* Video.swift */; };
 		279654D5297CD52000F15177 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279654D4297CD52000F15177 /* Model.swift */; };
@@ -76,6 +77,7 @@
 		2781E59C2983FF1B0029366A /* InfoViewProto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewProto.swift; sourceTree = "<group>"; };
 		2781E59E298405040029366A /* ViewModifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModifiers.swift; sourceTree = "<group>"; };
 		2781E5A029847AD30029366A /* PrefKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrefKeys.swift; sourceTree = "<group>"; };
+		2781E5A52984A3CD0029366A /* SomaApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SomaApp.entitlements; sourceTree = "<group>"; };
 		279654D0297CD1BD00F15177 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		279654D2297CD4EF00F15177 /* Video.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Video.swift; sourceTree = "<group>"; };
 		279654D4297CD52000F15177 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
@@ -121,6 +123,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2781E5A42984A2CC0029366A /* FirebaseMessaging in Frameworks */,
 				27C45FD6298351DD00D6B6B8 /* FirebaseAnalytics in Frameworks */,
 				27C45FDA298351DD00D6B6B8 /* FirebaseInAppMessagingSwift-Beta in Frameworks */,
 				27C45FD8298351DD00D6B6B8 /* FirebaseAuth in Frameworks */,
@@ -158,6 +161,13 @@
 				2781E5A029847AD30029366A /* PrefKeys.swift */,
 			);
 			path = Helper;
+			sourceTree = "<group>";
+		};
+		2781E5A22984A2CC0029366A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		279654DF297D680600F15177 /* Model */ = {
@@ -198,6 +208,7 @@
 				27A7280E297A31F000856CF3 /* SomaAppTests */,
 				27A72818297A31F000856CF3 /* SomaAppUITests */,
 				27A727F6297A31EF00856CF3 /* Products */,
+				2781E5A22984A2CC0029366A /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -214,6 +225,7 @@
 		27A727F7297A31EF00856CF3 /* SomaApp */ = {
 			isa = PBXGroup;
 			children = (
+				2781E5A52984A3CD0029366A /* SomaApp.entitlements */,
 				271A10A1297ADA680058D76C /* Helper */,
 				27A7282D297A33C700856CF3 /* Landing */,
 				27A7282F297A33D200856CF3 /* Listing */,
@@ -318,6 +330,7 @@
 				27C45FD5298351DD00D6B6B8 /* FirebaseAnalytics */,
 				27C45FD7298351DD00D6B6B8 /* FirebaseAuth */,
 				27C45FD9298351DD00D6B6B8 /* FirebaseInAppMessagingSwift-Beta */,
+				2781E5A32984A2CC0029366A /* FirebaseMessaging */,
 			);
 			productName = SomaApp;
 			productReference = 27A727F5297A31EF00856CF3 /* SomaApp.app */;
@@ -637,6 +650,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = SomaApp/SomaApp.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 8WJZH74XAS;
@@ -664,6 +678,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = SomaApp/SomaApp.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 8WJZH74XAS;
@@ -815,6 +830,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		2781E5A32984A2CC0029366A /* FirebaseMessaging */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 27C45FD4298351DD00D6B6B8 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseMessaging;
+		};
 		27C45FD5298351DD00D6B6B8 /* FirebaseAnalytics */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 27C45FD4298351DD00D6B6B8 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;

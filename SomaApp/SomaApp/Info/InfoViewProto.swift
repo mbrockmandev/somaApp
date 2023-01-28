@@ -13,19 +13,28 @@ struct InfoViewProto: View {
   
   var body: some View {
     
-    ZStack {
-      Color.black.opacity(0.05)
-        .ignoresSafeArea()
-        .background(.ultraThinMaterial)
-      ScrollView {
-        scrollDetection
-        ZStack {
-          Image("soma_red_black")
-          featured
+    NavigationStack {
+      ZStack {
+        Color.black.opacity(0.05)
+          .ignoresSafeArea()
+          .background(.ultraThinMaterial)
+        ScrollView {
+          VStack(alignment: .leading) {
+            Text("Instructors")
+              .largeSectionModifier()
+              .offset(y: 20)
+            scrollDetection
+            ZStack {
+              Image("soma_red_black")
+              featured
+            }
+          }
+          
         }
+        .padding()
+        .shadow(radius: 20)
       }
-      .padding()
-      .shadow(radius: 20)
+      
     }
     
   }
@@ -99,7 +108,7 @@ struct ProfileViewProto: View {
     .mask(RoundedRectangle(cornerRadius: 20, style: .continuous))
     .overlay(RoundedRectangle(cornerRadius: 20, style: .continuous)
       .stroke(.linearGradient(colors: [.primary.opacity(0.3), .secondary.opacity(0.1)], startPoint: .topLeading, endPoint: .bottomTrailing)))
-    .popover(isPresented: $isShowingDetail) {
+    .navigationDestination(isPresented: $isShowingDetail) {
       InfoDetailView(profile: profile)
     }
     
