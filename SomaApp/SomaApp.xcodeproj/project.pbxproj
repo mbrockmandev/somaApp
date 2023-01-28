@@ -14,6 +14,7 @@
 		2781E59F298405040029366A /* ViewModifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2781E59E298405040029366A /* ViewModifiers.swift */; };
 		2781E5A129847AD30029366A /* PrefKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2781E5A029847AD30029366A /* PrefKeys.swift */; };
 		2781E5A42984A2CC0029366A /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 2781E5A32984A2CC0029366A /* FirebaseMessaging */; };
+		2781E5B029855E810029366A /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 2781E5AF29855E810029366A /* FirebaseMessaging */; };
 		279654D1297CD1BD00F15177 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279654D0297CD1BD00F15177 /* Constants.swift */; };
 		279654D3297CD4EF00F15177 /* Video.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279654D2297CD4EF00F15177 /* Video.swift */; };
 		279654D5297CD52000F15177 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279654D4297CD52000F15177 /* Model.swift */; };
@@ -134,6 +135,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2781E5B029855E810029366A /* FirebaseMessaging in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -350,6 +352,9 @@
 				27A7280D297A31F000856CF3 /* PBXTargetDependency */,
 			);
 			name = SomaAppTests;
+			packageProductDependencies = (
+				2781E5AF29855E810029366A /* FirebaseMessaging */,
+			);
 			productName = SomaAppTests;
 			productReference = 27A7280B297A31F000856CF3 /* SomaAppTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
@@ -831,6 +836,11 @@
 
 /* Begin XCSwiftPackageProductDependency section */
 		2781E5A32984A2CC0029366A /* FirebaseMessaging */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 27C45FD4298351DD00D6B6B8 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseMessaging;
+		};
+		2781E5AF29855E810029366A /* FirebaseMessaging */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 27C45FD4298351DD00D6B6B8 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseMessaging;
