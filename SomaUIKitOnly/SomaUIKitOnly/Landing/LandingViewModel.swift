@@ -16,5 +16,11 @@ struct LandingViewModel {
     makeBannerImage(from: UIImage(named: "soma_bottom_banner")!),
   ]
   
+  let cards = [
+    "Soma Academy",
+    "Second Card",
+    "Third Card",
+    "Fourth Card",
+  ]
   
 }

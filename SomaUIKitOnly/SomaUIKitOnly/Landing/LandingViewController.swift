@@ -8,10 +8,28 @@
 import UIKit
 import SnapKit
 
+//MARK: - LandingElementType
+enum LandingCellType: String {
+  case banner
+  case card
+}
+
+protocol LandingModel: AnyObject {
+  var type: LandingCellType { get }
+}
+
+protocol LandingCell: AnyObject {
+  func configure(with elementModel: LandingModel)
+}
+
 class LandingViewController: UIViewController {
   
   let vm = LandingViewModel()
-  let bannerImageView = UIImageView()
+
+  let tableView = UITableView()
+  
+  var landingElements = [LandingModel]()
+
   lazy var timer: Timer = {
     setupTimer()
   }()
@@ -19,6 +37,7 @@ class LandingViewController: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    setupElements()
     setupViews()
     startTimer()
     style()
@@ -26,53 +45,36 @@ class LandingViewController: UIViewController {
 }
 
 extension LandingViewController {
+  private func setupElements() {
+//    var bannerElements = [BannerElement]()
+    for banner in vm.banners {
+      landingElements.append(BannerElement(image: banner))
+    }
+//    var cardElements = [CardElement]()
+    for card in vm.cards {
+      landingElements.append(CardElement(text: card))
+    }
+    
+  }
+  
   private func setupViews() {
-    let scrollView = UIScrollView()
-    view.addSubview(scrollView)
-    scrollView.snp.makeConstraints { make in
+
+    tableView.delegate = self
+    view.addSubview(tableView)
+    tableView.snp.makeConstraints { make in
       make.top.leading.trailing.bottom.equalToSuperview()
     }
-    
-    let contentView = UIView()
-    scrollView.addSubview(contentView)
-    contentView.snp.makeConstraints { make in
-      make.top.bottom.equalTo(scrollView)
-      make.leading.trailing.equalTo(view)
-    }
-
-    contentView.addSubviews(bannerImageView)
-    
-    bannerImageView.image = vm.banners[0]
-    
-    bannerImageView.snp.makeConstraints { make in
-      make.top.leading.trailing.equalTo(contentView).inset(16)
-      make.height.equalTo(240)
-    }
-    bannerImageView.contentMode = .scaleAspectFill
-    bannerImageView.layer.cornerRadius = 5
-    bannerImageView.clipsToBounds = true
-    bannerImageView.backgroundColor = .systemRed.withAlphaComponent(0.2)
     
     let backgroundImageView = UIImageView()
     view.addSubview(backgroundImageView)
     backgroundImageView.image = UIImage(named: "soma_red_black")
     backgroundImageView.snp.makeConstraints { make in
       make.centerX.centerY.equalTo(view)
-//      make.top.equalTo(bannerImageView.snp.bottom).offset(16)
       make.height.width.equalTo(240)
     }
     view.sendSubviewToBack(backgroundImageView)
     
-    let label = UILabel()
-    contentView.addSubview(label)
-    label.text = "I fpwoijefpoqijweopfijqwpeofijqwopefijqwopeifjqpefijI fpwoijefpoqijweopfijqwpeofijqwopefijqwopeifjqpefijI fpwoijefpoqijweopfijqwpeofijqwopefijqwopeifjqpefijI fpwoijefpoqijweopfijqwpeofijqwopefijqwopeifjqpefijI fpwoijefpoqijweopfijqwpeofijqwopefijqwopeifjqpefijI fpwoijefpoqijweopfijqwpeofijqwopefijqwopeifjqpefijI fpwoijefpoqijweopfijqwpeofijqwopefijqwopeifjqpefijI fpwoijefpoqijweopfijqwpeofijqwopefijqwopeifjqpefijI fpwoijefpoqijweopfijqwpeofijqwopefijqwopeifjqpefijI fpwoijefpoqijweopfijqwpeofijqwopefijqwopeifjqpefijI fpwoijefpoqijweopfijqwpeofijqwopefijqwopeifjqpefijI fpwoijefpoqijweopfijqwpeofijqwopefijqwopeifjqpefijI fpwoijefpoqijweopfijqwpeofijqwopefijqwopeifjqpefijI fpwoijefpoqijweopfijqwpeofijqwopefijqwopeifjqpefijI fpwoijefpoqijweopfijqwpeofijqwopefijqwopeifjqpefijI fpwoijefpoqijweopfijqwpeofijqwopefijqwopeifjqpefijI fpwoijefpoqijweopfijqwpeofijqwopefijqwopeifjqpefijI fpwoijefpoqijweopfijqwpeofijqwopefijqwopeifjqpefijI fpwoijefpoqijweopfijqwpeofijqwopefijqwopeifjqpefij"
-    label.numberOfLines = 0
-    label.font = .preferredFont(forTextStyle: .title1)
-    label.snp.makeConstraints { make in
-      make.top.equalTo(bannerImageView.snp.bottom)
-      make.leading.trailing.equalTo(contentView).inset(16)
-    }
-    
+
 
   }
   
@@ -91,22 +93,22 @@ extension LandingViewController {
   
   @objc private func changeBannerImage() {
     
-    if bannerIndex < vm.banners.count - 1 {
-      bannerIndex += 1
-    } else {
-      bannerIndex = 0
-    }
+//    if bannerIndex < vm.banners.count - 1 {
+//      bannerIndex += 1
+//    } else {
+//      bannerIndex = 0
+//    }
     
-    let currentPos = bannerImageView.layer.position
-    UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseInOut) { [self] in
-      bannerImageView.alpha = 0
-    } completion: { [self] _ in
-      bannerImageView.image = vm.banners[bannerIndex]
-    }
-    
-    UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseInOut) { [self] in
-      bannerImageView.alpha = 1
-    }
+//    let currentPos = bannerImageView.layer.position
+//    UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseInOut) { [self] in
+//      bannerImageView.alpha = 0
+//    } completion: { [self] _ in
+//      bannerImageView.image = vm.banners[bannerIndex]
+//    }
+//
+//    UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseInOut) { [self] in
+//      bannerImageView.alpha = 1
+//    }
 
 
     
@@ -120,6 +122,27 @@ extension LandingViewController {
   
 }
 
-extension LandingViewController: UIScrollViewDelegate {
+extension LandingViewController: UITableViewDelegate, UITableViewDataSource {
+  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    return landingElements.count
+  }
+  
+  func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    
+    let cellModel = landingElements[indexPath.row]
+    let cellIdentifier = cellModel.type.rawValue
+    let customCell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! LandingCell
+    
+    customCell.configure(with: cellModel)
+    
+    return customCell as! UITableViewCell
+    
+  }
+  
+  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    tableView.deselectRow(at: indexPath, animated: true)
+    
+    //more logic to come
+  }
   
 }
