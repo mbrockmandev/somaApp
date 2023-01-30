@@ -30,14 +30,14 @@ extension LandingViewController {
     let scrollView = UIScrollView()
     view.addSubview(scrollView)
     scrollView.snp.makeConstraints { make in
-      make.edges.equalTo(view)
+      make.top.leading.trailing.bottom.equalToSuperview()
     }
     
     let contentView = UIView()
     scrollView.addSubview(contentView)
     contentView.snp.makeConstraints { make in
       make.top.bottom.equalTo(scrollView)
-      make.left.right.equalTo(view)
+      make.leading.trailing.equalTo(view)
     }
 
     contentView.addSubviews(bannerImageView)
@@ -57,23 +57,23 @@ extension LandingViewController {
     view.addSubview(backgroundImageView)
     backgroundImageView.image = UIImage(named: "soma_red_black")
     backgroundImageView.snp.makeConstraints { make in
-//      make.centerX.centerY.equalTo(view)
-      make.top.equalTo(bannerImageView.snp.bottom).offset(16)
-      make.height.width.equalTo(800)
+      make.centerX.centerY.equalTo(view)
+//      make.top.equalTo(bannerImageView.snp.bottom).offset(16)
+      make.height.width.equalTo(240)
     }
-//    view.sendSubviewToBack(backgroundImageView)
+    view.sendSubviewToBack(backgroundImageView)
     
-    let blurEffect = UIBlurEffect(style: .dark)
-    let blurredEffectView = UIVisualEffectView(effect: blurEffect)
-    blurredEffectView.frame = backgroundImageView.bounds
-    view.addSubview(blurredEffectView)
-    let vibrancyEffect = UIVibrancyEffect(blurEffect: blurEffect)
-    let vibrancyEffectView = UIVisualEffectView(effect: vibrancyEffect)
-    vibrancyEffectView.frame = backgroundImageView.bounds
+    let label = UILabel()
+    contentView.addSubview(label)
+    label.text = "I fpwoijefpoqijweopfijqwpeofijqwopefijqwopeifjqpefijI fpwoijefpoqijweopfijqwpeofijqwopefijqwopeifjqpefijI fpwoijefpoqijweopfijqwpeofijqwopefijqwopeifjqpefijI fpwoijefpoqijweopfijqwpeofijqwopefijqwopeifjqpefijI fpwoijefpoqijweopfijqwpeofijqwopefijqwopeifjqpefijI fpwoijefpoqijweopfijqwpeofijqwopefijqwopeifjqpefijI fpwoijefpoqijweopfijqwpeofijqwopefijqwopeifjqpefijI fpwoijefpoqijweopfijqwpeofijqwopefijqwopeifjqpefijI fpwoijefpoqijweopfijqwpeofijqwopefijqwopeifjqpefijI fpwoijefpoqijweopfijqwpeofijqwopefijqwopeifjqpefijI fpwoijefpoqijweopfijqwpeofijqwopefijqwopeifjqpefijI fpwoijefpoqijweopfijqwpeofijqwopefijqwopeifjqpefijI fpwoijefpoqijweopfijqwpeofijqwopefijqwopeifjqpefijI fpwoijefpoqijweopfijqwpeofijqwopefijqwopeifjqpefijI fpwoijefpoqijweopfijqwpeofijqwopefijqwopeifjqpefijI fpwoijefpoqijweopfijqwpeofijqwopefijqwopeifjqpefijI fpwoijefpoqijweopfijqwpeofijqwopefijqwopeifjqpefijI fpwoijefpoqijweopfijqwpeofijqwopefijqwopeifjqpefijI fpwoijefpoqijweopfijqwpeofijqwopefijqwopeifjqpefij"
+    label.numberOfLines = 0
+    label.font = .preferredFont(forTextStyle: .title1)
+    label.snp.makeConstraints { make in
+      make.top.equalTo(bannerImageView.snp.bottom)
+      make.leading.trailing.equalTo(contentView).inset(16)
+    }
     
-    vibrancyEffectView.contentView.addSubview(backgroundImageView)
-    blurredEffectView.contentView.addSubview(vibrancyEffectView)
-    
+
   }
   
   private func setupTimer() -> Timer {
