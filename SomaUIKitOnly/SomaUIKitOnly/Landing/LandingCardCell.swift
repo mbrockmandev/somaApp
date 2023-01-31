@@ -27,10 +27,11 @@ class LandingCardCell: UITableViewCell {
   
   private func configureUI() {
     contentView.addSubviews(iconImage, cardText)
+//    print("Cell configured!")
     
     iconImage.snp.makeConstraints { make in
-      make.top.trailing.equalToSuperview().inset(16)
-      make.width.height.equalTo(60)
+      make.top.trailing.bottom.equalToSuperview().inset(8).priority(.high)
+      make.width.height.equalTo(60).priority(.required)
     }
     
     cardText.numberOfLines = 0

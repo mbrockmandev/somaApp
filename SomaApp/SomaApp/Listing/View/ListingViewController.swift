@@ -13,7 +13,6 @@ final class ListingViewController: UIViewController {
   var collectionView: UICollectionView!
   var model = Model()
   
-  
   let groundSections = [
     Model.Section(uuid: UUID().uuidString, title: "Guard"),
     Model.Section(uuid: UUID().uuidString, title: "Side Mount"),
@@ -46,7 +45,6 @@ final class ListingViewController: UIViewController {
   }
   
 
-  
   private func addMenu() {
     let groundItem = UIAction(title: "Ground", image: UIImage(systemName: model.currentSubset == .ground ? "star.fill" : "star")) { [self] action in
         // trigger refresh of data for ground items

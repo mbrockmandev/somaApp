@@ -12,8 +12,11 @@ class LandingViewController: UIViewController {
   
   let vm = LandingViewModel()
 
+  let scrollView = UIScrollView()
+  let stackView = UIStackView()
   let bannerImageView = UIImageView()
-  let tableView = UITableView()
+  let tableView = UITableView(frame: .init(x: 0, y: 0, width: 390, height: 400), style: .plain)
+  let label = makeLabel(withText: "qpwoefijqwopefij qwopfijqwpeofijqwopefijqpweofijqwepfoij qwepfoijqwepfoiqjefopijqwefopiqjwefopiqjefpoiq wejfpoiqwejfpoiqefjopqweifjpoqweifjqopweifjpqweoifjqwopeifjqpwoefijqpwe ofijqwepoifjqpoefijqpeofijqwpeofijqpweofijqwef")
 
   lazy var timer: Timer = {
     setupTimer()
@@ -22,40 +25,21 @@ class LandingViewController: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    print("Test!")
+    setupBackgroundImageView()
+    setupScrollView()
     setupBannerView()
     setupTableView()
     startTimer()
     style()
+    let stackViewSize = stackView.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)
+    scrollView.contentSize = stackViewSize
+    
   }
+
 }
 
 extension LandingViewController {
-  private func setupBannerView() {
-    view.addSubview(bannerImageView)
-    bannerImageView.image = vm.banners[0]
-    
-    bannerImageView.snp.makeConstraints { make in
-      make.top.equalTo(view.safeAreaLayoutGuide.snp.top)
-      make.leading.trailing.equalTo(view).inset(16)
-      make.height.equalTo(240)
-    }
-    bannerImageView.contentMode = .scaleAspectFill
-    bannerImageView.layer.cornerRadius = 5
-  }
-  
-  private func setupTableView() {
-
-    tableView.delegate = self
-    tableView.dataSource = self
-    tableView.register(LandingCardCell.self)
-    
-    view.addSubview(tableView)
-    tableView.snp.makeConstraints { make in
-      make.leading.trailing.bottom.equalToSuperview()
-      make.top.equalTo(bannerImageView.snp.bottom).offset(16)
-    }
-    
+  private func setupBackgroundImageView() {
     let backgroundImageView = UIImageView()
     view.addSubview(backgroundImageView)
     backgroundImageView.image = UIImage(named: "soma_red_black")
@@ -64,6 +48,72 @@ extension LandingViewController {
       make.height.width.equalTo(240)
     }
     view.sendSubviewToBack(backgroundImageView)
+  }
+  
+  private func setupScrollView() {
+
+    scrollView.isDirectionalLockEnabled = true
+    scrollView.showsVerticalScrollIndicator = true
+    scrollView.showsHorizontalScrollIndicator = false
+    scrollView.isScrollEnabled = true
+    
+    stackView.axis = .vertical
+    stackView.distribution = .equalSpacing
+    stackView.alignment = .fill
+    stackView.spacing = 8
+
+    stackView.backgroundColor = .systemPink.withAlphaComponent(0.3)
+    
+    view.addSubview(scrollView)
+    scrollView.addSubview(stackView)
+    stackView.addArrangedSubviews(bannerImageView, tableView, label)
+    
+    scrollView.snp.makeConstraints { make in
+      make.top.leading.trailing.bottom.equalTo(view.safeAreaLayoutGuide)
+    }
+    
+    stackView.snp.makeConstraints { make in
+      make.top.leading.trailing.equalTo(scrollView)
+      make.width.equalTo(scrollView.snp.width)
+    }
+    
+  }
+  
+  private func setupBannerView() {
+    bannerImageView.image = vm.banners[0]
+    
+    bannerImageView.snp.makeConstraints { make in
+        //TODO: leave room for buttons at top?
+
+//      make.top.equalTo(view.safeAreaLayoutGuide.snp.top)
+      make.height.equalTo(240)
+//      make.width.equalTo(360)
+    }
+    bannerImageView.contentMode = .scaleAspectFill
+  }
+  
+  private func setupTableView() {
+    tableView.delegate = self
+    tableView.dataSource = self
+    tableView.register(LandingCardCell.self)
+    tableView.rowHeight = UITableView.automaticDimension
+    
+    tableView.snp.makeConstraints { make in
+      make.leading.trailing.equalTo(scrollView).inset(8)
+//      make.top.equalTo(bannerImageView.snp.bottom).offset(16).priority(.required)
+      make.height.equalTo(view.snp.height).multipliedBy(0.48)
+    }
+    tableView.layer.cornerRadius = 20
+    
+    //TODO: REMOVE
+    label.numberOfLines = 0
+    label.font = .preferredFont(forTextStyle: .largeTitle)
+    // just for testing
+    
+    
+    label.snp.makeConstraints { make in
+      make.leading.trailing.equalToSuperview()
+    }
     
   }
   
@@ -88,7 +138,7 @@ extension LandingViewController {
       bannerIndex = 0
     }
     
-    let currentPos = bannerImageView.layer.position
+//    let currentPos = bannerImageView.layer.position
     UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseInOut) { [self] in
       bannerImageView.alpha = 0
     } completion: { [self] _ in

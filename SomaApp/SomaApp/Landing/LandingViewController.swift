@@ -71,7 +71,6 @@ extension LandingViewController {
     pagingVC.view.frame = .zero
     pagingVC.view.contentMode = .scaleAspectFill
     
-    
     topPagingVCs.append(firstPageVC)
     topPagingVCs.append(secondPageVC)
     topPagingVCs.append(thirdPageVC)

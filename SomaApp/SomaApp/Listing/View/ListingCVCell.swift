@@ -8,7 +8,6 @@
 import UIKit
 
 class ListingCVCell: UICollectionViewCell {
-  static let reuseID = "ListingCVCell"
   
   let titleLabel = UILabel()
   let imageView = UIImageView()

@@ -13,7 +13,6 @@ struct InfoViewProto: View {
   
   var body: some View {
     
-    NavigationStack {
       ZStack {
         Color.black.opacity(0.05)
           .ignoresSafeArea()
@@ -35,7 +34,7 @@ struct InfoViewProto: View {
         .shadow(radius: 20)
       }
       
-    }
+    
     
   }
   
@@ -108,7 +107,7 @@ struct ProfileViewProto: View {
     .mask(RoundedRectangle(cornerRadius: 20, style: .continuous))
     .overlay(RoundedRectangle(cornerRadius: 20, style: .continuous)
       .stroke(.linearGradient(colors: [.primary.opacity(0.3), .secondary.opacity(0.1)], startPoint: .topLeading, endPoint: .bottomTrailing)))
-    .navigationDestination(isPresented: $isShowingDetail) {
+    .sheet(isPresented: $isShowingDetail) {
       InfoDetailView(profile: profile)
     }
     
