@@ -20,6 +20,19 @@ extension UIView {
       addSubview(subview)
     }
   }
+  
+    ///Applies NSLayoutConstraints to all four edges of the superView (UIViewController)
+  func pinToEdges(_ views: UIView...) {
+    for view in views {
+      guard let superview = self.superview else { return }
+      NSLayoutConstraint.activate([
+        view.topAnchor.constraint(equalTo: superview.topAnchor),
+        view.leadingAnchor.constraint(equalTo: superview.leadingAnchor),
+        view.trailingAnchor.constraint(equalTo: superview.trailingAnchor),
+        view.bottomAnchor.constraint(equalTo: superview.bottomAnchor),
+      ])
+    }
+  }
 }
 
 extension UIStackView {

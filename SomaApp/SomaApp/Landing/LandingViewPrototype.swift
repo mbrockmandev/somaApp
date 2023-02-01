@@ -8,6 +8,7 @@
   ///
 import UIKit
 import SwiftUI
+import MessageUI
 
 final class LandingViewPrototype: UIViewController {
   
@@ -238,11 +239,30 @@ extension LandingViewPrototype: UICollectionViewDelegate, UICollectionViewDataSo
       break
       
     case 2:
+      let phoneNumber = "tel://937-555-5555"
+      if let url = URL(string: phoneNumber) {
+        if UIApplication.shared.canOpenURL(url) {
+          UIApplication.shared.open(url)
+        }
+      }
+
 //      let detailVC = ScheduleViewController()
 //      show(detailVC, sender: nil)
       break
       
     case 3:
+      if MFMessageComposeViewController.canSendText() {
+          // proceed with composing a message
+        let messageComposeVC = MFMessageComposeViewController()
+        messageComposeVC.recipients = ["937-555-5555"]
+        messageComposeVC.body = "What's up, nerd."
+        present(messageComposeVC, animated: true, completion: nil)
+
+      } else {
+          // show an error message
+      }
+
+      
 //      let detailVC = ShopViewController()
 //      show(detailVC, sender: nil)
       break
@@ -252,4 +272,18 @@ extension LandingViewPrototype: UICollectionViewDelegate, UICollectionViewDataSo
     }
     
   }
+}
+
+extension LandingViewPrototype: MFMessageComposeViewControllerDelegate {
+  func messageComposeViewController(_ controller: MFMessageComposeViewController, didFinishWith result: MessageComposeResult) {
+    switch result {
+    case .cancelled:
+      print("Message was cancelled")
+      dismiss(animated: true, completion: nil)
+    default:
+      break
+    }
+
+  }
+  
 }
