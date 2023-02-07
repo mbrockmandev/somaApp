@@ -1,17 +1,26 @@
-//
-//  LandingViewController.swift
-//  SomaApp
-//
-//  Created by Michael Brockman on 1/23/23.
-//
-///basically the new landing view controller
-///
+  //
+  //  LandingViewPrototype.swift
+  //  SomaApp
+  //
+  //  Created by Michael Brockman on 1/23/23.
+  //
+
+  ///
 import UIKit
+import SwiftUI
+import MessageUI
 
 final class LandingViewController: UIViewController {
   
-  let stackView = UIStackView()
-  let scrollView = UIScrollView()
+  enum Sections {
+    case main
+  }
+  
+  enum Locations {
+    case dayton, westChester, oxford, kokomo, idahoFalls, rexburg
+  }
+  
+  var userLocation: Locations = .dayton
   
   let pagingVC = UIPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal)
   var topPagingVCs: [UIViewController] = []
@@ -29,22 +38,21 @@ final class LandingViewController: UIViewController {
   }()
   var pagingIndex = 0
   
-  // Tiles for the stack view
-  let tiles = [
-    TileVC("Who is Soma"),
-    TileVC("The Mission"),
-    TileVC("The Vision"),
-  ]
+  var cv: UICollectionView! = nil
   
-  lazy var blurView: UIView = {
-    makeBlurView()
-  }()
+  // tiles for the collectionView
+  let tiles = [
+    "INSTRUCTORS",
+    "RULES",
+    "SCHEDULE",
+    "SHOP",
+  ]
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    setupScrollView()
-    setupBackgroundImageBlur()
+    addMenu()
     setupPagingVC()
+    configureCollectionView()
     style()
     layout()
     startTimer()
@@ -53,15 +61,36 @@ final class LandingViewController: UIViewController {
 
 extension LandingViewController {
   
-  private func setupScrollView() {
-    scrollView.delegate = self
-    scrollView.isDirectionalLockEnabled = true
-    scrollView.showsHorizontalScrollIndicator = false
-  }
-  
-  private func setupBackgroundImageBlur() {
+  /// set location through the context menu in the upper right hand corner
+  /// triggers UI updates among other things (TBD)
+  private func addMenu() {
+    let daytonItem = UIAction(title: "Dayton, OH", image: UIImage(systemName: userLocation == .dayton ? "checkmark.circle" : "globe")) { [self] action in
+      userLocation = .dayton
+      // use the location for some reason
+    }
     
-
+    let westChesterItem = UIAction(title: "West Chester, OH", image: UIImage(systemName: userLocation == .westChester ? "checkmark" : "globe")) { [self] action in
+      userLocation = .westChester
+    }
+    
+    let oxfordItem = UIAction(title: "Oxford, OH", image: UIImage(systemName: userLocation == .oxford ? "checkmark" : "globe")) { [self] action in
+      userLocation = .oxford
+    }
+    
+    let kokomoItem = UIAction(title: "Kokomo, IN", image: UIImage(systemName: userLocation == .kokomo ? "checkmark" : "globe")) { [self] action in
+      userLocation = .kokomo
+    }
+    
+    let idahoFallsItem = UIAction(title: "Idaho Falls, ID", image: UIImage(systemName: userLocation == .idahoFalls ? "checkmark" : "globe")) { [self] action in
+      userLocation = .idahoFalls
+    }
+    
+    let rexburgItem = UIAction(title: "Rexburg, ID", image: UIImage(systemName: userLocation == .rexburg ? "checkmark" : "globe")) { [self] action in
+      userLocation = .rexburg
+    }
+    
+    let menu = UIMenu(title: "", children: [daytonItem, westChesterItem, oxfordItem, kokomoItem, idahoFallsItem, rexburgItem])
+    navigationItem.rightBarButtonItem = UIBarButtonItem(title: nil, image: UIImage(systemName: "list.bullet"), primaryAction: nil, menu: menu)
   }
   
   private func setupPagingVC() {
@@ -76,6 +105,28 @@ extension LandingViewController {
     topPagingVCs.append(thirdPageVC)
     
     pagingVC.setViewControllers([topPagingVCs[0]], direction: .forward, animated: true)
+  }
+  
+  private func configureCollectionView() {
+    
+    let width = view.bounds.width
+    let padding: CGFloat = 12
+    let minimumItemSpacing: CGFloat = 10
+    let availableWidth = width - (padding) - (minimumItemSpacing * 2)
+    let itemWidth = availableWidth / 2.5
+    
+    let flowLayout = UICollectionViewFlowLayout()
+    flowLayout.sectionInset = UIEdgeInsets(top: 24, left: padding * 2, bottom: padding, right: padding * 2)
+    flowLayout.itemSize = CGSize(width: itemWidth, height: itemWidth + (itemWidth * 0.2))
+    
+    flowLayout.scrollDirection = .vertical
+    cv = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
+    
+    cv.delegate = self
+    cv.dataSource = self
+    cv.register(TileCell.self)
+    cv.backgroundColor = .clear
+    
   }
   
   private func setupTimer() -> Timer {
@@ -96,10 +147,7 @@ extension LandingViewController {
     
     navigationController?.navigationBar.topItem?.title = "Soma Academy"
     
-    turnTamicOffFor(stackView, scrollView, pagingVC.view)
-
-    stackView.axis = .vertical
-    stackView.spacing = 32
+    turnTamicOffFor(pagingVC.view, cv)
     
   }
   
@@ -109,43 +157,25 @@ extension LandingViewController {
     backgroundImageView.translatesAutoresizingMaskIntoConstraints = false
     backgroundImageView.contentMode = .scaleAspectFill
     
-    view.addSubviews(scrollView)
-    scrollView.addSubviews(pagingVC.view, stackView, backgroundImageView)
-    scrollView.sendSubviewToBack(backgroundImageView)
-    
-    for tile in tiles {
-      addChildVCs(to: stackView, tile)
-      tile.index = tiles.firstIndex(of: tile)
-    }
-    
-    print("content size: \(scrollView.contentSize)")
-
-    
-    pinToEdges(scrollView)
+    view.addSubviews(pagingVC.view, backgroundImageView, cv)
+    view.sendSubviewToBack(backgroundImageView)
+  
     NSLayoutConstraint.activate([
       
-      pagingVC.view.topAnchor.constraint(equalTo: scrollView.topAnchor),
-      pagingVC.view.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: K.inset),
+      pagingVC.view.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+      pagingVC.view.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: K.inset),
       pagingVC.view.heightAnchor.constraint(equalToConstant: 190),
-      pagingVC.view.widthAnchor.constraint(equalTo: scrollView.widthAnchor, constant: K.inset * -3),
-      
-      stackView.topAnchor.constraint(equalTo: pagingVC.view.bottomAnchor, constant: K.inset * 2),
-      stackView.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor),
-      stackView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
-      stackView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
-      stackView.widthAnchor.constraint(equalTo: scrollView.widthAnchor, constant: K.inset * -4),
+      pagingVC.view.widthAnchor.constraint(equalTo: view.widthAnchor, constant: K.inset * -3),
       
       backgroundImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
       backgroundImageView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+      
+      cv.topAnchor.constraint(equalTo: pagingVC.view.bottomAnchor, constant: K.inset * 4),
+      cv.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: K.inset),
+      cv.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -K.inset),
+      cv.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -K.inset),
+      
     ])
-  }
-}
-
-extension LandingViewController: UIScrollViewDelegate {
-  func scrollViewDidScroll(_ scrollView: UIScrollView) {
-    if scrollView.contentOffset.x != 0 {
-      scrollView.contentOffset.x = 0
-    }
   }
 }
 
@@ -178,4 +208,82 @@ extension LandingViewController: UIPageViewControllerDelegate, UIPageViewControl
     pagingVC.setViewControllers([topPagingVCs[pagingIndex]], direction: .forward, animated: true)
     
   }
+}
+
+extension LandingViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+  func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    return tiles.count
+  }
+  
+  func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TileCell.reuseID, for: indexPath) as! TileCell
+    
+    cell.set(with: tiles[indexPath.item])
+    
+    return cell
+  }
+  
+  func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    collectionView.deselectItem(at: indexPath, animated: true)
+    
+    // redirect to a detail view depending on the tile tapped
+    switch indexPath.item {
+      
+    case 0:
+      let detailVC = UIHostingController(rootView: InfoViewProto())
+      show(detailVC, sender: nil)
+      
+    case 1:
+      let detailVC = RulesViewController()
+      show(detailVC, sender: nil)
+      break
+      
+    case 2:
+      let phoneNumber = "tel://937-555-5555"
+      if let url = URL(string: phoneNumber) {
+        if UIApplication.shared.canOpenURL(url) {
+          UIApplication.shared.open(url)
+        }
+      }
+
+//      let detailVC = ScheduleViewController()
+//      show(detailVC, sender: nil)
+      break
+      
+    case 3:
+      if MFMessageComposeViewController.canSendText() {
+          // proceed with composing a message
+        let messageComposeVC = MFMessageComposeViewController()
+        messageComposeVC.recipients = ["937-555-5555"]
+        messageComposeVC.body = "What's up, nerd."
+        present(messageComposeVC, animated: true, completion: nil)
+
+      } else {
+          // show an error message
+      }
+
+      
+//      let detailVC = ShopViewController()
+//      show(detailVC, sender: nil)
+      break
+      
+    default:
+      break
+    }
+    
+  }
+}
+
+extension LandingViewController: MFMessageComposeViewControllerDelegate {
+  func messageComposeViewController(_ controller: MFMessageComposeViewController, didFinishWith result: MessageComposeResult) {
+    switch result {
+    case .cancelled:
+      print("Message was cancelled")
+      dismiss(animated: true, completion: nil)
+    default:
+      break
+    }
+
+  }
+  
 }

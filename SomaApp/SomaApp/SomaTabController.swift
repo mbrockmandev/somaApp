@@ -12,10 +12,9 @@ final class SomaTabController: UITabBarController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    let landingVC = LandingViewPrototype()
-//    let landingVC = LandingViewController()
+    let landingVC = LandingViewController()
     let listingVC = ListingViewController()
-    let messageVC = UIHostingController(rootView: MessageView())
+    let messageVC = MessageViewController()
     let infoVC = UIHostingController(rootView: InfoViewProto())
     
     let landingTabBarItem = UITabBarItem(title: "Welcome", image: UIImage(systemName: "house"), selectedImage: UIImage(systemName: "house.fill"))
