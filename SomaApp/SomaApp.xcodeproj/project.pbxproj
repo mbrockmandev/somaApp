@@ -157,19 +157,43 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		271A10A1297ADA680058D76C /* Helper */ = {
+		2716B24F29919FB000E2ADB4 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				2702A6FF2988B12F003E9A6D /* UICells+Ext.swift */,
+				279654E4297D6A4700F15177 /* UIView+Ext.swift */,
+				276BEDFC297E248B00660252 /* UIVisualEffectView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		2716B25029919FBA00E2ADB4 /* Builders */ = {
 			isa = PBXGroup;
 			children = (
 				271A10A2297ADA760058D76C /* ViewFactory.swift */,
-				279654E2297D695E00F15177 /* UIFont+Ext.swift */,
-				279654E4297D6A4700F15177 /* UIView+Ext.swift */,
-				276BEDFC297E248B00660252 /* UIVisualEffectView.swift */,
-				27C45FB9297F462800D6B6B8 /* Date+Ext.swift */,
-				27C45FC5298158BB00D6B6B8 /* Color+Ext.swift */,
+			);
+			path = Builders;
+			sourceTree = "<group>";
+		};
+		2716B25129919FC500E2ADB4 /* Modifiers */ = {
+			isa = PBXGroup;
+			children = (
 				27C45FCE29833B1100D6B6B8 /* Bundle+Ext.swift */,
-				2781E59E298405040029366A /* ViewModifiers.swift */,
+				27C45FC5298158BB00D6B6B8 /* Color+Ext.swift */,
+				27C45FB9297F462800D6B6B8 /* Date+Ext.swift */,
 				2781E5A029847AD30029366A /* PrefKeys.swift */,
-				2702A6FF2988B12F003E9A6D /* UICells+Ext.swift */,
+				279654E2297D695E00F15177 /* UIFont+Ext.swift */,
+				2781E59E298405040029366A /* ViewModifiers.swift */,
+			);
+			path = Modifiers;
+			sourceTree = "<group>";
+		};
+		271A10A1297ADA680058D76C /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				2716B25129919FC500E2ADB4 /* Modifiers */,
+				2716B25029919FBA00E2ADB4 /* Builders */,
+				2716B24F29919FB000E2ADB4 /* Views */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
