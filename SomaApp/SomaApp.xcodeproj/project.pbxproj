@@ -13,7 +13,6 @@
 		270462082992D51C00EAEE21 /* RulesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 270462072992D51C00EAEE21 /* RulesViewController.swift */; };
 		2704620A2992DA5000EAEE21 /* MessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 270462092992DA5000EAEE21 /* MessageViewController.swift */; };
 		271A10A3297ADA760058D76C /* ViewFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 271A10A2297ADA760058D76C /* ViewFactory.swift */; };
-		271ABCD22985C64300B70204 /* Info.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 271ABCD12985C64300B70204 /* Info.storyboard */; };
 		271ABCD42985C65800B70204 /* InfoVCTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 271ABCD32985C65800B70204 /* InfoVCTest.swift */; };
 		276BEDFB297E1AD900660252 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 276BEDFA297E1AD900660252 /* CardView.swift */; };
 		276BEDFD297E248B00660252 /* UIVisualEffectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 276BEDFC297E248B00660252 /* UIVisualEffectView.swift */; };
@@ -83,7 +82,6 @@
 		270462072992D51C00EAEE21 /* RulesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RulesViewController.swift; sourceTree = "<group>"; };
 		270462092992DA5000EAEE21 /* MessageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageViewController.swift; sourceTree = "<group>"; };
 		271A10A2297ADA760058D76C /* ViewFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewFactory.swift; sourceTree = "<group>"; };
-		271ABCD12985C64300B70204 /* Info.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Info.storyboard; sourceTree = "<group>"; };
 		271ABCD32985C65800B70204 /* InfoVCTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoVCTest.swift; sourceTree = "<group>"; };
 		276BEDFA297E1AD900660252 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		276BEDFC297E248B00660252 /* UIVisualEffectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIVisualEffectView.swift; sourceTree = "<group>"; };
@@ -336,7 +334,6 @@
 				27C45FC12980088C00D6B6B8 /* Profiles.swift */,
 				27C45FD029833B5A00D6B6B8 /* ProfileManager.swift */,
 				2781E59C2983FF1B0029366A /* InfoViewProto.swift */,
-				271ABCD12985C64300B70204 /* Info.storyboard */,
 				271ABCD32985C65800B70204 /* InfoVCTest.swift */,
 			);
 			path = Info;
@@ -470,7 +467,6 @@
 				27C45FCD298334FE00D6B6B8 /* profiles.json in Resources */,
 				27A72805297A31F000856CF3 /* LaunchScreen.storyboard in Resources */,
 				27A72802297A31F000856CF3 /* Assets.xcassets in Resources */,
-				271ABCD22985C64300B70204 /* Info.storyboard in Resources */,
 				27C45FD32983506D00D6B6B8 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

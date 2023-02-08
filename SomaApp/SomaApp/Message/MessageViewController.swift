@@ -6,11 +6,14 @@
 //
 
 import UIKit
+import MessageUI
 
 class MessageViewController: UIViewController {
   
   let subtitleLabel = UILabel()
-  let textField = UITextField(frame: .init(x: 0, y: 0, width: 390, height: 500))
+  let textView = UITextView(frame: .init(x: 0, y: 0, width: 390, height: 500))
+  let placeholderText = "Enter your message here…"
+  var userInput = ""
   let submitButton = UIButton(type: .system)
   
   override func viewDidLoad() {
@@ -30,51 +33,98 @@ extension MessageViewController {
     subtitleLabel.adjustsFontSizeToFitWidth = true
     subtitleLabel.text = "Please submit any Jiu-Jitsu related questions you have and an instructor will respond within 2-3 business days."
     
-    textField.delegate = self
-    textField.contentVerticalAlignment = .top
-    textField.placeholder = "Enter your question here…"
-    textField.autocorrectionType = .default
-    textField.autocapitalizationType = .sentences
-    textField.backgroundColor = .secondarySystemBackground
+    textView.delegate = self
+    textView.text = placeholderText
+    textView.textColor = .secondaryLabel
+    textView.autocorrectionType = .default
+    textView.autocapitalizationType = .sentences
+    textView.backgroundColor = .secondarySystemBackground
     
     submitButton.setTitle("Send Message".uppercased(), for: .normal)
     submitButton.setTitleColor(.tintColor, for: .normal)
     submitButton.configuration = .borderedTinted()
-    submitButton.addTarget(self, action: #selector(btnTapped), for: .touchUpInside)
+    submitButton.addTarget(self, action: #selector(sendBtnTapped), for: .touchUpInside)
     
+    let tapGesture = UITapGestureRecognizer(target: self, action: #selector(viewTapped))
+    view.addGestureRecognizer(tapGesture)
   }
   
   func layout() {
-    turnTamicOffFor(subtitleLabel, textField, submitButton)
-    view.addSubviews(subtitleLabel, textField, submitButton)
+    turnTamicOffFor(subtitleLabel, textView, submitButton)
+    view.addSubviews(subtitleLabel, textView, submitButton)
     
     NSLayoutConstraint.activate([
       subtitleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: K.inset * 4),
-      subtitleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: K.inset * 2),
-      subtitleLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -K.inset * 2),
+      subtitleLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: K.inset * 2),
+      subtitleLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -K.inset * 2),
       
-      textField.topAnchor.constraint(equalTo: subtitleLabel.bottomAnchor, constant: K.inset * 3),
-      textField.leadingAnchor.constraint(equalTo: subtitleLabel.leadingAnchor),
-      textField.trailingAnchor.constraint(equalTo: subtitleLabel.trailingAnchor),
-      textField.heightAnchor.constraint(equalToConstant: 400),
+      textView.topAnchor.constraint(equalTo: subtitleLabel.bottomAnchor, constant: K.inset * 3),
+      textView.leadingAnchor.constraint(equalTo: subtitleLabel.leadingAnchor),
+      textView.trailingAnchor.constraint(equalTo: subtitleLabel.trailingAnchor),
+      textView.heightAnchor.constraint(equalToConstant: 400),
       
-      submitButton.topAnchor.constraint(equalTo: textField.bottomAnchor, constant: K.inset * 3),
-      submitButton.leadingAnchor.constraint(equalTo: textField.leadingAnchor),
-      submitButton.trailingAnchor.constraint(equalTo: textField.trailingAnchor),
+      submitButton.topAnchor.constraint(equalTo: textView.bottomAnchor, constant: K.inset * 3),
+      submitButton.leadingAnchor.constraint(equalTo: textView.leadingAnchor),
+      submitButton.trailingAnchor.constraint(equalTo: textView.trailingAnchor),
       submitButton.heightAnchor.constraint(equalToConstant: 60),
       
     ])
   }
   
-  @objc private func btnTapped(_ sender: UIButton) {
-    print("Button tapped!")
+  // actions
+  
+  @objc private func sendBtnTapped(_ sender: UIButton) {
     
-    // implement email functionality? should auto generate an email to soma jj email presumably
+    if !textView.text.isEmpty {
+      userInput = textView.text
+    }
+    
+    if MFMailComposeViewController.canSendMail() {
+      let mailComposeViewController = MFMailComposeViewController()
+      mailComposeViewController.mailComposeDelegate = self
+      mailComposeViewController.setToRecipients(["mbrockmandev@gmail.com"])
+      mailComposeViewController.setSubject("Jiu-Jitsu Question From Soma App")
+      mailComposeViewController.setMessageBody(userInput, isHTML: false)
+        
+      present(mailComposeViewController, animated: true, completion: nil)
+    } else {
+      showSendMailErrorAlert()
+    }
+}
+  
+  @objc private func viewTapped() {
+    textView.resignFirstResponder()
+  }
+  
+}
+
+extension MessageViewController: MFMailComposeViewControllerDelegate {
+  func showSendMailErrorAlert() {
+    let alertController = UIAlertController(title: "Could Not Send Email", message: "Your device could not send the e-mail. Please double check your e-mail configuration and try again.", preferredStyle: .alert)
+    alertController.addAction(UIAlertAction(title: "OK", style: .default))
+    present(alertController, animated: true, completion: nil)
+  }
+  
+  func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+    controller.dismiss(animated: true, completion: nil)
   }
 }
 
-extension MessageViewController: UITextFieldDelegate {
+extension MessageViewController: UITextViewDelegate {
+  func textViewDidBeginEditing(_ textView: UITextView) {
+    if textView.textColor == .secondaryLabel {
+      textView.text = nil
+      textView.textColor = .label
+    }
+  }
   
+  func textViewDidEndEditing(_ textView: UITextView) {
+    if textView.text.isEmpty {
+      textView.text = placeholderText
+      textView.textColor = .secondaryLabel
+    }
+  }
+
 }
 
 #if DEBUG

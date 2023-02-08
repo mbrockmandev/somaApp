@@ -12,7 +12,6 @@ class InfoVCTest: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    
     configureView()
   }
   
