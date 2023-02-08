@@ -1,19 +1,21 @@
-//
-//  MessageViewController.swift
-//  SomaApp
-//
-//  Created by Michael Brockman on 2/7/23.
-//
+  //
+  //  MessageViewController.swift
+  //  SomaApp
+  //
+  //  Created by Michael Brockman on 2/7/23.
+  //
 
 import UIKit
 import MessageUI
 
 class MessageViewController: UIViewController {
   
+  //MARK: - Properties
   let subtitleLabel = UILabel()
   let textView = UITextView(frame: .init(x: 0, y: 0, width: 390, height: 500))
   let placeholderText = "Enter your message here…"
   var userInput = ""
+  let dismissBtn = UIButton()
   let submitButton = UIButton(type: .system)
   
   override func viewDidLoad() {
@@ -24,8 +26,10 @@ class MessageViewController: UIViewController {
 }
 
 extension MessageViewController {
-  func style() {
+  private func style() {
     view.backgroundColor = .systemBackground
+    
+    title = "Email Us!"
     
     subtitleLabel.numberOfLines = 0
     subtitleLabel.textAlignment = .left
@@ -33,12 +37,21 @@ extension MessageViewController {
     subtitleLabel.adjustsFontSizeToFitWidth = true
     subtitleLabel.text = "Please submit any Jiu-Jitsu related questions you have and an instructor will respond within 2-3 business days."
     
+    dismissBtn.backgroundColor = .secondarySystemBackground
+    dismissBtn.setTitle("Done", for: .normal)
+    dismissBtn.setTitleColor(.systemBlue, for: .normal)
+    dismissBtn.setTitleShadowColor(.secondaryLabel, for: .normal)
+    dismissBtn.addTarget(self, action: #selector(dismissBtnTapped), for: .touchUpInside)
+    dismissBtn.frame = .init(x: 0, y: 0, width: 100, height: 50)
+    
     textView.delegate = self
     textView.text = placeholderText
+    textView.font = .preferredFont(forTextStyle: .title3)
     textView.textColor = .secondaryLabel
     textView.autocorrectionType = .default
     textView.autocapitalizationType = .sentences
     textView.backgroundColor = .secondarySystemBackground
+    textView.inputAccessoryView = dismissBtn
     
     submitButton.setTitle("Send Message".uppercased(), for: .normal)
     submitButton.setTitleColor(.tintColor, for: .normal)
@@ -49,7 +62,7 @@ extension MessageViewController {
     view.addGestureRecognizer(tapGesture)
   }
   
-  func layout() {
+  private func layout() {
     turnTamicOffFor(subtitleLabel, textView, submitButton)
     view.addSubviews(subtitleLabel, textView, submitButton)
     
@@ -70,8 +83,13 @@ extension MessageViewController {
       
     ])
   }
-  
-  // actions
+}
+
+//MARK: - Actions
+extension MessageViewController {
+  @objc private func dismissBtnTapped(_ sender: UIButton) {
+    textView.resignFirstResponder()
+  }
   
   @objc private func sendBtnTapped(_ sender: UIButton) {
     
@@ -85,19 +103,19 @@ extension MessageViewController {
       mailComposeViewController.setToRecipients(["mbrockmandev@gmail.com"])
       mailComposeViewController.setSubject("Jiu-Jitsu Question From Soma App")
       mailComposeViewController.setMessageBody(userInput, isHTML: false)
-        
+      
       present(mailComposeViewController, animated: true, completion: nil)
     } else {
       showSendMailErrorAlert()
     }
-}
+  }
   
   @objc private func viewTapped() {
     textView.resignFirstResponder()
   }
-  
 }
 
+  //MARK: - MFMailComposeViewControllerDelegate
 extension MessageViewController: MFMailComposeViewControllerDelegate {
   func showSendMailErrorAlert() {
     let alertController = UIAlertController(title: "Could Not Send Email", message: "Your device could not send the e-mail. Please double check your e-mail configuration and try again.", preferredStyle: .alert)
@@ -110,6 +128,8 @@ extension MessageViewController: MFMailComposeViewControllerDelegate {
   }
 }
 
+
+  //MARK: - UITextViewDelegate
 extension MessageViewController: UITextViewDelegate {
   func textViewDidBeginEditing(_ textView: UITextView) {
     if textView.textColor == .secondaryLabel {
@@ -124,28 +144,22 @@ extension MessageViewController: UITextViewDelegate {
       textView.textColor = .secondaryLabel
     }
   }
-
+  
 }
 
+  //MARK: - Previews
 #if DEBUG
 import SwiftUI
 struct MessageViewControllerPreview<MessageViewController: UIViewController>: UIViewControllerRepresentable {
-  func updateUIViewController(_ uiViewController: MessageViewController, context: Context) {
-    
-  }
+  func updateUIViewController(_ uiViewController: MessageViewController, context: Context) { }
   
   let viewController: MessageViewController
   
-  init(_ builder: @escaping () -> MessageViewController) {
-    viewController = builder()
-  }
+  init(_ builder: @escaping () -> MessageViewController) { viewController = builder() }
   
     // MARK: - UIViewControllerRepresentable
-  func makeUIViewController(context: Context) -> MessageViewController {
-    viewController
-  }
+  func makeUIViewController(context: Context) -> MessageViewController { viewController }
 }
-#endif
 
 struct MessageViewController_Previews: PreviewProvider {
   static var previews: some View {
@@ -155,3 +169,4 @@ struct MessageViewController_Previews: PreviewProvider {
     }
   }
 }
+#endif
