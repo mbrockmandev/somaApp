@@ -45,7 +45,7 @@ final class LandingViewController: UIViewController {
     "INSTRUCTORS",
     "RULES",
     "SCHEDULE",
-    "SHOP",
+    "INFO",
   ]
   
   override func viewDidLoad() {
@@ -230,25 +230,24 @@ extension LandingViewController: UICollectionViewDelegate, UICollectionViewDataS
     switch indexPath.item {
       
     case 0:
-      let detailVC = UIHostingController(rootView: InfoViewProto())
+      let detailVC = UIHostingController(rootView: InstructorView())
       show(detailVC, sender: nil)
       
     case 1:
       let detailVC = RulesViewController()
       show(detailVC, sender: nil)
-      break
       
     case 2:
-
-//      let detailVC = ScheduleViewController()
-//      show(detailVC, sender: nil)
-      break
+      let detailVC = ScheduleViewController()
+      show(detailVC, sender: nil)
       
     case 3:
-      
+      if let url = URL(string: "https://www.squareup.com/store/Soma_JiuJitsu_Academy/") {
+        UIApplication.shared.open(url)
+      }
+      //consider in-app browsing later
 //      let detailVC = ShopViewController()
 //      show(detailVC, sender: nil)
-      break
       
     default:
       break
@@ -257,16 +256,22 @@ extension LandingViewController: UICollectionViewDelegate, UICollectionViewDataS
   }
 }
 
-extension LandingViewController: MFMessageComposeViewControllerDelegate {
-  func messageComposeViewController(_ controller: MFMessageComposeViewController, didFinishWith result: MessageComposeResult) {
-    switch result {
-    case .cancelled:
-      print("Message was cancelled")
-      dismiss(animated: true, completion: nil)
-    default:
-      break
-    }
-
-  }
-  
+//MARK: - SwiftUI Preview for UIKit
+#if DEBUG
+import SwiftUI
+struct LandingViewControllerPreview<LandingViewController: UIViewController>: UIViewControllerRepresentable {
+  func updateUIViewController(_ uiViewController: LandingViewController, context: Context) { }
+  let viewController: LandingViewController
+  init(_ builder: @escaping () -> LandingViewController) { viewController = builder() }
+  func makeUIViewController(context: Context) -> LandingViewController { viewController }
 }
+
+struct LandingViewController_Previews: PreviewProvider {
+  static var previews: some View {
+    LandingViewControllerPreview {
+      let vc = LandingViewController()
+      return vc
+    }
+  }
+}
+#endif

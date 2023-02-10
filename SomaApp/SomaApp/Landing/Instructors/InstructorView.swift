@@ -1,5 +1,5 @@
   //
-  //  InfoViewProto.swift
+  //  InstructorView.swift
   //  SomaApp
   //
   //  Created by Michael Brockman on 1/27/23.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct InfoViewProto: View {
+struct InstructorView: View {
   @State private var profiles = Profile.mock
   @State var hasScrolled = false
   
@@ -114,9 +114,9 @@ struct ProfileViewProto: View {
   }
 }
 
-struct InfoViewProto_Previews: PreviewProvider {
+struct InstructorView_Previews: PreviewProvider {
   static var previews: some View {
-    InfoViewProto()
+    InstructorView()
   }
 }
 

@@ -10,18 +10,6 @@ import Foundation
 struct ProfileManager {
   private init() {}
   
-//  static func writeData(_ profiles: [Profile]) -> Void {
-//    do {
-//      let fileURL = FileManager.default
-//        .urls(for: .documentDirectory, in: .userDomainMask)[0]
-//        .appendingPathComponent("profiles.json")
-//      try JSONEncoder().encode(profiles).write(to: fileURL)
-//      print("Read profiles correctly")
-//    } catch {
-//      print(error)
-//    }
-//  }
-  
   static func readData() -> [Profile] {
     do {
       let fileURL = FileManager.default

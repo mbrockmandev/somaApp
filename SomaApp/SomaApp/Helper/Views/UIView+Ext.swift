@@ -95,3 +95,11 @@ extension UIViewController {
   }
 }
 
+extension UICollectionViewCell {
+  func turnTamicOffFor(_ views: UIView...) {
+    for view in views {
+      view.translatesAutoresizingMaskIntoConstraints = false
+    }
+  }
+}
+

@@ -91,7 +91,7 @@ extension ListingViewController: UICollectionViewDelegate {
   private func configureCollectionView() {
     collectionView = UICollectionView(frame: view.frame, collectionViewLayout: createLayout())
     collectionView.backgroundColor = .secondarySystemBackground
-    collectionView.register(ListingCVCell.self, forCellWithReuseIdentifier: ListingCVCell.reuseID)
+    collectionView.register(ListingCVCell.self)
     collectionView.register(ItemSupplementaryView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: ItemSupplementaryView.reuseID)
     collectionView.delegate = self
     

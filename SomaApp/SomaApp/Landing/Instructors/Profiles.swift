@@ -38,7 +38,7 @@ struct Profile: Decodable, Hashable, Identifiable {
                      Profile(id: "05", name: "James Horne", image: "james_horne_thumb", belt: "Black Belt - Matt Strack", locations: ["Kokomo, IN"]),
                      Profile(id: "06", name: "Dan Weirauch", image: "dan_thumb", belt: "Brown Belt", locations: ["Kokomo, IN"]),
                      Profile(id: "07", name: "Jared Emfield", image: "jared_emfield_thumb", belt: "Black Belt - Pedro Sauer - 2011", locations: ["Idaho Falls, ID", "Rexburg, ID"]),
-                     Profile(id: "08", name: "James Emfield", image: "james_emfield_thumb", belt: "A Belt", locations: ["Idaho Falls, ID", "Rexburg, ID"]),
+                     Profile(id: "08", name: "James Emfield", image: "james_emfield_thumb", belt: "Brown Belt?", locations: ["Idaho Falls, ID", "Rexburg, ID"]),
                      ]
 }
 
