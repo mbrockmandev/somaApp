@@ -12,7 +12,6 @@ struct InstructorView: View {
   @State var hasScrolled = false
   
   var body: some View {
-    
       ZStack {
         Color.black.opacity(0.05)
           .ignoresSafeArea()
@@ -28,16 +27,13 @@ struct InstructorView: View {
               featured
             }
           }
-          
         }
         .padding()
         .shadow(radius: 20)
       }
-      
-    
-    
   }
   
+  //may use this later for scrolling purposes?
   var scrollDetection: some View {
     GeometryReader { proxy in
       Color.clear.preference(key: ScrollPreferenceKey.self, value: proxy.frame(in: .named("scroll")).minY)

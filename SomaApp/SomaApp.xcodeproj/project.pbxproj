@@ -9,14 +9,12 @@
 /* Begin PBXBuildFile section */
 		2700B69D29968F8C002185A8 /* ScheduleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2700B69C29968F8C002185A8 /* ScheduleViewController.swift */; };
 		2700B6A42996E686002185A8 /* ShopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2700B6A32996E686002185A8 /* ShopViewController.swift */; };
-		2700B6A82996F028002185A8 /* InstructorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2700B6A72996F028002185A8 /* InstructorCell.swift */; };
 		2702A6FE2988AB7A003E9A6D /* LandingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2702A6FD2988AB7A003E9A6D /* LandingViewController.swift */; };
 		2702A7002988B12F003E9A6D /* UICells+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2702A6FF2988B12F003E9A6D /* UICells+Ext.swift */; };
 		2702A7022988B178003E9A6D /* TileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2702A7012988B178003E9A6D /* TileCell.swift */; };
 		270462082992D51C00EAEE21 /* RulesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 270462072992D51C00EAEE21 /* RulesViewController.swift */; };
 		2704620A2992DA5000EAEE21 /* MessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 270462092992DA5000EAEE21 /* MessageViewController.swift */; };
 		271A10A3297ADA760058D76C /* ViewFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 271A10A2297ADA760058D76C /* ViewFactory.swift */; };
-		271ABCD42985C65800B70204 /* InstructorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 271ABCD32985C65800B70204 /* InstructorViewController.swift */; };
 		276BEDFB297E1AD900660252 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 276BEDFA297E1AD900660252 /* CardView.swift */; };
 		276BEDFD297E248B00660252 /* UIVisualEffectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 276BEDFC297E248B00660252 /* UIVisualEffectView.swift */; };
 		2781E59D2983FF1B0029366A /* InstructorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2781E59C2983FF1B0029366A /* InstructorView.swift */; };
@@ -80,14 +78,12 @@
 /* Begin PBXFileReference section */
 		2700B69C29968F8C002185A8 /* ScheduleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleViewController.swift; sourceTree = "<group>"; };
 		2700B6A32996E686002185A8 /* ShopViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopViewController.swift; sourceTree = "<group>"; };
-		2700B6A72996F028002185A8 /* InstructorCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstructorCell.swift; sourceTree = "<group>"; };
 		2702A6FD2988AB7A003E9A6D /* LandingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandingViewController.swift; sourceTree = "<group>"; };
 		2702A6FF2988B12F003E9A6D /* UICells+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICells+Ext.swift"; sourceTree = "<group>"; };
 		2702A7012988B178003E9A6D /* TileCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TileCell.swift; sourceTree = "<group>"; };
 		270462072992D51C00EAEE21 /* RulesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RulesViewController.swift; sourceTree = "<group>"; };
 		270462092992DA5000EAEE21 /* MessageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageViewController.swift; sourceTree = "<group>"; };
 		271A10A2297ADA760058D76C /* ViewFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewFactory.swift; sourceTree = "<group>"; };
-		271ABCD32985C65800B70204 /* InstructorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstructorViewController.swift; sourceTree = "<group>"; };
 		276BEDFA297E1AD900660252 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		276BEDFC297E248B00660252 /* UIVisualEffectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIVisualEffectView.swift; sourceTree = "<group>"; };
 		2781E59C2983FF1B0029366A /* InstructorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstructorView.swift; sourceTree = "<group>"; };
@@ -195,13 +191,11 @@
 		2700B6A62996EE67002185A8 /* Instructors */ = {
 			isa = PBXGroup;
 			children = (
-				271ABCD32985C65800B70204 /* InstructorViewController.swift */,
 				27C45FCC298334FE00D6B6B8 /* profiles.json */,
 				27C45FC12980088C00D6B6B8 /* Profiles.swift */,
 				2781E59C2983FF1B0029366A /* InstructorView.swift */,
 				27C45FC32981583800D6B6B8 /* InfoDetailView.swift */,
 				27C45FD029833B5A00D6B6B8 /* ProfileManager.swift */,
-				2700B6A72996F028002185A8 /* InstructorCell.swift */,
 			);
 			path = Instructors;
 			sourceTree = "<group>";
@@ -531,7 +525,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				2702A7002988B12F003E9A6D /* UICells+Ext.swift in Sources */,
-				271ABCD42985C65800B70204 /* InstructorViewController.swift in Sources */,
 				279654E5297D6A4700F15177 /* UIView+Ext.swift in Sources */,
 				279654E7297D71B900F15177 /* CacheManager.swift in Sources */,
 				270462082992D51C00EAEE21 /* RulesViewController.swift in Sources */,
@@ -559,7 +552,6 @@
 				279654D5297CD52000F15177 /* Model.swift in Sources */,
 				279654E3297D695E00F15177 /* UIFont+Ext.swift in Sources */,
 				27C45FC22980088C00D6B6B8 /* Profiles.swift in Sources */,
-				2700B6A82996F028002185A8 /* InstructorCell.swift in Sources */,
 				27C45FC6298158BB00D6B6B8 /* Color+Ext.swift in Sources */,
 				27A727FB297A31EF00856CF3 /* SceneDelegate.swift in Sources */,
 				279654DE297D52D500F15177 /* ListingCVCell.swift in Sources */,
