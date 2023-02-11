@@ -1,13 +1,14 @@
 //
-//  ShopViewController.swift
+//  InfoViewController.swift
 //  SomaApp
 //
-//  Created by Michael Brockman on 2/10/23.
+//  Created by Michael Brockman on 2/11/23.
 //
+//TODO: add info details...
 
 import UIKit
 
-class ShopViewController: UIViewController {
+class InfoViewController: UIViewController {
   
   let stackView = UIStackView()
   let imageView = UIImageView()
@@ -20,7 +21,7 @@ class ShopViewController: UIViewController {
   }
 }
 
-extension ShopViewController {
+extension InfoViewController {
   func style() {
     view.backgroundColor = .systemBackground
     
@@ -56,4 +57,24 @@ extension ShopViewController {
     ])
   }
 }
+
+  //MARK: SwiftUI Style Preview for UIKit
+#if DEBUG
+import SwiftUI
+struct InfoViewControllerPreview<InfoViewController: UIViewController>: UIViewControllerRepresentable {
+  func updateUIViewController(_ uiViewController: InfoViewController, context: Context) { }
+  let viewController: InfoViewController
+  init(_ builder: @escaping () -> InfoViewController) { viewController = builder() }
+  func makeUIViewController(context: Context) -> InfoViewController { viewController }
+}
+
+struct InfoViewController_Previews: PreviewProvider {
+  static var previews: some View {
+    InfoViewControllerPreview {
+      let vc = InfoViewController()
+      return vc
+    }
+  }
+}
+#endif
 

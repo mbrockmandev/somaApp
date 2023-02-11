@@ -5,6 +5,8 @@
 //  Created by Michael Brockman on 2/7/23.
 //
 
+//TODO: add rules from the website
+
 import UIKit
 
 class RulesViewController: UIViewController {

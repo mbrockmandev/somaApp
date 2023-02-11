@@ -104,7 +104,7 @@ struct ProfileViewProto: View {
     .overlay(RoundedRectangle(cornerRadius: 20, style: .continuous)
       .stroke(.linearGradient(colors: [.primary.opacity(0.3), .secondary.opacity(0.1)], startPoint: .topLeading, endPoint: .bottomTrailing)))
     .sheet(isPresented: $isShowingDetail) {
-      InfoDetailView(profile: profile)
+      InstructorDetailView(profile: profile)
     }
     
   }

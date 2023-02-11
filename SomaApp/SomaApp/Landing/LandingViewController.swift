@@ -45,7 +45,7 @@ final class LandingViewController: UIViewController {
     "INSTRUCTORS",
     "RULES",
     "SCHEDULE",
-    "INFO",
+    "SHOP",
   ]
   
   override func viewDidLoad() {
@@ -245,10 +245,8 @@ extension LandingViewController: UICollectionViewDelegate, UICollectionViewDataS
       if let url = URL(string: "https://www.squareup.com/store/Soma_JiuJitsu_Academy/") {
         UIApplication.shared.open(url)
       }
-      //consider in-app browsing later
-//      let detailVC = ShopViewController()
-//      show(detailVC, sender: nil)
-      
+      //TODO: Can only switch this to a tab and bring in Square API deal with Soma's explicit API keys and permission.
+
     default:
       break
     }

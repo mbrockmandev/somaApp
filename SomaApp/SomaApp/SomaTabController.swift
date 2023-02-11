@@ -15,20 +15,19 @@ final class SomaTabController: UITabBarController {
     let landingVC = LandingViewController()
     let listingVC = ListingViewController()
     let messageVC = MessageViewController()
-    let shopVC = ShopViewController()
+    let infoVC = UIHostingController(rootView: InfoView())
     
     let landingTabBarItem = UITabBarItem(title: "Welcome", image: UIImage(systemName: "house"), selectedImage: UIImage(systemName: "house.fill"))
     let listingTabBarItem = UITabBarItem(title: "Videos", image: UIImage(systemName: "video"), selectedImage: UIImage(systemName: "video.fill"))
     let messageTabBarItem = UITabBarItem(title: "Messages", image: UIImage(systemName: "message"), selectedImage: UIImage(systemName: "message.fill"))
-    let shopTabBarItem = UITabBarItem(title: "Shop", image: UIImage(systemName: "cart"), selectedImage: UIImage(systemName: "cart.fill"))
+    let infoTabBarItem = UITabBarItem(title: "Info", image: UIImage(systemName: "questionmark.circle"), selectedImage: UIImage(systemName: "questionmark.circle.fill"))
    
-    
     landingVC.tabBarItem = landingTabBarItem
     listingVC.tabBarItem = listingTabBarItem
     messageVC.tabBarItem = messageTabBarItem
-    shopVC.tabBarItem = shopTabBarItem
+    infoVC.tabBarItem = infoTabBarItem
     
-    let controllers = [landingVC, listingVC, messageVC, shopVC]
+    let controllers = [landingVC, listingVC, messageVC, infoVC]
     viewControllers = controllers.map { UINavigationController(rootViewController: $0) }
     
     #if DEBUG

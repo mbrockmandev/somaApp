@@ -1,5 +1,5 @@
 //
-//  InfoDetailView.swift
+//  InstructorDetailView.swift
 //  SomaApp
 //
 //  Created by Michael Brockman on 1/25/23.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct InfoDetailView: View {
+struct InstructorDetailView: View {
   var profile: Profile
     var body: some View {
       ZStack {
@@ -15,7 +15,7 @@ struct InfoDetailView: View {
           .opacity(0.2)
           .ignoresSafeArea()
         VStack {
-          InfoContainerView(profile: profile)
+          InstructorDetailContainerView(profile: profile)
         }
         
       }
@@ -23,7 +23,7 @@ struct InfoDetailView: View {
     }
 }
 
-struct InfoContainerView: View {
+struct InstructorDetailContainerView: View {
   var profile: Profile
   var body: some View {
       VStack {
@@ -55,8 +55,8 @@ struct InfoContainerView: View {
   }
 }
 
-struct InfoDetailView_Previews: PreviewProvider {
+struct InstructorDetailView_Previews: PreviewProvider {
     static var previews: some View {
-      InfoDetailView(profile: Profile.mock[0])
+      InstructorDetailView(profile: Profile.mock[0])
     }
 }
