@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class TileVC: UIViewController {
+final class TileViewController: UIViewController {
   
   let label = UILabel()
   let button = UIButton(configuration: .borderedTinted())
@@ -44,7 +44,7 @@ final class TileVC: UIViewController {
   }
 }
 
-extension TileVC {
+extension TileViewController {
   
   private func layout() {
     view.layer.cornerRadius = 20
@@ -70,7 +70,7 @@ extension TileVC {
   
   @objc func tileTapped(_ gestureRecognizer: UITapGestureRecognizer) {
     
-    let cardView = CardView(text: aboutText[index], headline: label.text)
+    let cardView = CardViewController(text: aboutText[index], headline: label.text)
     present(cardView, animated: true)
 
   }

@@ -7,7 +7,7 @@
 
 import UIKit
 
-class CardView: UIViewController {
+class CardViewController: UIViewController {
   var text: String
   var headline: String!
   let iconView = UIImageView(image: UIImage(named: "soma_red_black"))
