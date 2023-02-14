@@ -9,7 +9,26 @@ import SwiftUI
 
 struct ScheduleView: View {
     var body: some View {
-      Text("Need to put some schedules here!")
+      List {
+        VStack {
+          HStack {
+            ZStack {
+              RoundedRectangle(cornerRadius: 5)
+                .foregroundColor(.systemRed).opacity(0.8)
+                .frame(width: 40, height: 40)
+              Text("Feb")
+                .foregroundColor(.secondarySystemBackground)
+                .padding()
+                .bold()
+            }
+            RoundedRectangle(cornerRadius: 5)
+              .foregroundColor(.tertiaryLabel)
+          }
+          RoundedRectangle(cornerRadius: 5)
+            .foregroundColor(.tertiaryLabel)
+        }
+        
+      }
     }
 }
 
