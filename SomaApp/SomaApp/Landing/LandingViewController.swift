@@ -64,28 +64,28 @@ extension LandingViewController {
   /// set location through the context menu in the upper right hand corner
   /// triggers UI updates among other things (TBD)
   private func addMenu() {
-    let daytonItem = UIAction(title: "Dayton, OH", image: UIImage(systemName: userLocation == .dayton ? "checkmark.circle" : "globe")) { [self] action in
+    let daytonItem = UIAction(title: "Dayton, OH", image: UIImage(systemName: userLocation == .dayton ? "checkmark.circle.fill" : "")) { [self] action in
       userLocation = .dayton
       // use the location for some reason
     }
     
-    let westChesterItem = UIAction(title: "West Chester, OH", image: UIImage(systemName: userLocation == .westChester ? "checkmark" : "globe")) { [self] action in
+    let westChesterItem = UIAction(title: "West Chester, OH", image: UIImage(systemName: userLocation == .westChester ? "checkmark" : "")) { [self] action in
       userLocation = .westChester
     }
     
-    let oxfordItem = UIAction(title: "Oxford, OH", image: UIImage(systemName: userLocation == .oxford ? "checkmark" : "globe")) { [self] action in
+    let oxfordItem = UIAction(title: "Oxford, OH", image: UIImage(systemName: userLocation == .oxford ? "checkmark" : "")) { [self] action in
       userLocation = .oxford
     }
     
-    let kokomoItem = UIAction(title: "Kokomo, IN", image: UIImage(systemName: userLocation == .kokomo ? "checkmark" : "globe")) { [self] action in
+    let kokomoItem = UIAction(title: "Kokomo, IN", image: UIImage(systemName: userLocation == .kokomo ? "checkmark" : "")) { [self] action in
       userLocation = .kokomo
     }
     
-    let idahoFallsItem = UIAction(title: "Idaho Falls, ID", image: UIImage(systemName: userLocation == .idahoFalls ? "checkmark" : "globe")) { [self] action in
+    let idahoFallsItem = UIAction(title: "Idaho Falls, ID", image: UIImage(systemName: userLocation == .idahoFalls ? "checkmark" : "")) { [self] action in
       userLocation = .idahoFalls
     }
     
-    let rexburgItem = UIAction(title: "Rexburg, ID", image: UIImage(systemName: userLocation == .rexburg ? "checkmark" : "globe")) { [self] action in
+    let rexburgItem = UIAction(title: "Rexburg, ID", image: UIImage(systemName: userLocation == .rexburg ? "checkmark" : "")) { [self] action in
       userLocation = .rexburg
     }
     
@@ -245,7 +245,6 @@ extension LandingViewController: UICollectionViewDelegate, UICollectionViewDataS
       if let url = URL(string: "https://www.squareup.com/store/Soma_JiuJitsu_Academy/") {
         UIApplication.shared.open(url)
       }
-      //TODO: Can only switch this to a tab and bring in Square API deal with Soma's explicit API keys and permission.
 
     default:
       break
