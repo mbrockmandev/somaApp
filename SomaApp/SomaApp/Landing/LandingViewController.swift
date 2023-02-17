@@ -12,6 +12,8 @@ import MessageUI
 
 final class LandingViewController: UIViewController {
   
+  let defaults = UserDefaults.standard
+  
   enum Sections {
     case main
   }
@@ -64,29 +66,39 @@ extension LandingViewController {
   /// set location through the context menu in the upper right hand corner
   /// triggers UI updates among other things (TBD)
   private func addMenu() {
+    
     let daytonItem = UIAction(title: "Dayton, OH", image: UIImage(systemName: userLocation == .dayton ? "checkmark.circle.fill" : "")) { [self] action in
       userLocation = .dayton
-      // use the location for some reason
+      defaults.set("dayton", forKey: "userLocation")
     }
     
     let westChesterItem = UIAction(title: "West Chester, OH", image: UIImage(systemName: userLocation == .westChester ? "checkmark" : "")) { [self] action in
       userLocation = .westChester
+      defaults.set("westChester", forKey: "userLocation")
     }
     
     let oxfordItem = UIAction(title: "Oxford, OH", image: UIImage(systemName: userLocation == .oxford ? "checkmark" : "")) { [self] action in
       userLocation = .oxford
+      defaults.set("oxford", forKey: "userLocation")
     }
     
     let kokomoItem = UIAction(title: "Kokomo, IN", image: UIImage(systemName: userLocation == .kokomo ? "checkmark" : "")) { [self] action in
       userLocation = .kokomo
+      defaults.set("kokomo", forKey: "userLocation")
     }
     
     let idahoFallsItem = UIAction(title: "Idaho Falls, ID", image: UIImage(systemName: userLocation == .idahoFalls ? "checkmark" : "")) { [self] action in
       userLocation = .idahoFalls
+      defaults.set("idahoFalls", forKey: "userLocation")
     }
     
     let rexburgItem = UIAction(title: "Rexburg, ID", image: UIImage(systemName: userLocation == .rexburg ? "checkmark" : "")) { [self] action in
       userLocation = .rexburg
+      defaults.set("rexburg", forKey: "userLocation")
+    }
+    
+    if defaults.string(forKey: "userLocation") == nil {
+      defaults.set("dayton", forKey: "userLocation")
     }
     
     let menu = UIMenu(title: "", children: [daytonItem, westChesterItem, oxfordItem, kokomoItem, idahoFallsItem, rexburgItem])
@@ -238,7 +250,8 @@ extension LandingViewController: UICollectionViewDelegate, UICollectionViewDataS
       show(detailVC, sender: nil)
       
     case 2:
-      let detailVC = ScheduleViewController()
+//      let detailVC = ScheduleViewController()
+      let detailVC = UIHostingController(rootView: TodayView())
       show(detailVC, sender: nil)
       
     case 3:

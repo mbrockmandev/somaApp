@@ -57,6 +57,8 @@ struct CardView: View {
 }
 
 struct Ribbon: View {
+  
+  
   var height: CGFloat = 60
   var width: CGFloat = 20
   
