@@ -22,7 +22,11 @@ final class LandingViewController: UIViewController {
     case dayton, westChester, oxford, kokomo, idahoFalls, rexburg
   }
   
-  var userLocation: Locations = .dayton
+  var userLocation: Locations = .dayton {
+    didSet {
+      addMenu()
+    }
+  }
   
   let pagingVC = UIPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal)
   var topPagingVCs: [UIViewController] = []
@@ -72,27 +76,27 @@ extension LandingViewController {
       defaults.set("dayton", forKey: "userLocation")
     }
     
-    let westChesterItem = UIAction(title: "West Chester, OH", image: UIImage(systemName: userLocation == .westChester ? "checkmark" : "")) { [self] action in
+    let westChesterItem = UIAction(title: "West Chester, OH", image: UIImage(systemName: userLocation == .westChester ? "checkmark.circle.fill" : "")) { [self] action in
       userLocation = .westChester
       defaults.set("westChester", forKey: "userLocation")
     }
     
-    let oxfordItem = UIAction(title: "Oxford, OH", image: UIImage(systemName: userLocation == .oxford ? "checkmark" : "")) { [self] action in
+    let oxfordItem = UIAction(title: "Oxford, OH", image: UIImage(systemName: userLocation == .oxford ? "checkmark.circle.fill" : "")) { [self] action in
       userLocation = .oxford
       defaults.set("oxford", forKey: "userLocation")
     }
     
-    let kokomoItem = UIAction(title: "Kokomo, IN", image: UIImage(systemName: userLocation == .kokomo ? "checkmark" : "")) { [self] action in
+    let kokomoItem = UIAction(title: "Kokomo, IN", image: UIImage(systemName: userLocation == .kokomo ? "checkmark.circle.fill" : "")) { [self] action in
       userLocation = .kokomo
       defaults.set("kokomo", forKey: "userLocation")
     }
     
-    let idahoFallsItem = UIAction(title: "Idaho Falls, ID", image: UIImage(systemName: userLocation == .idahoFalls ? "checkmark" : "")) { [self] action in
+    let idahoFallsItem = UIAction(title: "Idaho Falls, ID", image: UIImage(systemName: userLocation == .idahoFalls ? "checkmark.circle.fill" : "")) { [self] action in
       userLocation = .idahoFalls
       defaults.set("idahoFalls", forKey: "userLocation")
     }
     
-    let rexburgItem = UIAction(title: "Rexburg, ID", image: UIImage(systemName: userLocation == .rexburg ? "checkmark" : "")) { [self] action in
+    let rexburgItem = UIAction(title: "Rexburg, ID", image: UIImage(systemName: userLocation == .rexburg ? "checkmark.circle.fill" : "")) { [self] action in
       userLocation = .rexburg
       defaults.set("rexburg", forKey: "userLocation")
     }
@@ -156,11 +160,8 @@ extension LandingViewController {
   
   private func style() {
     view.backgroundColor = .systemBackground
-    
     navigationController?.navigationBar.topItem?.title = "Soma Academy"
-    
     turnTamicOffFor(pagingVC.view, cv)
-    
   }
   
   private func layout() {
@@ -250,7 +251,6 @@ extension LandingViewController: UICollectionViewDelegate, UICollectionViewDataS
       show(detailVC, sender: nil)
       
     case 2:
-//      let detailVC = ScheduleViewController()
       let detailVC = UIHostingController(rootView: TodayView())
       show(detailVC, sender: nil)
       

@@ -15,7 +15,7 @@ final class SomaTabController: UITabBarController {
     let landingVC = LandingViewController()
     let listingVC = ListingViewController()
     let messageVC = MessageViewController()
-    let infoVC = UIHostingController(rootView: InfoView())
+    let studentVC = StudentViewController()
     
     let landingTabBarItem = UITabBarItem(title: "Welcome", image: UIImage(systemName: "house"), selectedImage: UIImage(systemName: "house.fill"))
     let listingTabBarItem = UITabBarItem(title: "Videos", image: UIImage(systemName: "video"), selectedImage: UIImage(systemName: "video.fill"))
@@ -25,9 +25,18 @@ final class SomaTabController: UITabBarController {
     landingVC.tabBarItem = landingTabBarItem
     listingVC.tabBarItem = listingTabBarItem
     messageVC.tabBarItem = messageTabBarItem
-    infoVC.tabBarItem = infoTabBarItem
+    studentVC.tabBarItem = infoTabBarItem
     
-    let controllers = [landingVC, listingVC, messageVC, infoVC]
+    UITabBar.appearance().barTintColor = UIColor.systemBackground
+    UITabBar.appearance().tintColor = .tintColor
+    UITabBar.appearance().isTranslucent = true
+    
+    let appearance = UITabBarAppearance()
+    appearance.backgroundColor = UIColor.systemBackground
+    UITabBar.appearance().standardAppearance = appearance
+    UITabBar.appearance().scrollEdgeAppearance = UITabBar.appearance().standardAppearance
+    
+    let controllers = [landingVC, listingVC, messageVC, studentVC]
     viewControllers = controllers.map { UINavigationController(rootViewController: $0) }
     
     #if DEBUG

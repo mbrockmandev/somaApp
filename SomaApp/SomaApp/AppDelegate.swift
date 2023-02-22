@@ -6,36 +6,36 @@
 //
 
 import UIKit
-import FirebaseCore
-import FirebaseMessaging
+//import FirebaseCore
+//import FirebaseMessaging
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
   
-  let gcmMessageIDKey = "gcm.Message_ID"
+//  let gcmMessageIDKey = "gcm.Message_ID"
 
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
     // Override point for customization after application launch.
     
     // Push Notifications
-    FirebaseApp.configure()
+//    FirebaseApp.configure()
   
-    UNUserNotificationCenter.current().delegate = self
+//    UNUserNotificationCenter.current().delegate = self
     
-    let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
-    UNUserNotificationCenter.current().requestAuthorization(
-      options: authOptions,
-      completionHandler: { _, _ in }
-    )
+//    let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
+//    UNUserNotificationCenter.current().requestAuthorization(
+//      options: authOptions,
+//      completionHandler: { _, _ in }
+//    )
     
-    application.registerForRemoteNotifications()
+//    application.registerForRemoteNotifications()
     
     // Messaging Delegate
-    Messaging.messaging().delegate = self
+//    Messaging.messaging().delegate = self
     
     return true
   }
-
+/*
   // MARK: UISceneSession Lifecycle
 
   func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {
@@ -124,4 +124,5 @@ extension AppDelegate: MessagingDelegate {
       // Note: This callback is fired at each app startup and whenever a new token is generated.
   }
 
+ */
 }

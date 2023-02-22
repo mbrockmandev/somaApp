@@ -29,7 +29,7 @@ class TileCell: UICollectionViewCell {
     
     addSubviews(tileLabel, underlineView)
     
-    backgroundColor = .systemBackground.withAlphaComponent(0.6)
+    backgroundColor = .systemBackground.withAlphaComponent(0.7)
     layer.cornerRadius = 20
     tileLabel.font = .preferredFont(forTextStyle: .headline).bold()
 

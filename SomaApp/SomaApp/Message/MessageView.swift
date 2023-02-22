@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-import FirebaseCore
+//import FirebaseCore
 
 
 struct MessageView: View {

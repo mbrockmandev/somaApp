@@ -11,28 +11,44 @@ import UIKit
 
 class RulesViewController: UIViewController {
   
-  let stackView = UIStackView()
+  private var tableView: UITableView!
+  private var expandedSection: Int?
+  var rules = [
+    "Keep your gi clean",
+    "Show up on time",
+    "Be respectful",
+    "Trim your nails",
+    "No rolling with other inexperienced white belts",
+  ]
+  
+  var sections = [
+    "Hygiene",
+    "Humility",
+    "Respect",
+  ]
   
   let titleLabel = UILabel()
-  let imageView = UIImageView()
+  let backgroundImageView = UIImageView()
   let subtitleLabel = UILabel()
   let bodyLabel = UILabel()
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    setupTableView()
     style()
     layout()
   }
 }
 
 extension RulesViewController {
+  private func setupTableView() {
+    tableView = UITableView(frame: .zero)
+    tableView.delegate = self
+    tableView.dataSource = self
+    tableView.register(RuleCell.self)
+  }
   func style() {
     view.backgroundColor = .systemBackground
-
-    // container
-    stackView.axis = .vertical
-    stackView.spacing = K.inset
-    stackView.distribution = .equalCentering
     
     // soma
     titleLabel.text = "Soma Academy"
@@ -40,36 +56,54 @@ extension RulesViewController {
     titleLabel.font = .preferredFont(forTextStyle: .largeTitle).bold()
     
     // logo
-    imageView.contentMode = .scaleAspectFit
-    imageView.image = UIImage(named: "soma_crest")
-    
-    // rules subtitle
-    subtitleLabel.text = "Rules of Etiquette"
-    subtitleLabel.textAlignment = .center
-    subtitleLabel.font = UIFont.preferredFont(forTextStyle: .title1).bold()
-    
-    // body text
-    bodyLabel.textAlignment = .center
-    bodyLabel.font = UIFont.preferredFont(forTextStyle: .title3)
-    bodyLabel.adjustsFontForContentSizeCategory = true
-    bodyLabel.numberOfLines = 0
-    bodyLabel.text = "Text here!"
+    backgroundImageView.contentMode = .scaleAspectFit
+    backgroundImageView.image = UIImage(named: "soma_red_black")
+    backgroundImageView.layer.opacity = 0.1
   }
   
   func layout() {
-    turnTamicOffFor(titleLabel, stackView, imageView, bodyLabel)
-    stackView.addArrangedSubviews(titleLabel, imageView, subtitleLabel, bodyLabel)
-    stackView.setCustomSpacing(30, after: subtitleLabel)
-    
-    view.addSubview(stackView)
-    
+    turnTamicOffFor(tableView, titleLabel, backgroundImageView)
+    view.addSubviews(tableView, titleLabel, backgroundImageView)
+        
     NSLayoutConstraint.activate([
-      stackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: K.inset),
-      stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: K.inset),
-      stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -K.inset),
-      stackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -K.inset),
+      backgroundImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+      backgroundImageView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+      backgroundImageView.heightAnchor.constraint(equalToConstant: 240),
+      backgroundImageView.widthAnchor.constraint(equalToConstant: 300),
+      
+      titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: K.inset),
+      titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+      
+      tableView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: K.inset),
+      tableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: K.inset),
+      tableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -K.inset),
+      tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -K.inset),
+      
+      
     ])
   }
+}
+
+extension RulesViewController: UITableViewDelegate, UITableViewDataSource {
+  func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    let cell = tableView.dequeueReusableCell(withIdentifier: RuleCell.reuseID, for: indexPath) as! RuleCell
+    let rule = rules[indexPath.item]
+    cell.configure(with: rule)
+    return cell
+  }
+  
+  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    return rules.count
+  }
+  
+  func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    return sections.randomElement()
+  }
+  
+  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    tableView.deselectRow(at: indexPath, animated: true)
+  }
+  
 }
 
 #if DEBUG

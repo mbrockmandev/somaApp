@@ -21,8 +21,6 @@
 		2781E59D2983FF1B0029366A /* InstructorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2781E59C2983FF1B0029366A /* InstructorView.swift */; };
 		2781E59F298405040029366A /* ViewModifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2781E59E298405040029366A /* ViewModifiers.swift */; };
 		2781E5A129847AD30029366A /* PrefKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2781E5A029847AD30029366A /* PrefKeys.swift */; };
-		2781E5A42984A2CC0029366A /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 2781E5A32984A2CC0029366A /* FirebaseMessaging */; };
-		2781E5B029855E810029366A /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 2781E5AF29855E810029366A /* FirebaseMessaging */; };
 		279654D1297CD1BD00F15177 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279654D0297CD1BD00F15177 /* Constants.swift */; };
 		279654D3297CD4EF00F15177 /* Video.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279654D2297CD4EF00F15177 /* Video.swift */; };
 		279654D5297CD52000F15177 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279654D4297CD52000F15177 /* Model.swift */; };
@@ -33,8 +31,8 @@
 		279654E5297D6A4700F15177 /* UIView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279654E4297D6A4700F15177 /* UIView+Ext.swift */; };
 		279654E7297D71B900F15177 /* CacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279654E6297D71B900F15177 /* CacheManager.swift */; };
 		279654E9297D732800F15177 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279654E8297D732800F15177 /* DetailViewController.swift */; };
-		27A3F9C629983BB400E76F05 /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A3F9C529983BB400E76F05 /* InfoViewController.swift */; };
-		27A3F9CA2998465400E76F05 /* InfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A3F9C92998465400E76F05 /* InfoView.swift */; };
+		27A3F9C629983BB400E76F05 /* StudentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A3F9C529983BB400E76F05 /* StudentViewController.swift */; };
+		27A3F9CA2998465400E76F05 /* StudentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A3F9C92998465400E76F05 /* StudentView.swift */; };
 		27A727F9297A31EF00856CF3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A727F8297A31EF00856CF3 /* AppDelegate.swift */; };
 		27A727FB297A31EF00856CF3 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A727FA297A31EF00856CF3 /* SceneDelegate.swift */; };
 		27A72802297A31F000856CF3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 27A72801297A31F000856CF3 /* Assets.xcassets */; };
@@ -43,6 +41,7 @@
 		27A7281A297A31F000856CF3 /* SomaAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A72819297A31F000856CF3 /* SomaAppUITests.swift */; };
 		27A7281C297A31F000856CF3 /* SomaAppUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A7281B297A31F000856CF3 /* SomaAppUITestsLaunchTests.swift */; };
 		27A7282A297A329500856CF3 /* SomaTabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A72829297A329500856CF3 /* SomaTabController.swift */; };
+		27B4124929A413AE005DB1BC /* RuleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27B4124829A413AE005DB1BC /* RuleCell.swift */; };
 		27C06547297C65CA001AE3CD /* ItemSupplementaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C06546297C65CA001AE3CD /* ItemSupplementaryView.swift */; };
 		27C45FBA297F462800D6B6B8 /* Date+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C45FB9297F462800D6B6B8 /* Date+Ext.swift */; };
 		27C45FC22980088C00D6B6B8 /* Profiles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C45FC12980088C00D6B6B8 /* Profiles.swift */; };
@@ -54,9 +53,6 @@
 		27C45FCF29833B1100D6B6B8 /* Bundle+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C45FCE29833B1100D6B6B8 /* Bundle+Ext.swift */; };
 		27C45FD129833B5A00D6B6B8 /* ProfileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C45FD029833B5A00D6B6B8 /* ProfileManager.swift */; };
 		27C45FD32983506D00D6B6B8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 27C45FD22983506C00D6B6B8 /* GoogleService-Info.plist */; };
-		27C45FD6298351DD00D6B6B8 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 27C45FD5298351DD00D6B6B8 /* FirebaseAnalytics */; };
-		27C45FD8298351DD00D6B6B8 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 27C45FD7298351DD00D6B6B8 /* FirebaseAuth */; };
-		27C45FDA298351DD00D6B6B8 /* FirebaseInAppMessagingSwift-Beta in Frameworks */ = {isa = PBXBuildFile; productRef = 27C45FD9298351DD00D6B6B8 /* FirebaseInAppMessagingSwift-Beta */; };
 		27EF30BF297EA887003C4BAB /* TileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27EF30BE297EA887003C4BAB /* TileViewController.swift */; };
 		27EF30C3297EAD19003C4BAB /* LandingHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27EF30C2297EAD19003C4BAB /* LandingHeaderView.swift */; };
 		27F8541C29988D3B00551D91 /* RulesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27F8541B29988D3B00551D91 /* RulesView.swift */; };
@@ -106,8 +102,8 @@
 		279654E4297D6A4700F15177 /* UIView+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Ext.swift"; sourceTree = "<group>"; };
 		279654E6297D71B900F15177 /* CacheManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheManager.swift; sourceTree = "<group>"; };
 		279654E8297D732800F15177 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
-		27A3F9C529983BB400E76F05 /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
-		27A3F9C92998465400E76F05 /* InfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoView.swift; sourceTree = "<group>"; };
+		27A3F9C529983BB400E76F05 /* StudentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentViewController.swift; sourceTree = "<group>"; };
+		27A3F9C92998465400E76F05 /* StudentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentView.swift; sourceTree = "<group>"; };
 		27A727F5297A31EF00856CF3 /* SomaApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SomaApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		27A727F8297A31EF00856CF3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		27A727FA297A31EF00856CF3 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -120,6 +116,7 @@
 		27A72819297A31F000856CF3 /* SomaAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SomaAppUITests.swift; sourceTree = "<group>"; };
 		27A7281B297A31F000856CF3 /* SomaAppUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SomaAppUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		27A72829297A329500856CF3 /* SomaTabController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SomaTabController.swift; sourceTree = "<group>"; };
+		27B4124829A413AE005DB1BC /* RuleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RuleCell.swift; sourceTree = "<group>"; };
 		27C06546297C65CA001AE3CD /* ItemSupplementaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemSupplementaryView.swift; sourceTree = "<group>"; };
 		27C45FB9297F462800D6B6B8 /* Date+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Ext.swift"; sourceTree = "<group>"; };
 		27C45FC12980088C00D6B6B8 /* Profiles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profiles.swift; sourceTree = "<group>"; };
@@ -142,10 +139,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2781E5A42984A2CC0029366A /* FirebaseMessaging in Frameworks */,
-				27C45FD6298351DD00D6B6B8 /* FirebaseAnalytics in Frameworks */,
-				27C45FDA298351DD00D6B6B8 /* FirebaseInAppMessagingSwift-Beta in Frameworks */,
-				27C45FD8298351DD00D6B6B8 /* FirebaseAuth in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -153,7 +146,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2781E5B029855E810029366A /* FirebaseMessaging in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -183,17 +175,18 @@
 			children = (
 				270462072992D51C00EAEE21 /* RulesViewController.swift */,
 				27F8541B29988D3B00551D91 /* RulesView.swift */,
+				27B4124829A413AE005DB1BC /* RuleCell.swift */,
 			);
 			path = Rules;
 			sourceTree = "<group>";
 		};
-		2700B6A52996E6E7002185A8 /* Info */ = {
+		2700B6A52996E6E7002185A8 /* Student */ = {
 			isa = PBXGroup;
 			children = (
-				27A3F9C529983BB400E76F05 /* InfoViewController.swift */,
-				27A3F9C92998465400E76F05 /* InfoView.swift */,
+				27A3F9C529983BB400E76F05 /* StudentViewController.swift */,
+				27A3F9C92998465400E76F05 /* StudentView.swift */,
 			);
-			path = Info;
+			path = Student;
 			sourceTree = "<group>";
 		};
 		2700B6A62996EE67002185A8 /* Instructors */ = {
@@ -317,7 +310,7 @@
 				27A7282F297A33D200856CF3 /* Listing */,
 				27C45FC92982A5E300D6B6B8 /* Message */,
 				27A72828297A321300856CF3 /* Files */,
-				2700B6A52996E6E7002185A8 /* Info */,
+				2700B6A52996E6E7002185A8 /* Student */,
 				27A727F8297A31EF00856CF3 /* AppDelegate.swift */,
 				27A727FA297A31EF00856CF3 /* SceneDelegate.swift */,
 				27A72829297A329500856CF3 /* SomaTabController.swift */,
@@ -404,10 +397,6 @@
 			);
 			name = SomaApp;
 			packageProductDependencies = (
-				27C45FD5298351DD00D6B6B8 /* FirebaseAnalytics */,
-				27C45FD7298351DD00D6B6B8 /* FirebaseAuth */,
-				27C45FD9298351DD00D6B6B8 /* FirebaseInAppMessagingSwift-Beta */,
-				2781E5A32984A2CC0029366A /* FirebaseMessaging */,
 			);
 			productName = SomaApp;
 			productReference = 27A727F5297A31EF00856CF3 /* SomaApp.app */;
@@ -428,7 +417,6 @@
 			);
 			name = SomaAppTests;
 			packageProductDependencies = (
-				2781E5AF29855E810029366A /* FirebaseMessaging */,
 			);
 			productName = SomaAppTests;
 			productReference = 27A7280B297A31F000856CF3 /* SomaAppTests.xctest */;
@@ -485,7 +473,6 @@
 			);
 			mainGroup = 27A727EC297A31EF00856CF3;
 			packageReferences = (
-				27C45FD4298351DD00D6B6B8 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 			);
 			productRefGroup = 27A727F6297A31EF00856CF3 /* Products */;
 			projectDirPath = "";
@@ -538,7 +525,7 @@
 				27EF30C3297EAD19003C4BAB /* LandingHeaderView.swift in Sources */,
 				27F8541E29988E2300551D91 /* ScheduleView.swift in Sources */,
 				279654D9297D500600F15177 /* ListingViewController.swift in Sources */,
-				27A3F9CA2998465400E76F05 /* InfoView.swift in Sources */,
+				27A3F9CA2998465400E76F05 /* StudentView.swift in Sources */,
 				27C45FC829820DB500D6B6B8 /* ListingDetailView.swift in Sources */,
 				27C45FBA297F462800D6B6B8 /* Date+Ext.swift in Sources */,
 				276BEDFB297E1AD900660252 /* CardViewController.swift in Sources */,
@@ -551,10 +538,11 @@
 				27645B5D299C795A004729F8 /* TodayView.swift in Sources */,
 				2781E59F298405040029366A /* ViewModifiers.swift in Sources */,
 				27C45FD129833B5A00D6B6B8 /* ProfileManager.swift in Sources */,
-				27A3F9C629983BB400E76F05 /* InfoViewController.swift in Sources */,
+				27A3F9C629983BB400E76F05 /* StudentViewController.swift in Sources */,
 				2781E59D2983FF1B0029366A /* InstructorView.swift in Sources */,
 				27C45FC42981583800D6B6B8 /* InstructorDetailView.swift in Sources */,
 				2781E5A129847AD30029366A /* PrefKeys.swift in Sources */,
+				27B4124929A413AE005DB1BC /* RuleCell.swift in Sources */,
 				27C45FCB2982A5F300D6B6B8 /* MessageView.swift in Sources */,
 				279654D3297CD4EF00F15177 /* Video.swift in Sources */,
 				279654E9297D732800F15177 /* DetailViewController.swift in Sources */,
@@ -906,45 +894,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCRemoteSwiftPackageReference section */
-		27C45FD4298351DD00D6B6B8 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
-			requirement = {
-				branch = master;
-				kind = branch;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		2781E5A32984A2CC0029366A /* FirebaseMessaging */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 27C45FD4298351DD00D6B6B8 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseMessaging;
-		};
-		2781E5AF29855E810029366A /* FirebaseMessaging */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 27C45FD4298351DD00D6B6B8 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseMessaging;
-		};
-		27C45FD5298351DD00D6B6B8 /* FirebaseAnalytics */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 27C45FD4298351DD00D6B6B8 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseAnalytics;
-		};
-		27C45FD7298351DD00D6B6B8 /* FirebaseAuth */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 27C45FD4298351DD00D6B6B8 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseAuth;
-		};
-		27C45FD9298351DD00D6B6B8 /* FirebaseInAppMessagingSwift-Beta */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 27C45FD4298351DD00D6B6B8 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = "FirebaseInAppMessagingSwift-Beta";
-		};
-/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 27A727ED297A31EF00856CF3 /* Project object */;
 }
