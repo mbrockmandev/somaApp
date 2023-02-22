@@ -18,6 +18,7 @@ class StudentViewController: UIViewController {
   let button2 = UIButton(configuration: .borderedTinted())
   let button3 = UIButton(configuration: .borderedTinted())
   let button4 = UIButton(configuration: .borderedTinted())
+  let button5 = UIButton(configuration: .borderedTinted())
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -55,8 +56,12 @@ class StudentViewController: UIViewController {
     button4.setTitle("Dayton AM Foundations Class", for: .normal)
     button4.addTarget(self, action: #selector(buttonTapped(_:)), for: .touchUpInside)
     
-    view.addSubviews(button1, button2, button3, button4)
-    turnTamicOffFor(button1, button2, button3, button4)
+    button5.setTitle("NEW WAIVER", for: .normal)
+    button5.addTarget(self, action: #selector(buttonTapped(_:)), for: .touchUpInside)
+  
+    
+    view.addSubviews(button1, button2, button3, button4, button5)
+    turnTamicOffFor(button1, button2, button3, button4, button5)
     
     NSLayoutConstraint.activate([
       button1.centerXAnchor.constraint(equalTo: view.centerXAnchor),
@@ -70,6 +75,10 @@ class StudentViewController: UIViewController {
       
       button4.centerXAnchor.constraint(equalTo: view.centerXAnchor),
       button4.topAnchor.constraint(equalTo: button3.bottomAnchor, constant: 50),
+      
+      button5.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+      button5.topAnchor.constraint(equalTo: button4.bottomAnchor, constant: 50),
+      
     ])
     
     self.view = view
@@ -94,10 +103,6 @@ extension StudentViewController {
     }))
     
     present(alert, animated: true, completion: nil)
-  }
-  
-  private func style() {
-    
   }
 
 }
@@ -136,11 +141,13 @@ extension StudentViewController {
     case button1:
       launchURL("https://www.onetapcheckin.com/p#/checkin?uniqueId=JB5aisH7SR700nON8e8TN")
     case button2:
-      launchURL("https://example.com/button2")
+      launchURL("https://www.onetapcheckin.com/p#/checkin?uniqueId=XumwCupvm5MhDYOmrN1pe")
     case button3:
-      launchURL("https://example.com/button3")
+      launchURL("https://www.onetapcheckin.com/p#/checkin?uniqueId=XPYc1hcOLCNwMY2Isj0gt")
     case button4:
-      launchURL("https://example.com/button4")
+      launchURL("https://www.onetapcheckin.com/p#/checkin?uniqueId=vXjO543hS5vlw_Dhe5MBg")
+    case button5:
+      launchURL("https://app.cleverwaiver.com/render/templateByRefId/63e240e2d6200e25a9d14796")
     default:
       break
     }
