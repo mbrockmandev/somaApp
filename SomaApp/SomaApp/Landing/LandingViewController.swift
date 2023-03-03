@@ -169,6 +169,7 @@ extension LandingViewController {
     let backgroundImageView = UIImageView(image: UIImage(named: "soma_red_black"))
     backgroundImageView.translatesAutoresizingMaskIntoConstraints = false
     backgroundImageView.contentMode = .scaleAspectFill
+    backgroundImageView.layer.opacity = 0.3
     
     view.addSubviews(pagingVC.view, backgroundImageView, cv)
     view.sendSubviewToBack(backgroundImageView)

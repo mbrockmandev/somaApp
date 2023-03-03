@@ -22,6 +22,8 @@ class ListingCVCell: UICollectionViewCell {
   required init?(coder: NSCoder) { fatalError("NO STORYBOARD") }
   
   private func configure() {
+    
+    
     layer.shadowColor  = .init(gray: 1, alpha: 1)
     layer.shadowRadius = 10
 
@@ -34,7 +36,7 @@ class ListingCVCell: UICollectionViewCell {
     titleLabel.font                       = .preferredFont(forTextStyle: .body)
     titleLabel.textColor                  = .white
     titleLabel.adjustsFontSizeToFitWidth  = true
-    titleLabel.minimumScaleFactor         = 0.9
+    titleLabel.minimumScaleFactor         = 0.7
     titleLabel.shadowColor                = .systemGray5
     titleLabel.layer.shadowRadius         = 5
     titleLabel.lineBreakMode              = .byWordWrapping
@@ -50,9 +52,17 @@ class ListingCVCell: UICollectionViewCell {
       
       titleLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
       titleLabel.topAnchor.constraint(equalTo: imageView.topAnchor, constant: K.inset),
-      titleLabel.leadingAnchor.constraint(equalTo: imageView.leadingAnchor, constant: K.inset),
-      titleLabel.trailingAnchor.constraint(equalTo: imageView.trailingAnchor, constant: -K.inset),
+      titleLabel.leadingAnchor.constraint(equalTo: imageView.leadingAnchor, constant: K.inset * 2),
+      titleLabel.trailingAnchor.constraint(equalTo: imageView.trailingAnchor, constant: -K.inset * 2),
+      
+      
     ])
+    
+    let blurEffect = UIBlurEffect(style: .light)
+    let blurView = UIVisualEffectView(effect: blurEffect)
+//    blurView.frame = titleLabel.frame
+    blurView.pinToEdges(titleLabel)
+    titleLabel.superview?.insertSubview(blurView, belowSubview: titleLabel)
   }
   
   func set(with v: Video) {
@@ -89,5 +99,17 @@ class ListingCVCell: UICollectionViewCell {
   
 }
 
+  //MARK: SwiftUI Style Preview for UIKit
+#if DEBUG
+import SwiftUI
 
-
+struct ListingCellPreviews: PreviewProvider {
+  static var previews: some View {
+    SomaTabControllerPreview {
+      let vc = SomaTabController()
+      vc.selectedIndex = 1
+      return vc
+    }
+  }
+}
+#endif

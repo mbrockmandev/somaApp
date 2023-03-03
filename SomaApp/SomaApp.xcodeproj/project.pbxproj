@@ -32,7 +32,7 @@
 		279654E7297D71B900F15177 /* CacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279654E6297D71B900F15177 /* CacheManager.swift */; };
 		279654E9297D732800F15177 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279654E8297D732800F15177 /* DetailViewController.swift */; };
 		27A3F9C629983BB400E76F05 /* StudentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A3F9C529983BB400E76F05 /* StudentViewController.swift */; };
-		27A3F9CA2998465400E76F05 /* StudentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A3F9C92998465400E76F05 /* StudentView.swift */; };
+		27A3F9CA2998465400E76F05 /* PrototypeInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A3F9C92998465400E76F05 /* PrototypeInfoView.swift */; };
 		27A727F9297A31EF00856CF3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A727F8297A31EF00856CF3 /* AppDelegate.swift */; };
 		27A727FB297A31EF00856CF3 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A727FA297A31EF00856CF3 /* SceneDelegate.swift */; };
 		27A72802297A31F000856CF3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 27A72801297A31F000856CF3 /* Assets.xcassets */; };
@@ -103,7 +103,7 @@
 		279654E6297D71B900F15177 /* CacheManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheManager.swift; sourceTree = "<group>"; };
 		279654E8297D732800F15177 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		27A3F9C529983BB400E76F05 /* StudentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentViewController.swift; sourceTree = "<group>"; };
-		27A3F9C92998465400E76F05 /* StudentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentView.swift; sourceTree = "<group>"; };
+		27A3F9C92998465400E76F05 /* PrototypeInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrototypeInfoView.swift; sourceTree = "<group>"; };
 		27A727F5297A31EF00856CF3 /* SomaApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SomaApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		27A727F8297A31EF00856CF3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		27A727FA297A31EF00856CF3 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -184,7 +184,7 @@
 			isa = PBXGroup;
 			children = (
 				27A3F9C529983BB400E76F05 /* StudentViewController.swift */,
-				27A3F9C92998465400E76F05 /* StudentView.swift */,
+				27A3F9C92998465400E76F05 /* PrototypeInfoView.swift */,
 			);
 			path = Student;
 			sourceTree = "<group>";
@@ -525,7 +525,7 @@
 				27EF30C3297EAD19003C4BAB /* LandingHeaderView.swift in Sources */,
 				27F8541E29988E2300551D91 /* ScheduleView.swift in Sources */,
 				279654D9297D500600F15177 /* ListingViewController.swift in Sources */,
-				27A3F9CA2998465400E76F05 /* StudentView.swift in Sources */,
+				27A3F9CA2998465400E76F05 /* PrototypeInfoView.swift in Sources */,
 				27C45FC829820DB500D6B6B8 /* ListingDetailView.swift in Sources */,
 				27C45FBA297F462800D6B6B8 /* Date+Ext.swift in Sources */,
 				276BEDFB297E1AD900660252 /* CardViewController.swift in Sources */,

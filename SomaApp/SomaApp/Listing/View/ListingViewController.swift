@@ -21,10 +21,10 @@ final class ListingViewController: UIViewController {
   ]
   
   let standingSections = [
-    Model.Section(uuid: UUID().uuidString, title: "Strike"),
-    Model.Section(uuid: UUID().uuidString, title: "Hold"),
-    Model.Section(uuid: UUID().uuidString, title: "Strangle"),
-    Model.Section(uuid: UUID().uuidString, title: "Weapon"),
+    Model.Section(uuid: UUID().uuidString, title: "Strikes"),
+    Model.Section(uuid: UUID().uuidString, title: "Holds"),
+    Model.Section(uuid: UUID().uuidString, title: "Strangles"),
+    Model.Section(uuid: UUID().uuidString, title: "Weapons"),
   ]
   
   var dataSource: UICollectionViewDiffableDataSource<Model.Section, Video>! = nil
@@ -42,8 +42,30 @@ final class ListingViewController: UIViewController {
     configureDataSource()
     
     addMenu()
+    configureUI()
   }
   
+  private func configureUI() {
+    let backgroundImageView = UIImageView(image: UIImage(named: "soma_red_black"))
+    backgroundImageView.translatesAutoresizingMaskIntoConstraints = false
+    backgroundImageView.contentMode = .scaleAspectFill
+    backgroundImageView.layer.opacity = 0.3
+    backgroundImageView.layer.zPosition = -1
+    
+    view.addSubviews(collectionView, backgroundImageView)
+    turnTamicOffFor(backgroundImageView, collectionView)
+        
+    NSLayoutConstraint.activate([
+      backgroundImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+      backgroundImageView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+      
+      collectionView.topAnchor.constraint(equalTo: view.topAnchor, constant: K.inset),
+      collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: K.inset * 2),
+      collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -K.inset),
+      collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -K.inset),
+    ])
+    
+  }
 
   private func addMenu() {
     let groundItem = UIAction(title: "Ground", image: UIImage(systemName: model.currentSubset == .ground ? "star.fill" : "star")) { [self] action in
@@ -90,21 +112,10 @@ extension ListingViewController: UICollectionViewDelegate {
   
   private func configureCollectionView() {
     collectionView = UICollectionView(frame: view.frame, collectionViewLayout: createLayout())
-    collectionView.backgroundColor = .secondarySystemBackground
     collectionView.register(ListingCVCell.self)
+    collectionView.backgroundColor = .clear
     collectionView.register(ItemSupplementaryView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: ItemSupplementaryView.reuseID)
     collectionView.delegate = self
-    
-    view.addSubview(collectionView)
-    
-    collectionView.translatesAutoresizingMaskIntoConstraints = false
-    
-    NSLayoutConstraint.activate([
-      collectionView.topAnchor.constraint(equalTo: view.topAnchor, constant: K.inset),
-      collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: K.inset * 2),
-      collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -K.inset),
-      collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -K.inset),
-    ])
   }
   
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -114,14 +125,6 @@ extension ListingViewController: UICollectionViewDelegate {
     let detailVC = UIHostingController(rootView: ListingDetailView(title: video.title, videoId: video.videoId))
     show(detailVC, sender: nil)
     
-
-    // uikit version
-    //    let urlString = Constants.YT_PLAY_URL + video.videoId + Constants.YT_INLINE_YES
-    //    guard let url = URL(string: urlString) else { return }
-    
-    //    let detailVC = DetailViewController()
-    //    detailVC.url = video.url
-    //    present(detailVC, animated: true)
   }
   
   private func configureDataSource() {
@@ -141,7 +144,8 @@ extension ListingViewController: UICollectionViewDelegate {
       if let self, let itemSupplementaryView = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: ItemSupplementaryView.reuseID, for: indexPath) as? ItemSupplementaryView {
         
         let _ = self.dataSource.snapshot().sectionIdentifiers[indexPath.section]
-        let sectionIndex = self.model.whichMonth + indexPath.section - 1
+        var sectionIndex = self.model.whichMonth + indexPath.section - 1
+        if sectionIndex > 3 { sectionIndex = 0 } //hacky way to get rid of out of index error
         
         switch self.model.currentSubset {
         case .standing:
@@ -217,3 +221,20 @@ extension ListingViewController: ModelDelegate {
     updateData()
   }
 }
+
+  //MARK: SwiftUI Style Preview for UIKit
+#if DEBUG
+import SwiftUI
+
+struct ListingPreviews: PreviewProvider {
+  static var previews: some View {
+    SomaTabControllerPreview {
+      let vc = SomaTabController()
+      vc.selectedIndex = 1
+      return vc
+    }
+  }
+}
+#endif
+
+

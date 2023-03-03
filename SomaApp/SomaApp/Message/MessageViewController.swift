@@ -11,12 +11,14 @@ import MessageUI
 class MessageViewController: UIViewController {
   
   //MARK: - Properties
+  let backgroundImageView = UIImageView(image: UIImage(named: "soma_red_black"))
   let subtitleLabel = UILabel()
   let textView = UITextView(frame: .init(x: 0, y: 0, width: 390, height: 500))
   let placeholderText = "Enter your message here…"
   var userInput = ""
   let dismissBtn = UIButton()
   let submitButton = UIButton(type: .system)
+  let backgroundTextView = UIView()
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -28,6 +30,11 @@ class MessageViewController: UIViewController {
 extension MessageViewController {
   private func style() {
     view.backgroundColor = .systemBackground
+    
+    backgroundImageView.contentMode = .scaleAspectFill
+    backgroundImageView.layer.opacity = 0.3
+    backgroundImageView.layer.cornerRadius = 20
+    backgroundImageView.clipsToBounds = true
     
     title = "Email Us!"
     
@@ -50,7 +57,7 @@ extension MessageViewController {
     textView.textColor = .secondaryLabel
     textView.autocorrectionType = .default
     textView.autocapitalizationType = .sentences
-    textView.backgroundColor = .secondarySystemBackground
+    textView.backgroundColor = .clear
     textView.inputAccessoryView = dismissBtn
     
     submitButton.setTitle("Send Message".uppercased(), for: .normal)
@@ -63,24 +70,28 @@ extension MessageViewController {
   }
   
   private func layout() {
-    turnTamicOffFor(subtitleLabel, textView, submitButton)
-    view.addSubviews(subtitleLabel, textView, submitButton)
+    turnTamicOffFor(backgroundImageView, subtitleLabel, textView, submitButton)
+
+    view.addSubviews(backgroundImageView, subtitleLabel, textView, submitButton)
     
     NSLayoutConstraint.activate([
-      subtitleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: K.inset * 4),
-      subtitleLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: K.inset * 2),
-      subtitleLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -K.inset * 2),
       
       textView.topAnchor.constraint(equalTo: subtitleLabel.bottomAnchor, constant: K.inset * 3),
       textView.leadingAnchor.constraint(equalTo: subtitleLabel.leadingAnchor),
       textView.trailingAnchor.constraint(equalTo: subtitleLabel.trailingAnchor),
       textView.heightAnchor.constraint(equalToConstant: 400),
       
+      subtitleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: K.inset * 4),
+      subtitleLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: K.inset * 2),
+      subtitleLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -K.inset * 2),
+      
+      backgroundImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+      backgroundImageView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+
       submitButton.topAnchor.constraint(equalTo: textView.bottomAnchor, constant: K.inset * 3),
       submitButton.leadingAnchor.constraint(equalTo: textView.leadingAnchor),
       submitButton.trailingAnchor.constraint(equalTo: textView.trailingAnchor),
       submitButton.heightAnchor.constraint(equalToConstant: 60),
-      
     ])
   }
 }
@@ -150,21 +161,12 @@ extension MessageViewController: UITextViewDelegate {
   //MARK: - Previews
 #if DEBUG
 import SwiftUI
-struct MessageViewControllerPreview<MessageViewController: UIViewController>: UIViewControllerRepresentable {
-  func updateUIViewController(_ uiViewController: MessageViewController, context: Context) { }
-  
-  let viewController: MessageViewController
-  
-  init(_ builder: @escaping () -> MessageViewController) { viewController = builder() }
-  
-    // MARK: - UIViewControllerRepresentable
-  func makeUIViewController(context: Context) -> MessageViewController { viewController }
-}
 
-struct MessageViewController_Previews: PreviewProvider {
+struct MessagePreviews: PreviewProvider {
   static var previews: some View {
-    MessageViewControllerPreview {
-      let vc = MessageViewController()
+    SomaTabControllerPreview {
+      let vc = SomaTabController()
+      vc.selectedIndex = 2
       return vc
     }
   }

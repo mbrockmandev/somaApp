@@ -10,7 +10,11 @@ import UIKit
 
 class StudentViewController: UIViewController {
   
-  var isUserLoggedIn = true //UserDefaults.standard.bool(forKey: "isUserLoggedIn")
+  let btnColor = UIColor.systemPink
+  let defaults = UserDefaults.standard
+  let titleLabel = UILabel()
+  var isUserLoggedIn = true //TODO: Remove and replace with below
+//  var isUserLoggedIn = UserDefaults.standard.bool(forKey: "isUserLoggedIn")
   var blurView: UIVisualEffectView?
   var loginButton: UIBarButtonItem!
   let buttonLabel = UILabel()
@@ -38,46 +42,58 @@ class StudentViewController: UIViewController {
   func setupView() {
     let view = UIView()
     
+    let backgroundImageView = UIImageView(image: UIImage(named: "soma_red_black"))
+    backgroundImageView.translatesAutoresizingMaskIntoConstraints = false
+    backgroundImageView.contentMode = .scaleAspectFill
+    backgroundImageView.layer.opacity = 0.3
+    
     view.backgroundColor = .systemBackground
     loginButton = UIBarButtonItem(title: "Login", style: .plain, target: self, action: #selector(showAlert))
     navigationItem.rightBarButtonItem = loginButton
     
-    // add label to this view? (buttonLabel)
+    titleLabel.font = .preferredFont(forTextStyle: .title2).bold()
+    titleLabel.text = "Sign-In Here!"
+    
+    let buttonStackView = UIStackView()
+    buttonStackView.axis = .vertical
+    buttonStackView.alignment = .leading
+    buttonStackView.spacing = 16
     
     button1.setTitle("Dayton PM Foundations Class", for: .normal)
     button1.addTarget(self, action: #selector(buttonTapped(_:)), for: .touchUpInside)
+    button1.tintColor = btnColor
     
     button2.setTitle("Dayton Advanced Class", for: .normal)
     button2.addTarget(self, action: #selector(buttonTapped(_:)), for: .touchUpInside)
+    button2.tintColor = btnColor
     
     button3.setTitle("Dayton Skills Class", for: .normal)
     button3.addTarget(self, action: #selector(buttonTapped(_:)), for: .touchUpInside)
+    button3.tintColor = btnColor
     
     button4.setTitle("Dayton AM Foundations Class", for: .normal)
     button4.addTarget(self, action: #selector(buttonTapped(_:)), for: .touchUpInside)
+    button4.tintColor = btnColor
     
     button5.setTitle("NEW WAIVER", for: .normal)
     button5.addTarget(self, action: #selector(buttonTapped(_:)), for: .touchUpInside)
+    button5.tintColor = btnColor
   
     
-    view.addSubviews(button1, button2, button3, button4, button5)
-    turnTamicOffFor(button1, button2, button3, button4, button5)
+    buttonStackView.addArrangedSubviews(button1, button2, button3, button4, button5)
+    view.addSubviews(backgroundImageView, titleLabel, buttonStackView)
+    turnTamicOffFor(backgroundImageView, titleLabel, buttonStackView, button1, button2, button3, button4, button5)
     
     NSLayoutConstraint.activate([
-      button1.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-      button1.topAnchor.constraint(equalTo: view.topAnchor, constant: 100),
+      backgroundImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+      backgroundImageView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
       
-      button2.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-      button2.topAnchor.constraint(equalTo: button1.bottomAnchor, constant: 50),
+      titleLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: K.inset * 2),
+      titleLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -K.inset * 2),
+      titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
       
-      button3.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-      button3.topAnchor.constraint(equalTo: button2.bottomAnchor, constant: 50),
-      
-      button4.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-      button4.topAnchor.constraint(equalTo: button3.bottomAnchor, constant: 50),
-      
-      button5.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-      button5.topAnchor.constraint(equalTo: button4.bottomAnchor, constant: 50),
+      buttonStackView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: K.inset * 2),
+      buttonStackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: K.inset * 2),
       
     ])
     
@@ -138,17 +154,22 @@ extension StudentViewController {
 
   @objc func buttonTapped(_ sender: UIButton) {
     switch sender {
-    case button1:
-      launchURL("https://www.onetapcheckin.com/p#/checkin?uniqueId=JB5aisH7SR700nON8e8TN")
-    case button2:
-      launchURL("https://www.onetapcheckin.com/p#/checkin?uniqueId=XumwCupvm5MhDYOmrN1pe")
-    case button3:
-      launchURL("https://www.onetapcheckin.com/p#/checkin?uniqueId=XPYc1hcOLCNwMY2Isj0gt")
-    case button4:
-      launchURL("https://www.onetapcheckin.com/p#/checkin?uniqueId=vXjO543hS5vlw_Dhe5MBg")
-    case button5:
-      launchURL("https://app.cleverwaiver.com/render/templateByRefId/63e240e2d6200e25a9d14796")
-    default:
+    case button1: // dayton pm foundations
+      launchURL(Constants.DAYTON_PM_FOUNDATIONS_ONE_TAP)
+      
+    case button2: // dayton advanced class
+      launchURL(Constants.DAYTON_ADV_ONE_TAP)
+      
+    case button3: // dayton skills class
+      launchURL(Constants.DAYTON_SKILLS_ONE_TAP)
+      
+    case button4: // dayton am foundations class
+      launchURL(Constants.DAYTON_AM_FOUNDATIONS_ONE_TAP)
+      
+    case button5: // new waiver
+      launchURL(Constants.SOMA_WAIVER_ONE_TAP)
+      
+    default: //should not need a default?
       break
     }
   }
@@ -162,17 +183,12 @@ extension StudentViewController {
   //MARK: SwiftUI Style Preview for UIKit
 #if DEBUG
 import SwiftUI
-struct StudentViewControllerPreview<StudentViewController: UIViewController>: UIViewControllerRepresentable {
-  func updateUIViewController(_ uiViewController: StudentViewController, context: Context) { }
-  let viewController: StudentViewController
-  init(_ builder: @escaping () -> StudentViewController) { viewController = builder() }
-  func makeUIViewController(context: Context) -> StudentViewController { viewController }
-}
 
-struct InfoViewController_Previews: PreviewProvider {
+struct StudentPreviews: PreviewProvider {
   static var previews: some View {
-    StudentViewControllerPreview {
-      let vc = StudentViewController()
+    SomaTabControllerPreview {
+      let vc = SomaTabController()
+      vc.selectedIndex = 3
       return vc
     }
   }

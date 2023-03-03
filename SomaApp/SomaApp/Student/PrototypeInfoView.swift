@@ -4,10 +4,11 @@
 //
 //  Created by Michael Brockman on 2/11/23.
 //
-//TODO: Build out info view
+// TODO: Likely discard this as it was a prototype view
 
 import SwiftUI
 
+// prototype view for card layout
 struct InfoView: View {
     var body: some View {
       ZStack {
@@ -77,8 +78,8 @@ struct Ribbon: View {
   }
 }
 
-struct InfoView_Previews: PreviewProvider {
+struct CardView_Previews: PreviewProvider {
     static var previews: some View {
-        InfoView()
+      CardView(title: "title", subtitle: "subtitle")
     }
 }
