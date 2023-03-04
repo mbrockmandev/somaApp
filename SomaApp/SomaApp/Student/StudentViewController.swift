@@ -1,20 +1,20 @@
-//
-//  StudentViewController.swift
-//  SomaApp
-//
-//  Created by Michael Brockman on 2/11/23.
-//
-//TODO: add info details...
+  //
+  //  StudentViewController.swift
+  //  SomaApp
+  //
+  //  Created by Michael Brockman on 2/11/23.
+  //
+  //TODO: add info details...
 
 import UIKit
 
 class StudentViewController: UIViewController {
   
-  let btnColor = UIColor.systemPink
+  let btnColor = UIColor.systemMint
   let defaults = UserDefaults.standard
   let titleLabel = UILabel()
   var isUserLoggedIn = true //TODO: Remove and replace with below
-//  var isUserLoggedIn = UserDefaults.standard.bool(forKey: "isUserLoggedIn")
+    //  var isUserLoggedIn = UserDefaults.standard.bool(forKey: "isUserLoggedIn")
   var blurView: UIVisualEffectView?
   var loginButton: UIBarButtonItem!
   let buttonLabel = UILabel()
@@ -31,6 +31,7 @@ class StudentViewController: UIViewController {
     if !isUserLoggedIn {
       showAlert()
     }
+    
   }
   
   override func viewWillAppear(_ animated: Bool) {
@@ -38,8 +39,55 @@ class StudentViewController: UIViewController {
     checkLoginStatusAndUpdateUI()
   }
   
+    //TODO: remove this function
+    //  private func testBlurView() {
+    //
+    //
+    //    let stackView = UIStackView()
+    //    stackView.axis = .vertical
+    //    stackView.spacing = 8
+    //    stackView.alignment = .fill
+    //    stackView.distribution = .fillEqually
+    //    containerView.addSubview(stackView)
+    //
+    //      // Add subviews to the stack view here...
+    //
+    //      // Constrain the stack view to the container view
+    //    stackView.translatesAutoresizingMaskIntoConstraints = false
+    //    NSLayoutConstraint.activate([
+    //      stackView.topAnchor.constraint(equalTo: containerView.topAnchor),
+    //      stackView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
+    //      stackView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
+    //      stackView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor)
+    //    ])
+    //
+    //      // Constrain the container view to its superview
+    //    containerView.translatesAutoresizingMaskIntoConstraints = false
+    //    NSLayoutConstraint.activate([
+    //      containerView.topAnchor.constraint(equalTo: view.topAnchor),
+    //      containerView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+    //      containerView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+    //      containerView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+    //    ])
+    //
+    //
+    //
+    //  }
+  
+  
   
   func setupView() {
+      // setup blur view?
+    let containerView = UIView()
+    containerView.backgroundColor = UIColor.systemBackground.withAlphaComponent(0.3)
+    containerView.clipsToBounds = true
+    
+    let blurEffect = UIBlurEffect(style: .regular)
+    let visualEffectView = UIVisualEffectView(effect: blurEffect)
+    visualEffectView.frame = containerView.bounds
+    containerView.addSubview(visualEffectView)
+    
+    
     let view = UIView()
     
     let backgroundImageView = UIImageView(image: UIImage(named: "soma_red_black"))
@@ -78,11 +126,11 @@ class StudentViewController: UIViewController {
     button5.setTitle("NEW WAIVER", for: .normal)
     button5.addTarget(self, action: #selector(buttonTapped(_:)), for: .touchUpInside)
     button5.tintColor = btnColor
-  
+    
     
     buttonStackView.addArrangedSubviews(button1, button2, button3, button4, button5)
-    view.addSubviews(backgroundImageView, titleLabel, buttonStackView)
-    turnTamicOffFor(backgroundImageView, titleLabel, buttonStackView, button1, button2, button3, button4, button5)
+    view.addSubviews(backgroundImageView, titleLabel, buttonStackView, containerView, visualEffectView)
+    turnTamicOffFor(backgroundImageView, titleLabel, buttonStackView, button1, button2, button3, button4, button5, containerView, visualEffectView)
     
     NSLayoutConstraint.activate([
       backgroundImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
@@ -92,8 +140,16 @@ class StudentViewController: UIViewController {
       titleLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -K.inset * 2),
       titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
       
-      buttonStackView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: K.inset * 2),
-      buttonStackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: K.inset * 2),
+      //      buttonStackView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: K.inset * 2),
+      //      buttonStackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: K.inset * 2),
+      
+      containerView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: K.inset * 2),
+      containerView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: K.inset * 2),
+      
+      buttonStackView.topAnchor.constraint(equalTo: containerView.topAnchor, constant: K.inset),
+      buttonStackView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: K.inset),
+      buttonStackView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -K.inset),
+      buttonStackView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -K.inset),
       
     ])
     
@@ -120,10 +176,10 @@ extension StudentViewController {
     
     present(alert, animated: true, completion: nil)
   }
-
+  
 }
 
-//MARK: - Custom Methods
+  //MARK: - Custom Methods
 extension StudentViewController {
   func checkLoginStatusAndUpdateUI() {
     if isUserLoggedIn {
@@ -151,7 +207,7 @@ extension StudentViewController {
     blurView?.removeFromSuperview()
     blurView = nil
   }
-
+  
   @objc func buttonTapped(_ sender: UIButton) {
     switch sender {
     case button1: // dayton pm foundations
