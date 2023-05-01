@@ -38,46 +38,10 @@ class StudentViewController: UIViewController {
     super.viewWillAppear(animated)
     checkLoginStatusAndUpdateUI()
   }
-  
-    //TODO: remove this function
-    //  private func testBlurView() {
-    //
-    //
-    //    let stackView = UIStackView()
-    //    stackView.axis = .vertical
-    //    stackView.spacing = 8
-    //    stackView.alignment = .fill
-    //    stackView.distribution = .fillEqually
-    //    containerView.addSubview(stackView)
-    //
-    //      // Add subviews to the stack view here...
-    //
-    //      // Constrain the stack view to the container view
-    //    stackView.translatesAutoresizingMaskIntoConstraints = false
-    //    NSLayoutConstraint.activate([
-    //      stackView.topAnchor.constraint(equalTo: containerView.topAnchor),
-    //      stackView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
-    //      stackView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
-    //      stackView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor)
-    //    ])
-    //
-    //      // Constrain the container view to its superview
-    //    containerView.translatesAutoresizingMaskIntoConstraints = false
-    //    NSLayoutConstraint.activate([
-    //      containerView.topAnchor.constraint(equalTo: view.topAnchor),
-    //      containerView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-    //      containerView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-    //      containerView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
-    //    ])
-    //
-    //
-    //
-    //  }
-  
-  
+
   
   func setupView() {
-      // setup blur view?
+    
     let containerView = UIView()
     containerView.backgroundColor = UIColor.systemBackground.withAlphaComponent(0.3)
     containerView.clipsToBounds = true
@@ -139,10 +103,7 @@ class StudentViewController: UIViewController {
       titleLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: K.inset * 2),
       titleLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -K.inset * 2),
       titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-      
-      //      buttonStackView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: K.inset * 2),
-      //      buttonStackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: K.inset * 2),
-      
+
       containerView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: K.inset * 2),
       containerView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: K.inset * 2),
       
